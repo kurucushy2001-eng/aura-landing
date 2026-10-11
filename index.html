@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Aura</title>
+<meta name="description" content="Aura entiende tu negocio y responde por ti en Telegram. Sin que tus clientes noten la diferencia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap">
+
+<style>
+:root {
+  --bg-0: #09090C;
+  --bg-1: #111216;
+  --bg-2: #18191F;
+  --bg-3: #21232B;
+  --border: rgba(255,255,255,0.07);
+  --border-strong: rgba(255,255,255,0.12);
+  --accent: #6C63FF;
+  --accent-dim: rgba(108,99,255,0.12);
+  --accent-glow: rgba(108,99,255,0.25);
+  --fg-0: #F2F3F8;
+  --fg-1: #9CA3AF;
+  --fg-2: #6B7280;
+  --green: #22C55E;
+  --radius: 10px;
+  --radius-lg: 16px;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg-0: #F8F9FC;
+    --bg-1: #FFFFFF;
+    --bg-2: #F1F2F7;
+    --bg-3: #E8EAEF;
+    --border: rgba(0,0,0,0.07);
+    --border-strong: rgba(0,0,0,0.12);
+    --accent: #5A52E8;
+    --accent-dim: rgba(90,82,232,0.08);
+    --accent-glow: rgba(90,82,232,0.20);
+    --fg-0: #0D0E12;
+    --fg-1: #4B5563;
+    --fg-2: #9CA3AF;
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg-0: #F8F9FC;
+  --bg-1: #FFFFFF;
+  --bg-2: #F1F2F7;
+  --bg-3: #E8EAEF;
+  --border: rgba(0,0,0,0.07);
+  --border-strong: rgba(0,0,0,0.12);
+  --accent: #5A52E8;
+  --accent-dim: rgba(90,82,232,0.08);
+  --accent-glow: rgba(90,82,232,0.20);
+  --fg-0: #0D0E12;
+  --fg-1: #4B5563;
+  --fg-2: #9CA3AF;
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-0);
+  color: var(--fg-0);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+nav {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 100;
+  background: rgba(9,9,12,0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) nav { background: rgba(248,249,252,0.88); }
+}
+:root[data-theme="light"] nav { background: rgba(248,249,252,0.88); }
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+}
+.nav-logo {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 22px;
+  color: var(--fg-0);
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+.nav-logo span { color: var(--accent); }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-links a {
+  font-size: 14px;
+  color: var(--fg-1);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--fg-0); }
+.nav-cta {
+  background: var(--accent);
+  color: #fff !important;
+  padding: 7px 16px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 13px !important;
+  transition: opacity 0.15s !important;
+}
+.nav-cta:hover { opacity: 0.88; }
+@media (max-width: 620px) {
+  .nav-links { gap: 14px; }
+  .nav-links li:not(:last-child) { display: none; }
+}
+
+.wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-inline: 24px;
+}
+
+.hero {
+  padding-block: 96px 80px;
+  text-align: center;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-glow);
+  border-radius: 999px;
+  padding: 4px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.hero-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+}
+.hero h1 {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: clamp(2.6rem, 6vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  margin: 0 0 20px;
+  color: var(--fg-0);
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+.hero-sub {
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  color: var(--fg-1);
+  max-width: 560px;
+  margin: 0 auto 40px;
+  line-height: 1.65;
+}
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 14px 28px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 0 32px var(--accent-glow);
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 48px var(--accent-glow);
+}
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-2);
+  color: var(--fg-0);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 14px 24px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-strong);
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.btn-secondary:hover { background: var(--bg-3); }
+.hero-note {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--fg-2);
+}
+.hero-note strong { color: var(--fg-1); }
+
+.demo-wrapper { padding-block: 0 80px; }
+.demo-window {
+  background: var(--bg-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+  max-width: 760px;
+  margin: 0 auto;
+}
+.demo-titlebar {
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.demo-dot { width: 10px; height: 10px; border-radius: 50%; }
+.demo-dot:nth-child(1) { background: #FF5F57; }
+.demo-dot:nth-child(2) { background: #FEBC2E; }
+.demo-dot:nth-child(3) { background: #28C840; }
+.demo-title { margin-left: 8px; font-size: 12px; color: var(--fg-2); font-weight: 500; }
+.demo-body { padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+.msg { display: flex; flex-direction: column; gap: 4px; max-width: 76%; }
+.msg.right { align-self: flex-end; align-items: flex-end; }
+.msg-sender { font-size: 11px; font-weight: 600; color: var(--fg-2); letter-spacing: 0.04em; text-transform: uppercase; }
+.msg-bubble { background: var(--bg-2); border-radius: 14px; padding: 10px 14px; font-size: 14px; line-height: 1.5; color: var(--fg-0); }
+.msg.right .msg-bubble { background: var(--accent); color: #fff; border-bottom-right-radius: 4px; }
+.msg.left .msg-bubble { border-bottom-left-radius: 4px; }
+.aura-tag { font-size: 10px; color: var(--accent); font-weight: 600; display: flex; align-items: center; gap: 4px; }
+
+section { padding-block: 80px; }
+.section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+.section-title { font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; letter-spacing: -0.025em; line-height: 1.2; text-wrap: balance; margin: 0 0 16px; color: var(--fg-0); }
+.section-title em { font-style: italic; color: var(--accent); }
+.section-sub { font-size: 1.05rem; color: var(--fg-1); max-width: 520px; line-height: 1.65; margin: 0; }
+
+.problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2px; margin-top: 52px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); }
+.problem-card { background: var(--bg-1); padding: 28px 26px; display: flex; flex-direction: column; gap: 10px; }
+.problem-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--accent-dim); display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0; }
+.problem-card h3 { font-size: 15px; font-weight: 600; margin: 0; color: var(--fg-0); }
+.problem-card p { font-size: 14px; color: var(--fg-1); margin: 0; line-height: 1.55; }
+
+.how-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 52px; }
+.how-card { background: var(--bg-1); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; gap: 12px; position: relative; }
+.how-num { font-family: 'Instrument Serif', Georgia, serif; font-size: 48px; font-weight: 400; font-style: italic; color: var(--accent); opacity: 0.22; line-height: 1; position: absolute; top: 20px; right: 22px; }
+.how-card h3 { font-size: 16px; font-weight: 600; margin: 0; color: var(--fg-0); }
+.how-card p { font-size: 14px; color: var(--fg-1); margin: 0; line-height: 1.6; }
+
+.features-section { background: var(--bg-1); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; margin-top: 52px; }
+.feature { display: flex; flex-direction: column; gap: 10px; }
+.feature-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--accent-dim); border: 1px solid var(--accent-glow); display: flex; align-items: center; justify-content: center; color: var(--accent); }
+.feature h3 { font-size: 16px; font-weight: 600; margin: 0; color: var(--fg-0); }
+.feature p { font-size: 14px; color: var(--fg-1); margin: 0; line-height: 1.6; }
+
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 52px; align-items: start; }
+.plan-card { background: var(--bg-1); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; gap: 20px; }
+.plan-card.featured { border-color: var(--accent); background: var(--bg-2); box-shadow: 0 0 40px var(--accent-dim); }
+.plan-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; background: var(--accent); color: #fff; padding: 3px 10px; border-radius: 999px; margin-bottom: -8px; }
+.plan-name { font-size: 18px; font-weight: 700; color: var(--fg-0); }
+.plan-price { display: flex; align-items: baseline; gap: 4px; }
+.plan-amount { font-family: 'Instrument Serif', Georgia, serif; font-size: 36px; font-weight: 400; letter-spacing: -0.02em; color: var(--fg-0); }
+.plan-currency { font-size: 14px; color: var(--fg-1); }
+.plan-period { font-size: 13px; color: var(--fg-2); }
+.plan-limit { font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-dim); border-radius: 6px; padding: 6px 12px; text-align: center; }
+.plan-features { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.plan-features li { font-size: 14px; color: var(--fg-1); display: flex; align-items: flex-start; gap: 8px; }
+.plan-features li::before { content: ''; width: 14px; height: 14px; background: var(--green); border-radius: 50%; flex-shrink: 0; margin-top: 3px; mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E"); -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E"); mask-size: contain; -webkit-mask-size: contain; }
+.plan-cta { display: block; text-align: center; padding: 12px; border-radius: var(--radius); font-size: 14px; font-weight: 600; text-decoration: none; transition: all 0.15s; }
+.plan-cta.outline { border: 1px solid var(--border-strong); color: var(--fg-0); background: transparent; }
+.plan-cta.outline:hover { background: var(--bg-3); }
+.plan-cta.filled { background: var(--accent); color: #fff; border: none; }
+.plan-cta.filled:hover { opacity: 0.88; }
+
+.faq-list { margin-top: 52px; display: flex; flex-direction: column; gap: 2px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); }
+.faq-item { background: var(--bg-1); }
+.faq-q { width: 100%; background: none; border: none; color: var(--fg-0); font-size: 15px; font-weight: 600; text-align: left; padding: 22px 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; transition: background 0.12s; }
+.faq-q:hover { background: var(--bg-2); }
+.faq-arrow { color: var(--fg-2); flex-shrink: 0; transition: transform 0.2s; }
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.faq-a-inner { padding: 0 24px 20px; font-size: 14px; color: var(--fg-1); line-height: 1.65; }
+
+.cta-band { background: var(--accent-dim); border-top: 1px solid var(--accent-glow); border-bottom: 1px solid var(--accent-glow); text-align: center; padding-block: 64px; }
+.cta-band .section-title { margin-bottom: 24px; }
+.cta-band .section-sub { margin: 0 auto 36px; }
+
+footer { background: var(--bg-0); border-top: 1px solid var(--border); padding-block: 40px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; padding-inline: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.footer-logo { font-family: 'Instrument Serif', Georgia, serif; font-size: 18px; color: var(--fg-0); }
+.footer-logo span { color: var(--accent); }
+.footer-links { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; }
+.footer-links a { font-size: 13px; color: var(--fg-2); text-decoration: none; transition: color 0.15s; }
+.footer-links a:hover { color: var(--fg-1); }
+.footer-copy { font-size: 12px; color: var(--fg-2); width: 100%; }
+@media (max-width: 600px) { .footer-inner { flex-direction: column; align-items: flex-start; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Aura<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#como-funciona">Cómo funciona</a></li>
+      <li><a href="#precios">Precios</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="https://aura-server-oisv.onrender.com/download" class="nav-cta">Descargar gratis</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="hero-badge">Disponible para Windows</div>
+    <h1>Responde en segundos.<br><em>Vende más.</em> Suena como tú.</h1>
+    <p class="hero-sub">Aura entiende tu negocio y responde por ti en Telegram — sin que tus clientes noten la diferencia. Tú vendes, Aura atiende.</p>
+    <div class="hero-actions">
+      <a href="https://aura-server-oisv.onrender.com/download" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descargar para Windows
+      </a>
+      <a href="#como-funciona" class="btn-secondary">
+        Ver cómo funciona
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <p class="hero-note"><strong>Prueba gratis 15 días.</strong> Sin tarjeta de crédito. Cancela cuando quieras.</p>
+  </section>
+</div>
+
+<div class="wrap">
+  <div class="demo-wrapper">
+    <div class="demo-window">
+      <div class="demo-titlebar">
+        <div class="demo-dot"></div>
+        <div class="demo-dot"></div>
+        <div class="demo-dot"></div>
+        <span class="demo-title">Aura — Conversaciones activas</span>
+      </div>
+      <div class="demo-body">
+        <div class="msg left">
+          <span class="msg-sender">Valentina M.</span>
+          <div class="msg-bubble">Hola! Cuánto vale el set de maquillaje que vi en tu historia?</div>
+        </div>
+        <div class="msg right">
+          <div class="msg-bubble">¡Hola Valentina! El set completo está en $89.000 😊 Incluye base, corrector, sombras y labial. ¿Te gustaría que te cuente los colores disponibles?</div>
+          <span class="aura-tag">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><path fill="white" d="M9 12l2 2 4-4" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Aura respondió automáticamente
+          </span>
+        </div>
+        <div class="msg left">
+          <span class="msg-sender">Valentina M.</span>
+          <div class="msg-bubble">Sí! Y acepta Nequi?</div>
+        </div>
+        <div class="msg right">
+          <div class="msg-bubble">¡Claro que sí! Acepto Nequi, Bancolombia y efectivo por contraentrega. Los colores disponibles son tono durazno, nude y coral 🎨 ¿Cuál te llama la atención?</div>
+          <span class="aura-tag">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><path fill="white" d="M9 12l2 2 4-4" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Aura respondió automáticamente
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <section>
+    <div class="section-label">El problema</div>
+    <h2 class="section-title">Pierdes ventas<br>mientras <em>no puedes responder</em></h2>
+    <p class="section-sub">Cada mensaje sin respuesta en los primeros minutos es una venta que se va a la competencia. Tú no puedes estar pegada al celular todo el día.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>Respuestas tardías</h3>
+        <p>El 78% de los compradores elige al vendedor que responde primero. Cada hora cuenta.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>Preguntas repetidas</h3>
+        <p>Precio, envío, métodos de pago — las mismas preguntas todo el día, todos los días.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <h3>Crecimiento estancado</h3>
+        <p>No puedes atender más clientes porque todo tu tiempo se va en responder mensajes.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap" id="como-funciona">
+  <section>
+    <div class="section-label">Proceso</div>
+    <h2 class="section-title">En 3 pasos,<br><em>Aura trabaja</em> por ti</h2>
+    <p class="section-sub">Sin configuraciones complicadas. Sin bots genéricos. Sin que tus clientes sepan que no eres tú.</p>
+    <div class="how-grid">
+      <div class="how-card">
+        <span class="how-num">1</span>
+        <div class="feature-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2H3v16h5l4 4 4-4h5V2z"/></svg>
+        </div>
+        <h3>Conecta tu Telegram</h3>
+        <p>Crea un bot en menos de 2 minutos y conéctalo a Aura. Tus clientes escriben al mismo número de siempre.</p>
+      </div>
+      <div class="how-card">
+        <span class="how-num">2</span>
+        <div class="feature-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h3>Enséñale tu estilo</h3>
+        <p>Cuéntale a Aura sobre tu negocio, tus precios y cómo hablas. Ella aprende y suena exactamente como tú.</p>
+      </div>
+      <div class="how-card">
+        <span class="how-num">3</span>
+        <div class="feature-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        </div>
+        <h3>Vende sin parar</h3>
+        <p>Aura responde al instante, 24/7. Tú recibes una alerta solo cuando necesitas intervenir personalmente.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="features-section">
+  <div class="wrap">
+    <div style="padding-block: 80px;">
+      <div class="section-label">Características</div>
+      <h2 class="section-title">Todo lo que necesitas<br>para <em>no perder una venta</em></h2>
+      <div class="features-grid">
+        <div class="feature">
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2H3v16h5l4 4 4-4h5V2z"/></svg>
+          </div>
+          <h3>Telegram nativo</h3>
+          <p>Integración oficial con la API de Telegram. Sin trucos, sin riesgo de baneo, sin configuraciones raras.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <h3>Personalidad propia</h3>
+          <p>Elige entre modo Negocio, Social o Captación de leads. Aura adapta su tono a cada contexto.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          </div>
+          <h3>Handoff inteligente</h3>
+          <p>Cuando la conversación lo necesita, Aura te avisa y toma el control sin interrupciones para el cliente.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+          </div>
+          <h3>Respuestas al instante</h3>
+          <p>Tiempo de respuesta promedio: menos de 3 segundos. Tus clientes nunca esperan.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Historial de chats</h3>
+          <p>Ve todas las conversaciones activas, busca clientes por nombre y revisa el historial completo.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Actualizaciones automáticas</h3>
+          <p>Aura se actualiza sola en segundo plano. Siempre tienes la versión más reciente sin hacer nada.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap" id="precios">
+  <section>
+    <div class="section-label">Precios</div>
+    <h2 class="section-title">Empieza gratis.<br><em>Escala cuando crezcas.</em></h2>
+    <p class="section-sub">Sin permanencia. Cancela cuando quieras. Todos los planes incluyen soporte por Telegram.</p>
+    <div class="pricing-grid">
+      <div class="plan-card">
+        <div>
+          <div class="plan-name">Gratis</div>
+          <div class="plan-price"><span class="plan-amount">$0</span></div>
+          <div class="plan-period">Para siempre</div>
+        </div>
+        <div class="plan-limit">20 mensajes / día</div>
+        <ul class="plan-features">
+          <li>Telegram integrado</li>
+          <li>3 modos de personalidad</li>
+          <li>Historial de conversaciones</li>
+          <li>Actualizaciones automáticas</li>
+        </ul>
+        <a href="https://aura-server-oisv.onrender.com/download" class="plan-cta outline">Descargar gratis</a>
+      </div>
+      <div class="plan-card featured">
+        <span class="plan-badge">Más popular</span>
+        <div>
+          <div class="plan-name">Pro</div>
+          <div class="plan-price">
+            <span class="plan-amount">$49.900</span>
+            <span class="plan-currency">COP</span>
+          </div>
+          <div class="plan-period">/ mes · ~$12 USD</div>
+        </div>
+        <div class="plan-limit">600 mensajes / día</div>
+        <ul class="plan-features">
+          <li>Todo lo del plan Gratis</li>
+          <li>Prioridad en respuestas</li>
+          <li>Modo automático 24/7</li>
+          <li>Estadísticas de conversaciones</li>
+          <li>Soporte prioritario</li>
+        </ul>
+        <a href="https://aura-server-oisv.onrender.com/download" class="plan-cta filled">Probar 15 días gratis</a>
+      </div>
+      <div class="plan-card">
+        <div>
+          <div class="plan-name">Premium</div>
+          <div class="plan-price">
+            <span class="plan-amount">$89.900</span>
+            <span class="plan-currency">COP</span>
+          </div>
+          <div class="plan-period">/ mes · ~$22 USD</div>
+        </div>
+        <div class="plan-limit">1.500 mensajes / día</div>
+        <ul class="plan-features">
+          <li>Todo lo del plan Pro</li>
+          <li>Múltiples personalidades</li>
+          <li>Próximo: WhatsApp e Instagram</li>
+          <li>Acceso anticipado a features</li>
+          <li>Soporte VIP directo</li>
+        </ul>
+        <a href="https://aura-server-oisv.onrender.com/download" class="plan-cta outline">Probar 15 días gratis</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap" id="faq">
+  <section>
+    <div class="section-label">Preguntas frecuentes</div>
+    <h2 class="section-title">Lo que todo el mundo<br><em>quiere saber</em></h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">¿Mis clientes van a saber que es un bot?<svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-a"><div class="faq-a-inner">No. Aura usa inteligencia artificial para responder con el tono y vocabulario que tú le enseñas. No es una respuesta automática genérica — es tu voz, simplemente más rápida. La mayoría de usuarios dicen que sus clientes no notan diferencia.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">¿Necesito saber de tecnología para configurarlo?<svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-a"><div class="faq-a-inner">Para nada. El proceso completo de instalación y conexión con Telegram tarda menos de 10 minutos, y Aura te guía paso a paso con instrucciones en pantalla. Si tienes algún problema, tienes soporte directo por Telegram.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">¿Qué pasa cuando el límite de mensajes se acaba?<svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-a"><div class="faq-a-inner">Aura te avisa cuando estás cerca del límite. Los mensajes nuevos siguen llegando — simplemente te toca responderlos tú misma ese día. Al día siguiente el contador se reinicia automáticamente. Nunca se pierden mensajes.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">¿Funciona solo con Telegram? ¿Y WhatsApp?<svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-a"><div class="faq-a-inner">Ahora mismo funciona con Telegram, que tiene una API oficial y estable. WhatsApp e Instagram están en el roadmap y llegarán en los próximos meses. Empezamos con Telegram para garantizar que funcione perfecto antes de expandir.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">¿Mis datos y conversaciones están seguros?<svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-a"><div class="faq-a-inner">Sí. El historial de conversaciones se guarda localmente en tu computador, no en nuestros servidores. El único dato que viaja a internet es el mensaje que se envía a la IA para generar la respuesta, sin información personal identificable de tus clientes. Cumplimos con la Ley 1581/2012 de protección de datos de Colombia.</div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="cta-band">
+  <div class="wrap" style="text-align:center;">
+    <h2 class="section-title" style="max-width:600px;margin-inline:auto;">¿Lista para no perder<br><em>otra venta</em> por no responder?</h2>
+    <p class="section-sub" style="margin-inline:auto;margin-bottom:36px;">Descarga Aura hoy. Los primeros 15 días son completamente gratis, sin tarjeta de crédito.</p>
+    <a href="https://aura-server-oisv.onrender.com/download" class="btn-primary" style="font-size:16px;padding:16px 32px;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Descargar Aura gratis — Windows
+    </a>
+    <p style="margin-top:16px;font-size:13px;color:var(--fg-2);">Windows 10 / 11 · 73 MB · Versión 1.0.8</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Aura<span>.</span></div>
+    <ul class="footer-links">
+      <li><a href="#">Términos de uso</a></li>
+      <li><a href="#">Privacidad</a></li>
+      <li><a href="#">Soporte</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 Aura App. Colombia · Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const answer = item.querySelector('.faq-a');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o => {
+        o.classList.remove('open');
+        o.querySelector('.faq-a').style.maxHeight = '0';
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
