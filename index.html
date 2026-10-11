@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Aura</title>
 <meta name="description" content="Aura entiende tu negocio y responde por ti en Telegram. Sin que tus clientes noten la diferencia.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%236C63FF'/><text x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' font-style='italic' fill='white'>A</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap">
 <style>
@@ -61,7 +62,7 @@ nav.scrolled { border-bottom-color: var(--border); }
 @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) nav { background: rgba(248,249,252,0.88); } }
 :root[data-theme="light"] nav { background: rgba(248,249,252,0.88); }
 .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
-.nav-logo { font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; color: var(--fg-0); letter-spacing: -0.02em; }
+.nav-logo { font-family: 'Instrument Serif', Georgia, serif; font-size: 28px; color: var(--fg-0); letter-spacing: -0.03em; }
 .nav-logo span { color: var(--accent); }
 .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; margin: 0; padding: 0; }
 .nav-links a { font-size: 14px; color: var(--fg-1); transition: color 0.15s; }
@@ -173,7 +174,7 @@ section { padding-block: 80px; }
 .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
 .section-title { font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; letter-spacing: -0.025em; line-height: 1.2; text-wrap: balance; margin: 0 0 16px; color: var(--fg-0); }
 .section-title em { font-style: italic; color: var(--accent); }
-.section-sub { font-size: 1.05rem; color: var(--fg-1); max-width: 520px; line-height: 1.65; margin: 0; }
+.section-sub { font-size: 1.1rem; color: var(--fg-1); max-width: 520px; line-height: 1.7; margin: 0; }
 .section-head { text-align: center; margin-bottom: 56px; }
 .section-head .section-sub { margin-inline: auto; }
 
@@ -182,8 +183,8 @@ section { padding-block: 80px; }
 .problem-card { background: var(--bg-1); padding: 28px 26px; display: flex; flex-direction: column; gap: 10px; transition: background .2s; }
 .problem-card:hover { background: var(--bg-2); }
 .problem-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--accent-dim); display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0; }
-.problem-card h3 { font-size: 15px; font-weight: 600; margin: 0; color: var(--fg-0); }
-.problem-card p { font-size: 14px; color: var(--fg-1); margin: 0; line-height: 1.55; }
+.problem-card h3 { font-size: 17px; font-weight: 600; margin: 0; color: var(--fg-0); }
+.problem-card p { font-size: 15px; color: var(--fg-1); margin: 0; line-height: 1.6; }
 
 /* HOW IT WORKS */
 .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); position: relative; margin-top: 52px; }
@@ -194,16 +195,16 @@ section { padding-block: 80px; }
 }
 .how-card { padding: 0 20px; text-align: center; position: relative; }
 .how-icon {
-  width: 64px; height: 64px; border-radius: 50%;
-  background: var(--bg-1); border: 1px solid var(--border);
-  margin-inline: auto; margin-bottom: 22px;
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--accent-dim); border: 1.5px solid var(--accent-glow);
+  margin-inline: auto; margin-bottom: 24px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.4rem; position: relative; z-index: 1;
-  transition: border-color .25s, box-shadow .25s;
+  color: var(--accent); position: relative; z-index: 1;
+  transition: border-color .25s, box-shadow .25s, background .25s;
 }
-.how-card:hover .how-icon { border-color: var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
-.how-card h3 { font-size: 16px; font-weight: 600; margin: 0 0 8px; color: var(--fg-0); }
-.how-card p { font-size: 14px; color: var(--fg-1); line-height: 1.6; }
+.how-card:hover .how-icon { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 0 28px var(--accent-glow); }
+.how-card h3 { font-size: 18px; font-weight: 600; margin: 0 0 10px; color: var(--fg-0); }
+.how-card p { font-size: 15px; color: var(--fg-1); line-height: 1.65; }
 @media (max-width: 720px) { .how-grid { grid-template-columns: 1fr; gap: 32px; } .how-grid::before { display: none; } .how-card { text-align: left; padding: 0; } .how-icon { margin-inline: 0 auto 0 0; } }
 
 /* FEATURES */
@@ -211,8 +212,8 @@ section { padding-block: 80px; }
 .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 36px; margin-top: 52px; }
 .feature { display: flex; flex-direction: column; gap: 10px; }
 .feature-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--accent-dim); border: 1px solid var(--accent-glow); display: flex; align-items: center; justify-content: center; color: var(--accent); }
-.feature h3 { font-size: 16px; font-weight: 600; margin: 0; color: var(--fg-0); }
-.feature p { font-size: 14px; color: var(--fg-1); margin: 0; line-height: 1.6; }
+.feature h3 { font-size: 17px; font-weight: 600; margin: 0; color: var(--fg-0); }
+.feature p { font-size: 15px; color: var(--fg-1); margin: 0; line-height: 1.65; }
 
 /* TESTIMONIALS */
 .testi-section { }
@@ -386,17 +387,17 @@ footer { background: var(--bg-0); border-top: 1px solid var(--border); padding-b
     </div>
     <div class="how-grid">
       <div class="how-card fu">
-        <div class="how-icon">💬</div>
+        <div class="how-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2H3v16h5l4 4 4-4h5V2z"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="13" y2="13"/></svg></div>
         <h3>Conecta tu Telegram</h3>
         <p>Crea un bot en menos de 2 minutos y conéctalo a Aura. Tus clientes escriben al mismo número de siempre.</p>
       </div>
       <div class="how-card fu" style="transition-delay:.12s">
-        <div class="how-icon">✦</div>
+        <div class="how-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
         <h3>Enséñale tu estilo</h3>
         <p>Cuéntale a Aura sobre tu negocio, tus precios y cómo hablas. Ella aprende y suena exactamente como tú.</p>
       </div>
       <div class="how-card fu" style="transition-delay:.22s">
-        <div class="how-icon">🚀</div>
+        <div class="how-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
         <h3>Vende sin parar</h3>
         <p>Aura responde al instante, 24/7. Tú recibes una alerta solo cuando necesitas intervenir personalmente.</p>
       </div>
