@@ -280,6 +280,19 @@ footer { background: var(--bg-0); border-top: 1px solid var(--border); padding-b
 .footer-bottom { max-width: 1100px; margin: 32px auto 0; padding-inline: 24px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 12px; color: var(--fg-2); }
 @media (max-width: 600px) { .footer-inner { flex-direction: column; } .footer-cols { gap: 28px; } }
 
+/* LEGAL MODAL */
+.legal-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.65); z-index: 9999; align-items: center; justify-content: center; padding: 24px; backdrop-filter: blur(4px); }
+.legal-modal.open { display: flex; }
+.legal-box { background: var(--bg-1); border: 1px solid var(--border); border-radius: 16px; width: 100%; max-width: 600px; max-height: 80vh; display: flex; flex-direction: column; }
+.legal-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px 16px; border-bottom: 1px solid var(--border); }
+.legal-title { font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; font-weight: 400; color: var(--fg-0); }
+.legal-close { background: none; border: none; font-size: 18px; color: var(--fg-2); cursor: pointer; padding: 4px 8px; border-radius: 6px; transition: color .15s; }
+.legal-close:hover { color: var(--fg-0); }
+.legal-body { padding: 20px 24px; overflow-y: auto; font-size: 14px; line-height: 1.8; color: var(--fg-1); }
+.legal-body h3 { font-size: 15px; font-weight: 700; color: var(--fg-0); margin: 20px 0 6px; }
+.legal-body h3:first-child { margin-top: 0; }
+.legal-body p { margin-bottom: 10px; }
+
 /* FADE IN */
 .fu { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
 .fu.in { opacity: 1; transform: none; }
@@ -548,6 +561,17 @@ footer { background: var(--bg-0); border-top: 1px solid var(--border); padding-b
   </div>
 </section>
 
+<!-- Legal modal -->
+<div id="legalModal" class="legal-modal" onclick="if(event.target===this)closeLegal()">
+  <div class="legal-box">
+    <div class="legal-header">
+      <h2 id="legalTitle" class="legal-title"></h2>
+      <button class="legal-close" onclick="closeLegal()">✕</button>
+    </div>
+    <div id="legalBody" class="legal-body"></div>
+  </div>
+</div>
+
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
@@ -564,12 +588,12 @@ footer { background: var(--bg-0); border-top: 1px solid var(--border); padding-b
       <div class="footer-col">
         <div class="footer-col-h">Soporte</div>
         <a href="#faq" class="footer-lnk">Preguntas frecuentes</a>
-        <a href="#" class="footer-lnk">Contacto</a>
+        <a href="mailto:kurucushy2001@gmail.com" class="footer-lnk">Contacto</a>
       </div>
       <div class="footer-col">
         <div class="footer-col-h">Legal</div>
-        <a href="#" class="footer-lnk">Términos de uso</a>
-        <a href="#" class="footer-lnk">Privacidad</a>
+        <a href="#" class="footer-lnk" onclick="openLegal('terms');return false;">Términos de uso</a>
+        <a href="#" class="footer-lnk" onclick="openLegal('privacy');return false;">Privacidad</a>
       </div>
     </div>
   </div>
@@ -637,6 +661,59 @@ async function runChat() {
   await W(3500); runChat()
 }
 runChat()
+
+// Legal modal
+const LEGAL_CONTENT = {
+  terms: {
+    title: 'Términos de uso',
+    body: `
+      <h3>1. Aceptación</h3>
+      <p>Al descargar o usar Aura, aceptas estos términos. Si no estás de acuerdo, no uses el servicio.</p>
+      <h3>2. Descripción del servicio</h3>
+      <p>Aura es una aplicación de escritorio que automatiza respuestas en Telegram usando inteligencia artificial. Requiere un bot de Telegram propio configurado por el usuario.</p>
+      <h3>3. Uso permitido</h3>
+      <p>Puedes usar Aura para responder mensajes de clientes en tu negocio personal. Queda prohibido usarlo para spam, fraude, o cualquier actividad que viole los Términos de Servicio de Telegram.</p>
+      <h3>4. Cuenta y licencia</h3>
+      <p>Cada licencia es personal e intransferible. La licencia está vinculada al dispositivo donde se activa (HWID). El plan Trial dura 15 días sin costo.</p>
+      <h3>5. Pagos y cancelaciones</h3>
+      <p>Los pagos mensuales se procesan a través de Wompi (Colombia) o Stripe (internacional). No hay contratos de permanencia. Puedes cancelar en cualquier momento contactándonos.</p>
+      <h3>6. Limitación de responsabilidad</h3>
+      <p>Aura no garantiza que todas las respuestas automáticas sean perfectas. El usuario es responsable de supervisar las conversaciones importantes.</p>
+      <h3>7. Contacto</h3>
+      <p>Para dudas sobre estos términos: <a href="mailto:kurucushy2001@gmail.com" style="color:var(--accent)">kurucushy2001@gmail.com</a></p>
+    `
+  },
+  privacy: {
+    title: 'Política de privacidad',
+    body: `
+      <h3>1. Datos que recopilamos</h3>
+      <p>Aura almacena localmente en tu dispositivo: el token de tu bot de Telegram, los mensajes procesados (para mostrar en la app), y tu licencia de activación.</p>
+      <h3>2. Datos que NO recopilamos</h3>
+      <p>No guardamos tus conversaciones en servidores externos. Los mensajes de Telegram se procesan en tiempo real y no se almacenan fuera de tu dispositivo.</p>
+      <h3>3. Telegram</h3>
+      <p>Los mensajes se reciben a través de la API oficial de Telegram Bots. Telegram tiene su propia política de privacidad aplicable a sus servicios.</p>
+      <h3>4. Inteligencia artificial</h3>
+      <p>Las respuestas se generan con Claude (Anthropic) a través de nuestro servidor proxy. Los mensajes se envían de forma encriptada y no se usan para entrenar modelos.</p>
+      <h3>5. Pagos</h3>
+      <p>Los pagos son procesados por Wompi o Stripe. Aura no almacena datos de tarjetas de crédito.</p>
+      <h3>6. Contacto</h3>
+      <p>Para ejercer tus derechos de datos o cualquier consulta: <a href="mailto:kurucushy2001@gmail.com" style="color:var(--accent)">kurucushy2001@gmail.com</a></p>
+    `
+  }
+}
+
+function openLegal(type) {
+  const content = LEGAL_CONTENT[type]
+  document.getElementById('legalTitle').textContent = content.title
+  document.getElementById('legalBody').innerHTML = content.body
+  document.getElementById('legalModal').classList.add('open')
+  document.body.style.overflow = 'hidden'
+}
+function closeLegal() {
+  document.getElementById('legalModal').classList.remove('open')
+  document.body.style.overflow = ''
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLegal() })
 </script>
 
 </body>
