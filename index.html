@@ -3,718 +3,982 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Aura</title>
-<meta name="description" content="Aura entiende tu negocio y responde por ti en Telegram. Sin que tus clientes noten la diferencia.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236C63FF'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' font-style='italic' fill='white'%3EA%3C/text%3E%3C/svg%3E">
+<title>Contesa — responde a tus clientes como tú</title>
+<meta name="description" content="Contesa atiende tus chats de WhatsApp, Telegram y Discord con tu tono, tu catálogo y tus precios. App para Windows con 15 días de prueba gratis.">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161514" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Contesa — responde a tus clientes como tú">
+<meta property="og:description" content="WhatsApp, Telegram y Discord en una sola bandeja. Contesa responde con tu tono, toma pedidos y te avisa cuando hace falta.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23f7774f'/%3E%3Cstop offset='1' stop-color='%23df4529'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7.5' fill='url(%23g)'/%3E%3Cpath d='M21.6 11.1A6.6 6.6 0 1 0 21.6 20.9' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round'/%3E%3Ccircle cx='16.2' cy='16' r='2' fill='white'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap">
 <style>
+/* Contesa — mismos tokens que la app. Claro por defecto, oscuro según el sistema. */
 :root {
-  --bg-0: #09090C;
-  --bg-1: #111216;
-  --bg-2: #18191F;
-  --bg-3: #21232B;
-  --border: rgba(255,255,255,0.07);
-  --border-strong: rgba(255,255,255,0.12);
-  --accent: #6C63FF;
-  --accent-dim: rgba(108,99,255,0.12);
-  --accent-glow: rgba(108,99,255,0.25);
-  --fg-0: #F2F3F8;
-  --fg-1: #9CA3AF;
-  --fg-2: #6B7280;
-  --green: #22C55E;
-  --radius: 10px;
-  --radius-lg: 16px;
-  color-scheme: dark;
+  --accent: #ee5d3b;
+  --accent-ink: #c9401e;
+  --accent-soft: rgba(238, 93, 59, 0.1);
+  --accent-line: rgba(238, 93, 59, 0.32);
+  --on-accent: #ffffff;
+
+  --bg: #ffffff;
+  --bg-soft: #f7f6f5;
+  --bg-sunk: #f0efed;
+  --line: rgba(40, 28, 20, 0.09);
+  --line-strong: rgba(40, 28, 20, 0.16);
+  --text: #1d1b1a;
+  --text-2: #6b6865;
+  --text-3: #9c9894;
+
+  --win: #ffffff;
+  --win-side: #f4f3f2;
+  --win-list: #fbfaf9;
+  --bubble-in: #f0efed;
+  --win-shadow: 0 40px 90px -20px rgba(60, 30, 15, 0.28), 0 0 0 0.5px rgba(0, 0, 0, 0.14);
+  --pop-shadow: 0 14px 40px rgba(40, 20, 10, 0.16), 0 0 0 0.5px rgba(0, 0, 0, 0.1);
+
+  --green: #22a356;
+  --green-soft: rgba(34, 163, 86, 0.12);
+  --blue: #0a7aff;
+  --orange: #e2850a;
+
+  --serif: 'Instrument Serif', 'New York', Georgia, serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI Variable Text', 'Segoe UI', system-ui, sans-serif;
+  --wrap: 1120px;
+  color-scheme: light;
 }
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    --bg-0: #F8F9FC; --bg-1: #FFFFFF; --bg-2: #F1F2F7; --bg-3: #E8EAEF;
-    --border: rgba(0,0,0,0.07); --border-strong: rgba(0,0,0,0.12);
-    --accent: #5A52E8; --accent-dim: rgba(90,82,232,0.08); --accent-glow: rgba(90,82,232,0.20);
-    --fg-0: #0D0E12; --fg-1: #4B5563; --fg-2: #9CA3AF;
-    color-scheme: light;
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --accent: #f0694a; --accent-ink: #ff8a6c; --accent-soft: rgba(240, 105, 74, 0.16); --accent-line: rgba(240, 105, 74, 0.42);
+    --bg: #161514; --bg-soft: #1c1b1a; --bg-sunk: #242322;
+    --line: rgba(255, 255, 255, 0.08); --line-strong: rgba(255, 255, 255, 0.15);
+    --text: #f5f3f1; --text-2: #a7a3a0; --text-3: #7a7673;
+    --win: #1e1d1c; --win-side: #282726; --win-list: #222120; --bubble-in: #31302e;
+    --win-shadow: 0 40px 90px -20px rgba(0, 0, 0, 0.7), 0 0 0 0.5px rgba(255, 255, 255, 0.14);
+    --pop-shadow: 0 16px 44px rgba(0, 0, 0, 0.55), 0 0 0 0.5px rgba(255, 255, 255, 0.12);
+    --green: #34c46a; --green-soft: rgba(52, 196, 106, 0.15); --blue: #3b9bff; --orange: #f59f2b;
+    color-scheme: dark;
   }
 }
-:root[data-theme="light"] {
-  --bg-0: #F8F9FC; --bg-1: #FFFFFF; --bg-2: #F1F2F7; --bg-3: #E8EAEF;
-  --border: rgba(0,0,0,0.07); --border-strong: rgba(0,0,0,0.12);
-  --accent: #5A52E8; --accent-dim: rgba(90,82,232,0.08); --accent-glow: rgba(90,82,232,0.20);
-  --fg-0: #0D0E12; --fg-1: #4B5563; --fg-2: #9CA3AF;
-  color-scheme: light;
+:root[data-theme="dark"] {
+  --accent: #f0694a; --accent-ink: #ff8a6c; --accent-soft: rgba(240, 105, 74, 0.16); --accent-line: rgba(240, 105, 74, 0.42);
+  --bg: #161514; --bg-soft: #1c1b1a; --bg-sunk: #242322;
+  --line: rgba(255, 255, 255, 0.08); --line-strong: rgba(255, 255, 255, 0.15);
+  --text: #f5f3f1; --text-2: #a7a3a0; --text-3: #7a7673;
+  --win: #1e1d1c; --win-side: #282726; --win-list: #222120; --bubble-in: #31302e;
+  --win-shadow: 0 40px 90px -20px rgba(0, 0, 0, 0.7), 0 0 0 0.5px rgba(255, 255, 255, 0.14);
+  --pop-shadow: 0 16px 44px rgba(0, 0, 0, 0.55), 0 0 0 0.5px rgba(255, 255, 255, 0.12);
+  --green: #34c46a; --green-soft: rgba(52, 196, 106, 0.15); --blue: #3b9bff; --orange: #f59f2b;
+  color-scheme: dark;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { margin: 0; padding: 0; background: var(--bg-0); color: var(--fg-0); font-family: 'Inter', system-ui, sans-serif; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 a { color: inherit; text-decoration: none; }
+h1, h2, h3, p { margin: 0; }
+button { font: inherit; color: inherit; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+.ic { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+.wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: 24px; }
+.tabular { font-variant-numeric: tabular-nums; }
 
-.wrap { max-width: 1100px; margin: 0 auto; padding-inline: 24px; }
+/* ---------- Marca ---------- */
+.mark { width: 28px; height: 28px; border-radius: 7.5px; background: linear-gradient(#f7774f, #df4529); display: grid; place-items: center; box-shadow: inset 0 0 0 0.5px rgba(0,0,0,.12), 0 1px 2px rgba(200,60,30,.25); flex-shrink: 0; }
+.mark svg { width: 18px; height: 18px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 17px; letter-spacing: -0.01em; }
 
-/* NAV */
-nav {
-  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 100;
-  background: rgba(9,9,12,0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid transparent; transition: border-color .3s;
-  padding: 0 24px;
-}
-nav.scrolled { border-bottom-color: var(--border); }
-@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) nav { background: rgba(248,249,252,0.88); } }
-:root[data-theme="light"] nav { background: rgba(248,249,252,0.88); }
-.nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
-.nav-logo { font-family: 'Instrument Serif', Georgia, serif; font-size: 36px; color: var(--fg-0); letter-spacing: -0.03em; }
-.nav-logo span { color: var(--accent); }
-.nav-links { display: flex; align-items: center; gap: 28px; list-style: none; margin: 0; padding: 0; }
-.nav-links a { font-size: 14px; color: var(--fg-1); transition: color 0.15s; }
-.nav-links a:hover { color: var(--fg-0); }
-.nav-cta { background: var(--accent); color: #fff !important; padding: 7px 16px; border-radius: var(--radius); font-weight: 600; font-size: 13px !important; transition: opacity 0.15s !important; }
-.nav-cta:hover { opacity: 0.88; }
-@media (max-width: 620px) { .nav-links { gap: 14px; } .nav-links li:not(:last-child) { display: none; } }
+/* ---------- Botones ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 46px; padding-inline: 22px; border-radius: 12px; font-size: 15px; font-weight: 600; border: 0; cursor: pointer; transition: background-color .15s, box-shadow .15s, transform .15s; white-space: nowrap; }
+.btn--primary { background: var(--accent); color: var(--on-accent); box-shadow: 0 1px 2px rgba(180, 50, 20, .3), inset 0 1px 0 rgba(255,255,255,.18); }
+.btn--primary:hover { background: color-mix(in srgb, var(--accent) 90%, black); }
+.btn--secondary { background: var(--bg); color: var(--text); box-shadow: 0 0 0 1px var(--line-strong), 0 1px 2px rgba(0,0,0,.04); }
+.btn--secondary:hover { background: var(--bg-soft); }
+.btn--sm { height: 34px; padding-inline: 14px; font-size: 13.5px; border-radius: 9px; }
+.btn .ic { width: 17px; height: 17px; stroke-width: 2; }
 
-/* HERO — two column */
-.hero-section { padding-block: clamp(56px, 9vw, 96px) clamp(48px, 6vw, 72px); }
-.hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: var(--accent-dim); border: 1px solid var(--accent-glow); border-radius: 999px;
-  padding: 5px 14px; font-size: 12.5px; font-weight: 500; color: var(--accent);
-  margin-bottom: 28px;
-}
-.hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
-.hero h1 {
-  font-family: 'Instrument Serif', Georgia, serif;
-  font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 400; line-height: 1.05;
-  letter-spacing: -0.03em; text-wrap: balance; margin: 0 0 24px; color: var(--fg-0);
-}
-.hero h1 em { font-style: italic; }
-.hero-sub { font-size: clamp(1rem, 2vw, 1.15rem); color: var(--fg-1); max-width: 420px; margin: 0 0 36px; line-height: 1.7; }
-.hero-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
-.hero-meta { font-size: 12px; color: var(--fg-2); }
-.hero-meta span { margin-inline: 6px; color: var(--border-strong); }
+/* ---------- Nav ---------- */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: saturate(1.6) blur(18px); -webkit-backdrop-filter: saturate(1.6) blur(18px); border-bottom: 1px solid transparent; transition: border-color .25s; }
+.nav.is-scrolled { border-bottom-color: var(--line); }
+.nav-inner { height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.nav-links { display: flex; align-items: center; gap: 26px; list-style: none; margin: 0; padding: 0; font-size: 14px; }
+.nav-links a:not(.btn) { color: var(--text-2); transition: color .15s; }
+.nav-links a:not(.btn):hover { color: var(--text); }
+@media (max-width: 680px) { .nav-links li:not(:last-child) { display: none; } }
 
-.btn-primary {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: var(--accent); color: #fff; font-weight: 700; font-size: 15px;
-  padding: 14px 28px; border-radius: var(--radius);
-  transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
-  box-shadow: 0 0 32px var(--accent-glow);
-}
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 48px var(--accent-glow); opacity: .92; }
-.btn-secondary {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: var(--bg-2); color: var(--fg-0); font-weight: 600; font-size: 15px;
-  padding: 14px 24px; border-radius: var(--radius); border: 1px solid var(--border-strong);
-  transition: background 0.15s;
-}
-.btn-secondary:hover { background: var(--bg-3); }
+/* ---------- Hero ---------- */
+.hero { padding-block: clamp(44px, 6vw, 72px) 0; text-align: center; }
+.hero-pill { display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px 5px 6px; border-radius: 999px; background: var(--bg-soft); box-shadow: inset 0 0 0 1px var(--line); font-size: 13px; color: var(--text-2); margin-bottom: 28px; }
+.hero-pill b { background: var(--accent-soft); color: var(--accent-ink); font-weight: 600; font-size: 12px; padding: 2px 8px; border-radius: 999px; }
+.hero h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(2.9rem, 7.4vw, 5.6rem); line-height: 1.02; letter-spacing: -0.025em; text-wrap: balance; max-width: 15ch; margin-inline: auto; }
+.hero-sub { font-size: clamp(1.05rem, 1.8vw, 1.2rem); color: var(--text-2); max-width: 36em; margin: 24px auto 0; line-height: 1.65; text-wrap: pretty; }
+.hero-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 34px; }
+.hero-note { margin-top: 16px; font-size: 13px; color: var(--text-3); }
 
-/* PHONE MOCKUP */
-.hero-visual { position: relative; display: flex; justify-content: center; align-items: center; }
-.hero-glow {
-  position: absolute; width: 380px; height: 380px; border-radius: 50%;
-  background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 65%);
-  filter: blur(52px); z-index: 0; pointer-events: none;
-}
-.phone-frame {
-  position: relative; z-index: 1; width: 284px;
-  background: var(--bg-1); border: 1px solid var(--border-strong);
-  border-radius: 26px; overflow: hidden;
-  box-shadow: 0 28px 72px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,.04);
-}
-.phone-bar {
-  background: var(--bg-2); padding: 13px 16px 10px;
-  display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border);
-}
-.phone-av {
-  width: 34px; height: 34px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent), var(--green));
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Instrument Serif', serif; font-size: 15px; color: white; flex-shrink: 0;
-}
-.phone-info { flex: 1; min-width: 0; }
-.phone-name { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.phone-online { font-size: 10px; color: var(--green); }
-.aura-badge {
-  font-size: 9px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
-  background: var(--accent-dim); color: var(--accent);
-  border: 1px solid var(--accent-glow); padding: 2px 8px; border-radius: 999px;
-}
-.phone-msgs { padding: 12px; height: 300px; overflow: hidden; display: flex; flex-direction: column; gap: 8px; }
-.chat-msg { max-width: 84%; font-size: 12px; line-height: 1.5; }
-.chat-in { background: var(--bg-2); border-radius: 12px 12px 12px 3px; padding: 8px 11px; align-self: flex-start; color: var(--fg-0); }
-.chat-out { background: var(--accent); border-radius: 12px 12px 3px 12px; padding: 8px 11px; align-self: flex-end; color: #fff; }
-.chat-t { font-size: 9px; margin-top: 3px; color: var(--fg-2); }
-.chat-out .chat-t { text-align: right; color: rgba(255,255,255,.5); }
-.typing-ind { display: flex; gap: 4px; padding: 9px 12px; background: var(--bg-2); border-radius: 12px 12px 12px 3px; align-self: flex-start; width: fit-content; }
-.t-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--fg-2); animation: tdot 1.2s infinite; }
-.t-dot:nth-child(2) { animation-delay: .2s; }
-.t-dot:nth-child(3) { animation-delay: .4s; }
-@keyframes tdot { 0%,80%,100% { transform: translateY(0); opacity: .45; } 40% { transform: translateY(-5px); opacity: 1; } }
-.msg-pop { animation: mpop .3s cubic-bezier(.18,.89,.32,1.28); }
-@keyframes mpop { from { opacity: 0; transform: translateY(8px) scale(.96); } to { opacity: 1; transform: none; } }
+/* ---------- Ventana de la app (hero) ---------- */
+.stage { position: relative; margin-top: clamp(48px, 7vw, 76px); padding-bottom: clamp(56px, 8vw, 96px); }
+.stage::before { content: ''; position: absolute; left: 50%; top: 8%; width: min(900px, 90%); height: 70%; transform: translateX(-50%); background: radial-gradient(closest-side, var(--accent-soft), transparent); filter: blur(40px); pointer-events: none; }
+.win { position: relative; text-align: left; display: grid; grid-template-columns: 196px 272px minmax(0, 1fr); height: 540px; border-radius: 14px; overflow: hidden; background: var(--win); box-shadow: var(--win-shadow); font-size: 13px; line-height: 1.45; }
+.win-side { background: var(--win-side); border-right: 1px solid var(--line); padding: 14px 10px; display: flex; flex-direction: column; gap: 2px; }
+.lights { display: flex; gap: 8px; padding: 2px 6px 18px; }
+.lights i { width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; box-shadow: inset 0 0 0 0.5px rgba(0,0,0,.18); }
+.lights i:nth-child(2) { background: #febc2e; } .lights i:nth-child(3) { background: #28c840; }
+.side-item { display: flex; align-items: center; gap: 9px; height: 30px; padding-inline: 9px; border-radius: 7px; color: var(--text); font-weight: 500; }
+.side-item .ic { color: var(--accent); width: 16px; height: 16px; }
+.side-item.is-active { background: var(--accent); color: #fff; }
+.side-item.is-active .ic { color: #fff; }
+.side-count { margin-left: auto; font-size: 11px; font-weight: 600; color: var(--text-2); font-variant-numeric: tabular-nums; }
+.side-item.is-active .side-count { color: rgba(255,255,255,.85); }
+.side-count.is-bump { animation: bump .5s ease; }
+@keyframes bump { 40% { transform: scale(1.35); color: var(--accent); } }
+.side-foot { margin-top: auto; display: flex; align-items: center; gap: 9px; padding: 8px 9px; border-radius: 9px; background: var(--win); box-shadow: 0 0 0 1px var(--line); }
+.side-foot .mark { width: 22px; height: 22px; border-radius: 6px; }
+.side-foot .mark svg { width: 14px; height: 14px; }
+.side-foot small { display: block; font-size: 11px; color: var(--text-2); line-height: 1.2; }
+.side-foot strong { display: block; font-size: 12px; line-height: 1.3; }
 
-@media (max-width: 760px) {
-  .hero-inner { grid-template-columns: 1fr; gap: 36px; }
-  .hero-visual { order: -1; }
-  .phone-frame { width: 252px; }
-  .phone-msgs { height: 260px; }
+.win-list { background: var(--win-list); border-right: 1px solid var(--line); display: flex; flex-direction: column; min-width: 0; }
+.list-head { padding: 16px 14px 10px; }
+.list-head h4 { margin: 0 0 10px; font-size: 15px; font-weight: 600; }
+.search { display: flex; align-items: center; gap: 7px; height: 28px; padding-inline: 9px; border-radius: 7px; background: var(--bg-sunk); color: var(--text-3); font-size: 12.5px; }
+.search .ic { width: 13px; height: 13px; }
+.convos { list-style: none; margin: 0; padding: 4px 8px; display: flex; flex-direction: column; gap: 2px; }
+.convo { display: grid; grid-template-columns: 36px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 9px 8px; border-radius: 9px; transition: background-color .25s; }
+.convo.is-active { background: var(--accent-soft); }
+.av { position: relative; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; font-weight: 600; font-size: 13px; color: #fff; }
+.av .ch { position: absolute; right: -3px; bottom: -3px; box-shadow: 0 0 0 2px var(--win-list); }
+.convo-main { min-width: 0; }
+.convo-name { display: block; font-weight: 600; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.convo-prev { display: block; color: var(--text-2); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.convo-time { font-size: 11px; color: var(--text-3); align-self: start; padding-top: 2px; font-variant-numeric: tabular-nums; }
+
+.ch { width: 16px; height: 16px; border-radius: 4.5px; display: grid; place-items: center; flex-shrink: 0; }
+.ch svg { width: 78%; height: 78%; }
+.ch--telegram { background: #2aabee; } .ch--whatsapp { background: #25d366; } .ch--discord { background: #5865f2; }
+.ch--instagram { background: linear-gradient(135deg, #f9b233, #e1306c 50%, #833ab4); } .ch--messenger { background: #0a7cff; }
+
+.win-chat { display: flex; flex-direction: column; min-width: 0; background: var(--win); }
+.chat-head { display: flex; align-items: center; gap: 10px; padding: 12px 18px; border-bottom: 1px solid var(--line); min-height: 58px; }
+.chat-head .av { width: 32px; height: 32px; font-size: 12px; }
+.chat-who { min-width: 0; flex: 1; }
+.chat-who strong { display: block; font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chat-who span { display: flex; align-items: center; gap: 5px; font-size: 11.5px; color: var(--text-2); }
+.chat-who .ch { width: 12px; height: 12px; border-radius: 3.5px; }
+.mode-pill { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: var(--green-soft); color: var(--green); white-space: nowrap; }
+.mode-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.mode-pill[data-mode="assist"] { background: var(--accent-soft); color: var(--accent-ink); }
+.mode-pill[data-mode="away"] { background: var(--bg-sunk); color: var(--text-2); }
+.chat-body { flex: 1; overflow: hidden; padding: 18px 18px 8px; display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; }
+.msg { max-width: 78%; padding: 8px 12px; border-radius: 16px; font-size: 13px; line-height: 1.45; text-wrap: pretty; }
+.msg--in { align-self: flex-start; background: var(--bubble-in); border-bottom-left-radius: 5px; }
+.msg--out { align-self: flex-end; background: var(--accent); color: #fff; border-bottom-right-radius: 5px; }
+.msg-meta { align-self: flex-end; display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-3); margin-top: -3px; }
+.msg-meta .ic { width: 12px; height: 12px; color: var(--accent); }
+.typing { align-self: flex-end; display: inline-flex; align-items: center; gap: 8px; font-size: 11.5px; color: var(--text-3); }
+.dots { display: inline-flex; gap: 3px; padding: 9px 11px; border-radius: 14px; background: var(--accent-soft); }
+.dots i { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: dot 1.1s infinite; }
+.dots i:nth-child(2) { animation-delay: .15s; } .dots i:nth-child(3) { animation-delay: .3s; }
+@keyframes dot { 0%, 70%, 100% { opacity: .35; transform: none; } 35% { opacity: 1; transform: translateY(-3px); } }
+.draft { align-self: flex-end; max-width: 82%; border-radius: 14px; border: 1.5px dashed var(--accent-line); background: var(--accent-soft); padding: 10px 12px; }
+.draft-label { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: var(--accent-ink); margin-bottom: 4px; }
+.draft-label .ic { width: 12px; height: 12px; }
+.draft p { font-size: 13px; }
+.draft-actions { display: flex; justify-content: flex-end; gap: 6px; margin-top: 9px; }
+.chip-btn { font-size: 11.5px; font-weight: 600; padding: 4px 11px; border-radius: 7px; background: var(--win); box-shadow: 0 0 0 1px var(--line-strong); }
+.chip-btn--primary { background: var(--accent); color: #fff; box-shadow: none; }
+.chip-btn.is-press { transform: scale(.94); transition: transform .12s; }
+.event { align-self: center; display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border-radius: 999px; font-size: 11.5px; font-weight: 500; background: var(--green-soft); color: var(--green); }
+.event .ic { width: 13px; height: 13px; }
+.event--muted { background: var(--bg-sunk); color: var(--text-2); }
+.composer { margin: 8px 14px 14px; display: flex; align-items: center; gap: 8px; height: 38px; padding-inline: 14px; border-radius: 10px; box-shadow: 0 0 0 1px var(--line-strong); color: var(--text-3); font-size: 12.5px; }
+.composer kbd { font-family: inherit; font-size: 11px; padding: 1px 6px; border-radius: 5px; background: var(--bg-sunk); color: var(--text-2); }
+.composer .ic { margin-left: auto; color: var(--text-3); }
+.pop { animation: pop .34s cubic-bezier(.2, .9, .3, 1.2) both; }
+@keyframes pop { from { opacity: 0; transform: translateY(8px) scale(.97); } }
+
+@media (max-width: 960px) { .win { grid-template-columns: 252px minmax(0, 1fr); } .win-side { display: none; } }
+@media (max-width: 640px) {
+  .win { grid-template-columns: minmax(0, 1fr); height: 500px; }
+  .win-list { display: none; }
+  .chat-head { padding-left: 14px; }
+  .chat-head::before { content: ''; width: 46px; height: 12px; flex-shrink: 0; background: radial-gradient(circle 6px at 6px 6px, #ff5f57 98%, transparent) 0 0 / 20px 12px no-repeat, radial-gradient(circle 6px at 6px 6px, #febc2e 98%, transparent) 17px 0 / 20px 12px no-repeat, radial-gradient(circle 6px at 6px 6px, #28c840 98%, transparent) 34px 0 / 20px 12px no-repeat; }
+  .msg { max-width: 88%; }
+  .composer-hint { display: none; }
+  .panel { padding: 22px; }
 }
 
-/* STATS */
-.stats-section { border-top: 1px solid var(--border); padding-block: 48px; }
-.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
-.stat-item { text-align: center; padding: 8px 20px; border-right: 1px solid var(--border); }
-.stat-item:last-child { border-right: none; }
-.stat-n { font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(2.6rem, 5vw, 3.8rem); font-weight: 400; font-style: italic; color: var(--accent); line-height: 1; margin-bottom: 10px; }
-.stat-l { font-size: 0.9rem; color: var(--fg-1); line-height: 1.5; }
-@media (max-width: 600px) { .stats-grid { grid-template-columns: 1fr; } .stat-item { border-right: none; border-bottom: 1px solid var(--border); } .stat-item:last-child { border-bottom: none; } }
+/* ---------- Secciones ---------- */
+.section { padding-block: clamp(72px, 10vw, 120px); }
+.section--soft { background: var(--bg-soft); border-block: 1px solid var(--line); }
+.h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(2.2rem, 4.6vw, 3.5rem); line-height: 1.06; letter-spacing: -0.02em; text-wrap: balance; }
+.lede { margin-top: 18px; font-size: 1.08rem; color: var(--text-2); max-width: 34em; line-height: 1.7; text-wrap: pretty; }
+.head-center { text-align: center; }
+.head-center .lede { margin-inline: auto; }
 
-/* SECTIONS BASE */
-section { padding-block: 60px; }
-.section-label { font-family: 'Instrument Serif', Georgia, serif; font-size: 15px; font-style: italic; color: var(--fg-2); margin-bottom: 12px; }
-.section-title { font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 400; letter-spacing: -0.025em; line-height: 1.15; text-wrap: balance; margin: 0 0 18px; color: var(--fg-0); }
-.section-title em { font-style: italic; }
-.section-sub { font-size: 1.1rem; color: var(--fg-1); max-width: 520px; line-height: 1.7; margin: 0; }
-.section-head { text-align: center; margin-bottom: 44px; }
-.section-head .section-sub { margin-inline: auto; }
+/* Canales */
+.channels { padding-block: 0 clamp(64px, 8vw, 88px); }
+.channels-row { display: flex; align-items: center; justify-content: center; gap: 12px 28px; flex-wrap: wrap; color: var(--text-2); font-size: 14.5px; }
+.channels-row > span:first-child { color: var(--text-3); }
+.channel { display: inline-flex; align-items: center; gap: 9px; font-weight: 500; color: var(--text); }
+.channel .ch { width: 26px; height: 26px; border-radius: 7px; }
+.channel--soon { color: var(--text-3); }
+.channel--soon .ch { opacity: .45; filter: grayscale(.4); }
+.channel--soon em { font-style: normal; font-size: 11.5px; padding: 2px 7px; border-radius: 999px; background: var(--bg-sunk); color: var(--text-2); }
 
-/* PROBLEM */
-.problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2px; margin-top: 36px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); }
-.problem-card { background: var(--bg-1); padding: 28px 26px; display: flex; flex-direction: column; gap: 10px; transition: background .2s; }
-.problem-card:hover { background: var(--bg-2); }
-.problem-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--accent-dim); display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0; }
-.problem-card h3 { font-size: 17px; font-weight: 600; margin: 0; color: var(--fg-0); }
-.problem-card p { font-size: 15px; color: var(--fg-1); margin: 0; line-height: 1.6; }
+/* Pasos */
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 56px; border-top: 1px solid var(--line-strong); counter-reset: step; }
+.step { padding: 28px 28px 0 0; counter-increment: step; }
+.step + .step { padding-left: 28px; border-left: 1px solid var(--line); }
+.step-n { font-family: var(--serif); font-size: 2.6rem; line-height: 1; color: var(--accent); }
+.step h3 { margin-top: 18px; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+.step p { margin-top: 8px; color: var(--text-2); font-size: 15px; line-height: 1.65; }
+.step-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+.step-tags span { font-size: 12px; padding: 3px 9px; border-radius: 999px; background: var(--bg-sunk); color: var(--text-2); }
+@media (max-width: 800px) { .steps { grid-template-columns: 1fr; } .step, .step + .step { padding: 24px 0; border-left: 0; } .step + .step { border-top: 1px solid var(--line); } }
 
-/* HOW IT WORKS */
-.how-grid { display: grid; grid-template-columns: repeat(3, 1fr); position: relative; margin-top: 36px; }
-.how-grid::before {
-  content: ''; position: absolute; top: 32px;
-  left: calc(100%/6 + 24px); right: calc(100%/6 + 24px); height: 1px;
-  background: linear-gradient(to right, var(--accent), var(--green)); opacity: .3;
-}
-.how-card { padding: 0 20px; text-align: center; position: relative; }
-.how-icon {
-  width: 72px; height: 72px; border-radius: 50%;
-  background: var(--accent-dim); border: 1.5px solid var(--accent-glow);
-  margin-inline: auto; margin-bottom: 24px;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--accent); position: relative; z-index: 1;
-  transition: border-color .25s, box-shadow .25s, background .25s;
-}
-.how-card:hover .how-icon { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 0 28px var(--accent-glow); }
-.how-card h3 { font-size: 18px; font-weight: 600; margin: 0 0 10px; color: var(--fg-0); }
-.how-card p { font-size: 15px; color: var(--fg-1); line-height: 1.65; }
-@media (max-width: 720px) { .how-grid { grid-template-columns: 1fr; gap: 32px; } .how-grid::before { display: none; } .how-card { text-align: left; padding: 0; } .how-icon { margin-inline: 0 auto 0 0; } }
+/* Modos */
+.modes { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(32px, 6vw, 80px); align-items: center; }
+.seg { display: inline-flex; padding: 3px; gap: 2px; border-radius: 11px; background: var(--bg-sunk); margin-top: 32px; flex-wrap: wrap; }
+.seg button { border: 0; background: transparent; cursor: pointer; font-size: 14px; font-weight: 500; padding: 7px 16px; border-radius: 8px; color: var(--text-2); transition: background-color .15s, color .15s, box-shadow .15s; }
+.seg button[aria-selected="true"] { background: var(--bg); color: var(--text); box-shadow: 0 1px 2px rgba(0,0,0,.08), 0 0 0 0.5px var(--line-strong); }
+.mode-copy { margin-top: 22px; min-height: 7.5em; }
+.mode-copy h3 { font-size: 18px; font-weight: 600; }
+.mode-copy p { margin-top: 6px; color: var(--text-2); font-size: 15.5px; line-height: 1.65; max-width: 32em; }
+.mode-stage { position: relative; border-radius: 18px; background: var(--bg-soft); box-shadow: inset 0 0 0 1px var(--line); padding: 32px clamp(18px, 4vw, 36px); min-height: 330px; display: flex; flex-direction: column; justify-content: center; gap: 10px; overflow: hidden; }
+.section--soft .mode-stage { background: var(--bg); }
+.mode-stage .msg { font-size: 14px; max-width: 86%; }
+.notif { align-self: stretch; display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; gap: 11px; align-items: start; padding: 12px 14px; border-radius: 14px; background: var(--win); box-shadow: var(--pop-shadow); font-size: 13px; line-height: 1.4; }
+.notif .mark { width: 34px; height: 34px; border-radius: 9px; }
+.notif .mark svg { width: 21px; height: 21px; }
+.notif strong { display: block; font-size: 13px; }
+.notif span { color: var(--text-2); }
+.notif time { font-size: 11.5px; color: var(--text-3); }
 
-/* FEATURES */
-.features-section { background: var(--bg-1); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; margin-top: 36px; }
-.feature { display: flex; flex-direction: column; gap: 10px; }
-.feature-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--accent-dim); border: 1px solid var(--accent-glow); display: flex; align-items: center; justify-content: center; color: var(--accent); }
-.feature h3 { font-size: 17px; font-weight: 600; margin: 0; color: var(--fg-0); }
-.feature p { font-size: 15px; color: var(--fg-1); margin: 0; line-height: 1.65; }
+/* Funciones */
+.feat-top { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 56px; }
+.panel { border-radius: 18px; background: var(--bg); box-shadow: 0 0 0 1px var(--line); padding: 28px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.panel h3 { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+.panel > p { color: var(--text-2); font-size: 15px; line-height: 1.65; }
+.panel-visual { margin-top: 14px; }
+.kanban { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.kcol { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.kcol-h { display: flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 600; color: var(--text-2); padding-inline: 2px; }
+.kcol-h::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--c, var(--text-3)); }
+.kcard { padding: 8px 9px; border-radius: 9px; background: var(--bg-soft); box-shadow: inset 0 0 0 1px var(--line); font-size: 11.5px; line-height: 1.35; min-width: 0; }
+.kcard b { display: block; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kcard span { color: var(--text-2); font-variant-numeric: tabular-nums; }
+.brief { display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 14px; padding: 16px; border-radius: 14px; background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent-line); }
+.brief-ic { width: 38px; height: 38px; border-radius: 10px; background: var(--accent); color: #fff; display: grid; place-items: center; }
+.brief-ic .ic { width: 19px; height: 19px; }
+.brief strong { display: block; font-family: var(--serif); font-weight: 400; font-size: 21px; line-height: 1.2; }
+.brief p { margin-top: 4px; font-size: 13.5px; color: var(--text-2); line-height: 1.55; }
+.brief-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+.brief-stats div { padding: 10px 12px; border-radius: 11px; background: var(--bg-soft); box-shadow: inset 0 0 0 1px var(--line); }
+.brief-stats b { display: block; font-size: 20px; font-weight: 600; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.brief-stats span { font-size: 12px; color: var(--text-2); }
+@media (max-width: 860px) { .feat-top { grid-template-columns: 1fr; } }
+@media (max-width: 460px) { .kanban { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
-/* TESTIMONIALS */
-.testi-section { }
-.testi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 900px; margin-inline: auto; margin-top: 36px; }
-.testi-card { background: var(--bg-1); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px; transition: border-color .2s; }
-.testi-card:hover { border-color: var(--border-strong); }
-.testi-quote-mark { display: block; font-family: 'Instrument Serif', Georgia, serif; font-size: 4rem; color: var(--accent); line-height: 0.75; margin-bottom: 12px; opacity: 0.7; }
-.testi-text { font-family: 'Instrument Serif', Georgia, serif; font-size: 1.2rem; font-style: italic; color: var(--fg-0); line-height: 1.7; margin-bottom: 24px; }
-.testi-author { display: flex; align-items: center; gap: 10px; }
-.testi-av { width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0; background: linear-gradient(135deg, var(--accent), var(--green)); display: flex; align-items: center; justify-content: center; font-family: 'Instrument Serif', serif; font-size: 15px; color: white; }
-.testi-name { font-size: 0.875rem; font-weight: 600; }
-.testi-role { font-size: 0.75rem; color: var(--fg-2); }
-@media (max-width: 600px) { .testi-grid { grid-template-columns: 1fr; } }
+.feat-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 40px; margin-top: 48px; list-style: none; padding: 0; }
+.feat-list li { display: grid; align-content: start; grid-template-columns: 22px minmax(0, 1fr); gap: 4px 14px; padding: 22px 0; border-top: 1px solid var(--line); }
+.feat-list .ic { width: 20px; height: 20px; color: var(--accent); margin-top: 2px; }
+.feat-list h3 { font-size: 15.5px; font-weight: 600; }
+.feat-list p { grid-column: 2; color: var(--text-2); font-size: 14.5px; line-height: 1.6; }
+@media (max-width: 900px) { .feat-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .feat-list { grid-template-columns: 1fr; } }
 
-/* PRICING */
-.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 36px; align-items: start; }
-.plan-card { background: var(--bg-1); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; gap: 20px; transition: border-color .2s, transform .2s; }
-.plan-card:hover { border-color: var(--border-strong); }
-.plan-card.featured { border-color: var(--accent); background: var(--bg-2); box-shadow: 0 0 40px var(--accent-dim); }
-.plan-badge { display: inline-block; font-size: 12px; font-weight: 600; background: var(--accent); color: #fff; padding: 4px 12px; border-radius: 999px; margin-bottom: -6px; }
-.plan-name { font-size: 18px; font-weight: 700; color: var(--fg-0); }
-.plan-price { display: flex; align-items: baseline; gap: 4px; }
-.plan-amount { font-family: 'Instrument Serif', Georgia, serif; font-size: 36px; font-weight: 400; letter-spacing: -0.02em; color: var(--fg-0); }
-.plan-currency { font-size: 14px; color: var(--fg-1); }
-.plan-period { font-size: 13px; color: var(--fg-2); }
-.plan-limit { font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-dim); border-radius: 6px; padding: 6px 12px; text-align: center; }
-.plan-features { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-.plan-features li { font-size: 14px; color: var(--fg-1); display: flex; align-items: flex-start; gap: 8px; }
-.plan-features li::before { content: ''; width: 14px; height: 14px; background: var(--green); border-radius: 50%; flex-shrink: 0; margin-top: 3px; mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E"); -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E"); mask-size: contain; -webkit-mask-size: contain; }
-.plan-cta { display: block; text-align: center; padding: 12px; border-radius: var(--radius); font-size: 14px; font-weight: 600; transition: all 0.15s; }
-.plan-cta.outline { border: 1px solid var(--border-strong); color: var(--fg-0); background: transparent; }
-.plan-cta.outline:hover { background: var(--bg-3); }
-.plan-cta.filled { background: var(--accent); color: #fff; border: none; }
-.plan-cta.filled:hover { opacity: 0.88; }
+/* Privacidad */
+.privacy { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 80px); align-items: center; }
+.privacy-points { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.privacy-points li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 14px; padding: 18px 0; border-top: 1px solid var(--line); font-size: 15px; color: var(--text-2); line-height: 1.6; }
+.privacy-points li:last-child { border-bottom: 1px solid var(--line); }
+.privacy-points .ic { width: 20px; height: 20px; color: var(--text); margin-top: 2px; }
+.privacy-points b { color: var(--text); font-weight: 600; }
+@media (max-width: 820px) { .modes, .privacy { grid-template-columns: 1fr; } }
+
+/* Precios */
+.plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 56px; align-items: stretch; }
+.plan { position: relative; display: flex; flex-direction: column; gap: 18px; padding: 28px; border-radius: 18px; background: var(--bg); box-shadow: 0 0 0 1px var(--line); }
+.plan--pro { box-shadow: 0 0 0 1.5px var(--accent), 0 24px 50px -24px rgba(238, 93, 59, .45); }
+.plan-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.plan-name { font-size: 17px; font-weight: 600; }
+.plan-flag { font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: var(--accent); color: #fff; }
+.plan-price { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+.plan-price b { font-family: var(--serif); font-weight: 400; font-size: 46px; line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.plan-price span { font-size: 13.5px; color: var(--text-2); }
+.plan-tag { font-size: 14px; color: var(--text-2); margin-top: -8px; }
+.plan ul { list-style: none; margin: 0; padding: 18px 0 0; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.plan li { display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 10px; font-size: 14.5px; line-height: 1.5; }
+.plan li .ic { width: 16px; height: 16px; color: var(--accent); stroke-width: 2.4; margin-top: 2px; }
+.plan .btn { width: 100%; }
+.plans-note { margin-top: 24px; text-align: center; font-size: 14px; color: var(--text-2); }
+@media (max-width: 900px) { .plans { grid-template-columns: 1fr; max-width: 460px; margin-inline: auto; } }
 
 /* FAQ */
-.faq-list { margin-top: 36px; max-width: 720px; margin-inline: auto; display: flex; flex-direction: column; gap: 2px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); }
-.faq-item { background: var(--bg-1); }
-.faq-q { width: 100%; background: none; border: none; color: var(--fg-0); font-size: 15px; font-weight: 600; text-align: left; padding: 22px 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; transition: color 0.15s, background 0.12s; font-family: inherit; }
-.faq-q:hover { color: var(--accent); background: var(--bg-2); }
-.faq-arrow { color: var(--fg-2); flex-shrink: 0; transition: transform 0.2s, color 0.15s; }
-.faq-item.open .faq-arrow { transform: rotate(180deg); color: var(--accent); }
-.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-.faq-a-inner { padding: 0 24px 20px; font-size: 14px; color: var(--fg-1); line-height: 1.65; }
+.faq { max-width: 760px; margin: 48px auto 0; border-top: 1px solid var(--line-strong); }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 22px 2px; font-size: 16.5px; font-weight: 600; letter-spacing: -0.005em; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary .ic { width: 18px; height: 18px; color: var(--text-3); transition: transform .2s; }
+.faq details[open] summary .ic { transform: rotate(45deg); color: var(--accent); }
+.faq summary:hover { color: var(--accent-ink); }
+.faq-a { padding: 0 2px 24px; color: var(--text-2); font-size: 15.5px; line-height: 1.7; max-width: 62ch; }
+.faq-a p + p { margin-top: 10px; }
 
-/* CTA BAND */
-.cta-band { background: var(--accent-dim); border-top: 1px solid var(--accent-glow); border-bottom: 1px solid var(--accent-glow); text-align: center; padding-block: 72px; position: relative; overflow: hidden; }
-.cta-band::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 60%, rgba(108,99,255,.15) 0%, transparent 70%); pointer-events: none; }
-.cta-band .section-title { max-width: 600px; margin-inline: auto; margin-bottom: 20px; }
-.cta-band .section-sub { margin-inline: auto; margin-bottom: 36px; }
+/* Cierre */
+.closing { text-align: center; padding-block: clamp(80px, 11vw, 132px); background: var(--bg-soft); border-top: 1px solid var(--line); position: relative; overflow: hidden; }
+.closing .mark { width: 64px; height: 64px; border-radius: 16px; margin: 0 auto 28px; box-shadow: 0 14px 30px -10px rgba(200, 60, 30, .55), inset 0 0 0 0.5px rgba(0,0,0,.12); }
+.closing .mark svg { width: 40px; height: 40px; }
+.closing .h2 { max-width: 16ch; margin-inline: auto; }
+.closing .hero-actions { margin-top: 32px; }
+.closing .hero-note { margin-top: 18px; }
 
-/* FOOTER */
-footer { background: var(--bg-0); border-top: 1px solid var(--border); padding-block: 44px 28px; }
-.footer-inner { max-width: 1100px; margin: 0 auto; padding-inline: 24px; display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
-.footer-brand { flex: 1; min-width: 180px; }
-.footer-logo { font-family: 'Instrument Serif', Georgia, serif; font-size: 20px; color: var(--fg-0); margin-bottom: 10px; }
-.footer-logo span { color: var(--accent); }
-.footer-desc { font-size: 13px; color: var(--fg-2); line-height: 1.65; max-width: 230px; }
-.footer-cols { display: flex; gap: 48px; flex-wrap: wrap; }
-.footer-col { display: flex; flex-direction: column; gap: 8px; }
-.footer-col-h { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--fg-2); margin-bottom: 2px; }
-.footer-lnk { font-size: 14px; color: var(--fg-1); transition: color .15s; }
-.footer-lnk:hover { color: var(--accent); }
-.footer-bottom { max-width: 1100px; margin: 32px auto 0; padding-inline: 24px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 12px; color: var(--fg-2); }
-@media (max-width: 600px) { .footer-inner { flex-direction: column; } .footer-cols { gap: 28px; } }
+/* Footer */
+.footer { padding-block: 48px 36px; border-top: 1px solid var(--line); font-size: 14px; }
+.footer-top { display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+.footer-brand p { margin-top: 12px; color: var(--text-2); max-width: 26em; font-size: 14px; }
+.footer-cols { display: flex; gap: 56px; flex-wrap: wrap; }
+.footer-col { display: flex; flex-direction: column; gap: 9px; }
+.footer-col h4 { margin: 0 0 3px; font-size: 13px; font-weight: 600; }
+.footer-col a, .footer-col button { color: var(--text-2); background: none; border: 0; padding: 0; text-align: left; cursor: pointer; font-size: 14px; transition: color .15s; }
+.footer-col a:hover, .footer-col button:hover { color: var(--text); }
+.footer-bottom { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-size: 12.5px; color: var(--text-3); }
 
-/* LEGAL MODAL */
-.legal-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.65); z-index: 9999; align-items: center; justify-content: center; padding: 24px; backdrop-filter: blur(4px); }
-.legal-modal.open { display: flex; }
-.legal-box { background: var(--bg-1); border: 1px solid var(--border); border-radius: 16px; width: 100%; max-width: 600px; max-height: 80vh; display: flex; flex-direction: column; }
-.legal-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px 16px; border-bottom: 1px solid var(--border); }
-.legal-title { font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; font-weight: 400; color: var(--fg-0); }
-.legal-close { background: none; border: none; font-size: 18px; color: var(--fg-2); cursor: pointer; padding: 4px 8px; border-radius: 6px; transition: color .15s; }
-.legal-close:hover { color: var(--fg-0); }
-.legal-body { padding: 20px 24px; overflow-y: auto; font-size: 14px; line-height: 1.8; color: var(--fg-1); }
-.legal-body h3 { font-size: 15px; font-weight: 700; color: var(--fg-0); margin: 20px 0 6px; }
-.legal-body h3:first-child { margin-top: 0; }
-.legal-body p { margin-bottom: 10px; }
+/* Hoja legal */
+.sheet { border: 0; padding: 0; width: min(620px, calc(100% - 32px)); max-height: min(80vh, 720px); border-radius: 16px; background: var(--bg); color: var(--text); box-shadow: var(--pop-shadow); }
+.sheet::backdrop { background: rgba(20, 12, 8, .45); backdrop-filter: blur(4px); }
+.sheet-head { position: sticky; top: 0; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 22px; background: var(--bg); border-bottom: 1px solid var(--line); }
+.sheet-head h2 { font-family: var(--serif); font-weight: 400; font-size: 26px; }
+.sheet-close { width: 30px; height: 30px; border-radius: 8px; border: 0; background: var(--bg-sunk); display: grid; place-items: center; cursor: pointer; color: var(--text-2); }
+.sheet-close:hover { color: var(--text); }
+.sheet-body { padding: 8px 22px 24px; font-size: 14.5px; line-height: 1.75; color: var(--text-2); }
+.sheet-body h3 { font-size: 15px; font-weight: 600; color: var(--text); margin: 20px 0 4px; }
+.sheet-body a { color: var(--accent-ink); }
 
-/* FADE IN */
-.fu { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
-.fu.in { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) { .fu { transition: none; } .msg-pop { animation: none; } .t-dot { animation: none; } }
+/* Entrada al hacer scroll — solo encabezados */
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.is-in { opacity: 1; transform: none; }
+.hero-in > * { animation: rise .8s cubic-bezier(.2, .7, .2, 1) both; }
+.hero-in > :nth-child(2) { animation-delay: .06s; } .hero-in > :nth-child(3) { animation-delay: .12s; } .hero-in > :nth-child(4) { animation-delay: .18s; } .hero-in > :nth-child(5) { animation-delay: .22s; }
+.stage { animation: rise 1s .25s cubic-bezier(.2, .7, .2, 1) both; }
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .hero-in > *, .stage, .pop, .dots i, .side-count.is-bump { animation: none; }
+}
 </style>
 </head>
 <body>
 
-<nav id="nav">
-  <div class="nav-inner">
-    <a href="#" class="nav-logo">Aura<span>.</span></a>
+<!-- Iconos (trazos de Lucide) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></symbol>
+  <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></symbol>
+  <symbol id="i-package" viewBox="0 0 24 24"><path d="m16.5 9.4-9-5.19"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.3 7 12 12l8.7-5"/><path d="M12 22V12"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></symbol>
+  <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+  <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></symbol>
+  <symbol id="i-slash" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="m13.5 7-3 7"/></symbol>
+  <symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M12.59 2.59A2 2 0 0 0 11.17 2H4a2 2 0 0 0-2 2v7.17a2 2 0 0 0 .59 1.42l8.7 8.7a2.43 2.43 0 0 0 3.42 0l6.58-6.58a2.43 2.43 0 0 0 0-3.42z"/><path d="M7.5 7.5h.01"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 18a6 6 0 0 0 0-12z"/></symbol>
+  <symbol id="i-sunrise" viewBox="0 0 24 24"><path d="M12 2v8"/><path d="m4.93 10.93 1.41 1.41"/><path d="M2 18h2"/><path d="M20 18h2"/><path d="m19.07 10.93-1.41 1.41"/><path d="M22 22H2"/><path d="m8 6 4-4 4 4"/><path d="M16 18a4 4 0 0 0-8 0"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></symbol>
+  <symbol id="g-mark" viewBox="0 0 24 24"><path d="M17.4 7.4A7.2 7.2 0 1 0 17.4 16.6" fill="none" stroke="#fff" stroke-width="2.7" stroke-linecap="round"/><circle cx="12.4" cy="12" r="2.2" fill="#fff" stroke="none"/></symbol>
+  <symbol id="g-telegram" viewBox="0 0 24 24"><path fill="#fff" stroke="none" d="M18.9 5.3 4.2 11c-1 .4-1 1-.2 1.3l3.8 1.2 1.4 4.5c.2.5.3.7.7.7.3 0 .5-.1.7-.3l1.8-1.7 3.8 2.8c.7.4 1.2.2 1.4-.6l2.5-11.8c.3-1-.4-1.5-1.2-1.8Zm-2.4 2.6-6.9 6.3-.3 2.9-1.1-3.7 7.8-5.9c.4-.2.7.1.5.4Z"/></symbol>
+  <symbol id="g-whatsapp" viewBox="0 0 24 24"><path fill="none" stroke="#fff" stroke-width="1.7" stroke-linejoin="round" d="M12 4.2a7.8 7.8 0 0 0-6.7 11.8L4.2 19.8l3.9-1a7.8 7.8 0 1 0 3.9-14.6Z"/><path fill="#fff" stroke="none" d="M9.6 8.3c.2-.3.3-.4.6-.4h.4c.2 0 .3 0 .5.4l.6 1.5c.1.2.1.3 0 .5l-.4.5c-.1.1-.1.3 0 .4.4.6.8 1.1 1.4 1.5.1.1.3.1.4 0l.5-.5c.2-.1.3-.2.5-.1l1.5.7c.2.1.3.3.2.5-.1.7-.7 1.4-1.4 1.5-1.1.2-2.7-.5-3.9-1.8-1.2-1.3-1.9-2.8-1.6-3.8.1-.4.2-.7.5-1Z"/></symbol>
+  <symbol id="g-discord" viewBox="0 0 24 24"><path fill="#fff" stroke="none" d="M17.6 7.3a12.6 12.6 0 0 0-3.1-1l-.4.8a11.6 11.6 0 0 0-4.2 0l-.4-.8a12.6 12.6 0 0 0-3.1 1C4.5 10.2 4 13 4.2 15.8a12.7 12.7 0 0 0 3.8 1.9l.8-1.3c-.5-.2-.9-.4-1.3-.7l.3-.3a9 9 0 0 0 8.4 0l.3.3c-.4.3-.9.5-1.3.7l.8 1.3a12.7 12.7 0 0 0 3.8-1.9c.3-3.2-.5-6-2.2-8.5Zm-7.9 6.8c-.7 0-1.3-.7-1.3-1.5s.6-1.5 1.3-1.5c.8 0 1.4.7 1.3 1.5 0 .8-.6 1.5-1.3 1.5Zm4.6 0c-.7 0-1.3-.7-1.3-1.5s.6-1.5 1.3-1.5c.8 0 1.4.7 1.3 1.5 0 .8-.5 1.5-1.3 1.5Z"/></symbol>
+  <symbol id="g-instagram" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="4.2" fill="none" stroke="#fff" stroke-width="1.7"/><circle cx="12" cy="12" r="3.2" fill="none" stroke="#fff" stroke-width="1.7"/><circle cx="16.1" cy="7.9" r="1" fill="#fff" stroke="none"/></symbol>
+  <symbol id="g-messenger" viewBox="0 0 24 24"><path fill="#fff" stroke="none" d="M12 4.3c-4.3 0-7.7 3.2-7.7 7.4 0 2.2 1 4.2 2.6 5.5v2.5l2.4-1.3c.8.2 1.7.3 2.7.3 4.3 0 7.7-3.2 7.7-7.4S16.3 4.3 12 4.3Z"/><path fill="#0a7cff" stroke="none" d="m7.6 13.8 2.6-3.9 2 1.5 2.6-1.5-2.6 3.9-2-1.5Z"/></symbol>
+</svg>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#" class="brand" aria-label="Contesa, inicio">
+      <span class="mark"><svg><use href="#g-mark"/></svg></span>Contesa
+    </a>
     <ul class="nav-links">
-      <li><a href="#como-funciona">Cómo funciona</a></li>
+      <li><a href="#funciones">Funciones</a></li>
       <li><a href="#precios">Precios</a></li>
-      <li><a href="#faq">FAQ</a></li>
-      <li><a href="https://aura-server-oisv.onrender.com/download" class="nav-cta">Descargar gratis</a></li>
+      <li><a href="#preguntas">Preguntas</a></li>
+      <li><a href="https://aura-server-oisv.onrender.com/download" class="btn btn--primary btn--sm">Descargar gratis</a></li>
     </ul>
   </div>
-</nav>
+</header>
 
-<!-- HERO -->
-<div class="wrap">
-  <section class="hero-section">
-    <div class="hero-inner">
-      <div class="hero-copy">
-        <div class="hero-badge">Disponible para Windows</div>
-        <h1>Responde en segundos.<br><em>Vende más.</em> Suena como tú.</h1>
-        <p class="hero-sub">Aura entiende tu negocio y responde por ti en Telegram — sin que tus clientes noten la diferencia. Tú vendes, Aura atiende.</p>
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-in">
+        <div><span class="hero-pill"><b>Nuevo en 1.1</b>WhatsApp, Discord y pedidos</span></div>
+        <h1>Tus clientes escriben. Contesa contesta como tú.</h1>
+        <p class="hero-sub">La app para Windows que atiende tus chats de WhatsApp, Telegram y Discord con tu tono, tu catálogo y tus precios. Tú solo cierras la venta.</p>
         <div class="hero-actions">
-          <a href="https://aura-server-oisv.onrender.com/download" class="btn-primary">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Descargar para Windows
-          </a>
-          <a href="#como-funciona" class="btn-secondary">
-            Ver cómo funciona
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
+          <a href="https://aura-server-oisv.onrender.com/download" class="btn btn--primary"><svg class="ic"><use href="#i-download"/></svg>Descargar para Windows</a>
+          <a href="#precios" class="btn btn--secondary">Ver planes y precios</a>
         </div>
-        <p class="hero-meta"><strong style="color:var(--fg-1)">Prueba gratis 15 días.</strong><span>·</span>Sin tarjeta de crédito<span>·</span>Cancela cuando quieras</p>
+        <p class="hero-note">15 días de prueba con todo incluido. Sin tarjeta de crédito.</p>
       </div>
-      <div class="hero-visual">
-        <div class="hero-glow"></div>
-        <div class="phone-frame">
-          <div class="phone-bar">
-            <div class="phone-av" id="phoneAv">V</div>
-            <div class="phone-info">
-              <div class="phone-name" id="phoneName">Valentina R.</div>
-              <div class="phone-online">En línea</div>
+
+      <div class="stage" aria-label="Vista de la bandeja de Contesa respondiendo mensajes">
+        <div class="win" id="demo">
+          <aside class="win-side" aria-hidden="true">
+            <div class="lights"><i></i><i></i><i></i></div>
+            <div class="side-item"><svg class="ic"><use href="#i-home"/></svg>Inicio</div>
+            <div class="side-item is-active"><svg class="ic"><use href="#i-inbox"/></svg>Bandeja<span class="side-count">4</span></div>
+            <div class="side-item"><svg class="ic"><use href="#i-package"/></svg>Pedidos<span class="side-count" id="ordersCount">2</span></div>
+            <div class="side-item"><svg class="ic"><use href="#i-layers"/></svg>Canales</div>
+            <div class="side-item"><svg class="ic"><use href="#i-smile"/></svg>Personalidad</div>
+            <div class="side-item"><svg class="ic"><use href="#i-book"/></svg>Conocimiento</div>
+            <div class="side-item"><svg class="ic"><use href="#i-zap"/></svg>Automatización</div>
+            <div class="side-foot">
+              <span class="mark"><svg><use href="#g-mark"/></svg></span>
+              <div><strong>Casa Lino</strong><small>Plan Pro</small></div>
             </div>
-            <div class="aura-badge">AURA</div>
+          </aside>
+          <div class="win-list" aria-hidden="true">
+            <div class="list-head">
+              <h4>Bandeja</h4>
+              <div class="search"><svg class="ic"><use href="#i-search"/></svg>Buscar clientes</div>
+            </div>
+            <ul class="convos" id="convos"></ul>
           </div>
-          <div class="phone-msgs" id="chatMsgs"></div>
+          <div class="win-chat">
+            <div class="chat-head">
+              <div class="av" id="chatAv"></div>
+              <div class="chat-who"><strong id="chatName"></strong><span id="chatChannel"></span></div>
+              <span class="mode-pill" id="chatMode"></span>
+            </div>
+            <div class="chat-body" id="chatBody" aria-live="off"></div>
+            <div class="composer" aria-hidden="true">Escribe un mensaje<span class="composer-hint">&nbsp;o usa <kbd>/</kbd> para respuestas rápidas</span><svg class="ic"><use href="#i-send"/></svg></div>
+          </div>
         </div>
       </div>
     </div>
   </section>
-</div>
 
-<!-- STATS -->
-<section class="stats-section">
+  <!-- CANALES -->
+  <section class="channels" aria-label="Canales compatibles">
+    <div class="wrap channels-row">
+      <span>Funciona donde ya te escriben</span>
+      <span class="channel"><span class="ch ch--whatsapp"><svg><use href="#g-whatsapp"/></svg></span>WhatsApp</span>
+      <span class="channel"><span class="ch ch--telegram"><svg><use href="#g-telegram"/></svg></span>Telegram</span>
+      <span class="channel"><span class="ch ch--discord"><svg><use href="#g-discord"/></svg></span>Discord</span>
+      <span class="channel channel--soon"><span class="ch ch--instagram"><svg><use href="#g-instagram"/></svg></span>Instagram <em>Pronto</em></span>
+      <span class="channel channel--soon"><span class="ch ch--messenger"><svg><use href="#g-messenger"/></svg></span>Messenger <em>Pronto</em></span>
+    </div>
+  </section>
+
+  <!-- CÓMO EMPEZAR -->
+  <section class="section section--soft" id="como-funciona">
+    <div class="wrap">
+      <div class="reveal">
+        <h2 class="h2">Lista en una tarde. Trabajando desde el primer mensaje.</h2>
+        <p class="lede">No tienes que saber de tecnología. Contesa te guía paso a paso y puedes probar cada respuesta antes de dejarla sola.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-n">1</div>
+          <h3>Conecta tus canales</h3>
+          <p>Escanea un código QR para vincular WhatsApp, como en WhatsApp Web. Telegram y Discord se conectan con un bot en un par de minutos.</p>
+          <div class="step-tags"><span>QR de WhatsApp</span><span>Bot de Telegram</span><span>Bot de Discord</span></div>
+        </div>
+        <div class="step">
+          <div class="step-n">2</div>
+          <h3>Enséñale tu negocio</h3>
+          <p>Cuéntale cómo hablas, carga tu catálogo con precios y las preguntas que más te hacen. Pruébala en vivo antes de activarla.</p>
+          <div class="step-tags"><span>Personalidad</span><span>Catálogo</span><span>Preguntas frecuentes</span><span>Horario</span></div>
+        </div>
+        <div class="step">
+          <div class="step-n">3</div>
+          <h3>Decide cuánto control quieres</h3>
+          <p>Deja que responda sola, que te prepare borradores para aprobar o que solo te avise. Puedes cambiarlo cuando quieras.</p>
+          <div class="step-tags"><span>Automático</span><span>Asistente</span><span>Solo alertas</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODOS -->
+  <section class="section">
+    <div class="wrap modes">
+      <div>
+        <div class="reveal">
+          <h2 class="h2">Tú decides quién tiene la última palabra.</h2>
+          <p class="lede">Tres formas de trabajar con Contesa. Elige una para todos tus canales o cámbiala según el momento del día.</p>
+        </div>
+        <div class="seg" role="tablist" aria-label="Modos de respuesta">
+          <button role="tab" id="tab-auto" aria-controls="mode-auto" aria-selected="true">Automático</button>
+          <button role="tab" id="tab-assist" aria-controls="mode-assist" aria-selected="false" tabindex="-1">Asistente</button>
+          <button role="tab" id="tab-alert" aria-controls="mode-alert" aria-selected="false" tabindex="-1">Solo alertas</button>
+        </div>
+        <div class="mode-copy" id="modeCopy">
+          <h3>Responde sola, al instante</h3>
+          <p>Contesa contesta en segundos con tu tono y tus precios. Tú ves cada conversación en la bandeja y puedes entrar cuando quieras.</p>
+        </div>
+      </div>
+
+      <div class="mode-stage" id="mode-auto" role="tabpanel" aria-labelledby="tab-auto">
+        <div class="msg msg--in">Hola, ¿el bolso tejido lo tienen en color arena?</div>
+        <div class="msg msg--out">¡Hola! Sí, el bolso tejido está disponible en arena y cuesta $68.000. ¿Te lo envío a domicilio o lo recoges en la tienda?</div>
+        <div class="msg-meta"><svg class="ic"><use href="#i-sparkles"/></svg>Respondido por Contesa en 3 segundos</div>
+      </div>
+      <div class="mode-stage" id="mode-assist" role="tabpanel" aria-labelledby="tab-assist" hidden>
+        <div class="msg msg--in">¿Me hacen precio si compro 10 bolsos para mi tienda?</div>
+        <div class="draft">
+          <div class="draft-label"><svg class="ic"><use href="#i-sparkles"/></svg>Borrador de Contesa</div>
+          <p>¡Claro! Para pedidos al por mayor desde 10 unidades manejamos un 15% de descuento. ¿Para qué ciudad sería el envío?</p>
+          <div class="draft-actions"><span class="chip-btn">Editar</span><span class="chip-btn">Descartar</span><span class="chip-btn chip-btn--primary">Enviar</span></div>
+        </div>
+      </div>
+      <div class="mode-stage" id="mode-alert" role="tabpanel" aria-labelledby="tab-alert" hidden>
+        <div class="notif">
+          <span class="mark"><svg><use href="#g-mark"/></svg></span>
+          <div><strong>Juliana Ortiz necesita respuesta</strong><span>«Quiero cambiar la talla del vestido que me llegó ayer»</span></div>
+          <time>ahora</time>
+        </div>
+        <div class="notif" style="opacity:.55; transform: scale(.96)">
+          <span class="mark"><svg><use href="#g-mark"/></svg></span>
+          <div><strong>Andrés Mejía preguntó por envíos</strong><span>Haz clic para abrir el chat</span></div>
+          <time>hace 4 min</time>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FUNCIONES -->
+  <section class="section section--soft" id="funciones">
+    <div class="wrap">
+      <div class="reveal head-center">
+        <h2 class="h2">Más que responder: te ayuda a vender.</h2>
+        <p class="lede">Todo lo que pasa en tus chats, ordenado en un solo lugar. Sin hojas de cálculo ni notas sueltas.</p>
+      </div>
+
+      <div class="feat-top">
+        <article class="panel">
+          <h3>Pedidos que se organizan solos</h3>
+          <p>Convierte una conversación en pedido con un clic. Suma productos de tu catálogo y sigue cada venta hasta la entrega.</p>
+          <div class="panel-visual kanban" aria-hidden="true">
+            <div class="kcol"><div class="kcol-h" style="--c: var(--blue)">Nuevo</div><div class="kcard"><b>Valentina Ríos</b><span>$85.000</span></div><div class="kcard"><b>Camilo Duarte</b><span>$142.000</span></div></div>
+            <div class="kcol"><div class="kcol-h" style="--c: var(--green)">Pagado</div><div class="kcard"><b>Sara Gómez</b><span>$68.000</span></div></div>
+            <div class="kcol"><div class="kcol-h" style="--c: var(--accent)">Enviado</div><div class="kcard"><b>Luisa Pardo</b><span>$210.000</span></div><div class="kcard"><b>Diego Rincón</b><span>$54.000</span></div></div>
+            <div class="kcol"><div class="kcol-h">Entregado</div><div class="kcard"><b>Ana Beltrán</b><span>$96.000</span></div></div>
+          </div>
+        </article>
+        <article class="panel">
+          <h3>Te pone al día cuando vuelves</h3>
+          <p>Al abrir la app ves qué pasó mientras dormías o estabas ocupada: quién escribió, qué respondió Contesa y quién quiere comprar.</p>
+          <div class="panel-visual" aria-hidden="true">
+            <div class="brief">
+              <span class="brief-ic"><svg class="ic"><use href="#i-sunrise"/></svg></span>
+              <div>
+                <strong>Mientras no estabas</strong>
+                <p>9 clientes escribieron 23 mensajes. Contesa respondió 21 y detectó 4 intenciones de compra.</p>
+              </div>
+            </div>
+            <div class="brief-stats">
+              <div><b>21</b><span>respuestas</span></div>
+              <div><b>4</b><span>por comprar</span></div>
+              <div><b>2 h</b><span>ahorradas</span></div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <ul class="feat-list">
+        <li><svg class="ic"><use href="#i-inbox"/></svg><h3>Una sola bandeja</h3><p>WhatsApp, Telegram y Discord juntos. Responde a todos sin cambiar de aplicación.</p></li>
+        <li><svg class="ic"><use href="#i-slash"/></svg><h3>Respuestas rápidas</h3><p>Escribe / y elige un atajo: datos de pago, direcciones o políticas de cambio.</p></li>
+        <li><svg class="ic"><use href="#i-repeat"/></svg><h3>Seguimiento automático</h3><p>Si un cliente interesado deja de responder, Contesa le escribe de nuevo en el momento justo.</p></li>
+        <li><svg class="ic"><use href="#i-clock"/></svg><h3>Horario de atención</h3><p>Fuera de horario envía tu mensaje de ausencia y te deja las conversaciones listas para la mañana.</p></li>
+        <li><svg class="ic"><use href="#i-tag"/></svg><h3>Etiquetas y notas</h3><p>Marca a cada cliente como interesado, mayorista o VIP y guarda lo que necesitas recordar.</p></li>
+        <li><svg class="ic"><use href="#i-book"/></svg><h3>Catálogo y preguntas frecuentes</h3><p>Contesa responde con tus precios reales y nunca inventa productos que no tienes.</p></li>
+        <li><svg class="ic"><use href="#i-bell"/></svg><h3>Avisos en el escritorio</h3><p>Te avisa cuando un cliente quiere comprar o pide hablar con una persona.</p></li>
+        <li><svg class="ic"><use href="#i-moon"/></svg><h3>Modo claro y oscuro</h3><p>Se adapta a tu Windows o elige el tema y el color de acento que prefieras.</p></li>
+        <li><svg class="ic"><use href="#i-refresh"/></svg><h3>Siempre actualizada</h3><p>Las mejoras llegan solas en segundo plano. No tienes que volver a descargar nada.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PRIVACIDAD -->
+  <section class="section">
+    <div class="wrap privacy">
+      <div class="reveal">
+        <h2 class="h2">Tus chats se quedan en tu computador.</h2>
+        <p class="lede">Contesa guarda tus conversaciones, tu catálogo y tus pedidos en tu equipo, no en una nube ajena.</p>
+      </div>
+      <ul class="privacy-points">
+        <li><svg class="ic"><use href="#i-laptop"/></svg><span><b>Historial local.</b> Las conversaciones y los pedidos viven en tu Windows y solo tú los ves.</span></li>
+        <li><svg class="ic"><use href="#i-lock"/></svg><span><b>Solo lo necesario viaja.</b> Para redactar cada respuesta se envía el mensaje del cliente a la IA, de forma cifrada y sin usarlo para entrenar modelos.</span></li>
+        <li><svg class="ic"><use href="#i-check-circle"/></svg><span><b>Tú tienes el control.</b> Desconecta un canal y Contesa borra sus credenciales de inmediato.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PRECIOS -->
+  <section class="section section--soft" id="precios">
+    <div class="wrap">
+      <div class="reveal head-center">
+        <h2 class="h2">Empieza gratis. Paga cuando te haga vender más.</h2>
+        <p class="lede">Todos los planes usan la misma IA, tu personalidad y tu catálogo. Cambia la cantidad de respuestas al día y de canales.</p>
+      </div>
+      <div class="plans">
+        <div class="plan">
+          <div class="plan-top"><span class="plan-name">Gratis</span></div>
+          <div class="plan-price"><b>$0</b><span>para siempre</span></div>
+          <p class="plan-tag">Para probar con un canal.</p>
+          <ul>
+            <li><svg class="ic"><use href="#i-check"/></svg>20 respuestas al día</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>1 canal conectado</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Personalidad, catálogo y horario</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Bandeja unificada</li>
+          </ul>
+          <a href="https://aura-server-oisv.onrender.com/download" class="btn btn--secondary">Descargar gratis</a>
+        </div>
+        <div class="plan plan--pro">
+          <div class="plan-top"><span class="plan-name">Pro</span><span class="plan-flag">Más elegido</span></div>
+          <div class="plan-price"><b>$49.900</b><span>COP al mes</span></div>
+          <p class="plan-tag">Para negocios que venden todos los días.</p>
+          <ul>
+            <li><svg class="ic"><use href="#i-check"/></svg>600 respuestas al día</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>WhatsApp, Telegram y Discord a la vez</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Todo lo del plan Gratis</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Soporte por correo</li>
+          </ul>
+          <a href="https://aura-server-oisv.onrender.com/download" class="btn btn--primary">Probar 15 días gratis</a>
+        </div>
+        <div class="plan">
+          <div class="plan-top"><span class="plan-name">Premium</span></div>
+          <div class="plan-price"><b>$89.900</b><span>COP al mes</span></div>
+          <p class="plan-tag">Para negocios con mucho volumen.</p>
+          <ul>
+            <li><svg class="ic"><use href="#i-check"/></svg>1.500 respuestas al día</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Todos los canales, incluidos los nuevos</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Todo lo del plan Pro</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Soporte prioritario</li>
+          </ul>
+          <a href="https://aura-server-oisv.onrender.com/download" class="btn btn--secondary">Probar 15 días gratis</a>
+        </div>
+      </div>
+      <p class="plans-note">Paga con Nequi, PSE o tarjeta a través de Wompi, o con tarjeta internacional (US$14,99 y US$24,99). Sin permanencia.</p>
+    </div>
+  </section>
+
+  <!-- PREGUNTAS -->
+  <section class="section" id="preguntas">
+    <div class="wrap">
+      <div class="reveal head-center">
+        <h2 class="h2">Preguntas frecuentes</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>¿Las respuestas suenan como yo?<svg class="ic"><use href="#i-plus"/></svg></summary>
+          <div class="faq-a"><p>Sí. Le cuentas a Contesa cómo hablas, qué palabras usas y qué tan largas quieres las respuestas, y la pruebas en vivo antes de activarla. Si prefieres revisar todo, usa el modo Asistente: Contesa escribe el borrador y tú decides si se envía.</p></div>
+        </details>
+        <details>
+          <summary>¿Cómo se conecta WhatsApp?<svg class="ic"><use href="#i-plus"/></svg></summary>
+          <div class="faq-a"><p>Igual que WhatsApp Web: abres WhatsApp en tu celular, vas a Dispositivos vinculados y escaneas el código QR que te muestra Contesa. Sigues usando tu mismo número.</p><p>Te recomendamos usar un número de negocio y no enviar mensajes masivos, para cuidar tu cuenta.</p></div>
+        </details>
+        <details>
+          <summary>¿Tengo que dejar el computador prendido?<svg class="ic"><use href="#i-plus"/></svg></summary>
+          <div class="faq-a"><p>Sí. Contesa responde mientras la app está abierta, aunque sea minimizada en la bandeja de Windows. Si apagas el equipo, los mensajes te esperan y puedes responderlos al volver.</p></div>
+        </details>
+        <details>
+          <summary>¿Qué pasa si se acaban las respuestas del día?<svg class="ic"><use href="#i-plus"/></svg></summary>
+          <div class="faq-a"><p>Los mensajes siguen llegando a tu bandeja y los respondes tú. El contador se reinicia cada día y Contesa te avisa antes de llegar al límite. Nunca se pierde un mensaje.</p></div>
+        </details>
+        <details>
+          <summary>Windows muestra un aviso al instalar. ¿Es normal?<svg class="ic"><use href="#i-plus"/></svg></summary>
+          <div class="faq-a"><p>Sí. Windows SmartScreen avisa con las aplicaciones nuevas que todavía no son muy descargadas. Haz clic en «Más información» y luego en «Ejecutar de todas formas». Solo pasa la primera vez.</p></div>
+        </details>
+        <details>
+          <summary>¿Puedo cancelar cuando quiera?<svg class="ic"><use href="#i-plus"/></svg></summary>
+          <div class="faq-a"><p>Sí, no hay permanencia. Si cancelas, tu cuenta pasa al plan Gratis y conservas tus conversaciones, tu catálogo y tus pedidos.</p></div>
+        </details>
+        <details>
+          <summary>¿Funciona en Mac?<svg class="ic"><use href="#i-plus"/></svg></summary>
+          <div class="faq-a"><p>Por ahora Contesa está disponible para Windows 10 y 11. La versión para Mac está en nuestros planes.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CIERRE -->
+  <section class="closing">
+    <div class="wrap">
+      <span class="mark" aria-hidden="true"><svg><use href="#g-mark"/></svg></span>
+      <h2 class="h2 reveal">Que ningún cliente se quede esperando.</h2>
+      <div class="hero-actions">
+        <a href="https://aura-server-oisv.onrender.com/download" class="btn btn--primary"><svg class="ic"><use href="#i-download"/></svg>Descargar Contesa gratis</a>
+      </div>
+      <p class="hero-note">Versión 1.1.0 para Windows 10 y 11. 15 días de prueba sin tarjeta.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
   <div class="wrap">
-    <div class="stats-grid">
-      <div class="stat-item fu"><div class="stat-n">73%</div><div class="stat-l">de las ventas se pierden<br>por no responder a tiempo</div></div>
-      <div class="stat-item fu" style="transition-delay:.12s"><div class="stat-n">&lt;1 seg</div><div class="stat-l">tiempo de respuesta<br>promedio de Aura</div></div>
-      <div class="stat-item fu" style="transition-delay:.22s"><div class="stat-n">24/7</div><div class="stat-l">atención automática<br>mientras tú haces tu vida</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- PROBLEMA -->
-<div class="wrap">
-  <section>
-    <div class="fu">
-      <div class="section-label">El problema</div>
-      <h2 class="section-title">Pierdes ventas<br>mientras <em>no puedes responder</em></h2>
-      <p class="section-sub">Cada mensaje sin respuesta en los primeros minutos es una venta que se va a la competencia.</p>
-    </div>
-    <div class="problem-grid">
-      <div class="problem-card">
-        <div class="problem-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-        <h3>Respuestas tardías</h3>
-        <p>El 78% de los compradores elige al vendedor que responde primero. Cada hora cuenta.</p>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="brand"><span class="mark"><svg><use href="#g-mark"/></svg></span>Contesa</span>
+        <p>Respuestas que suenan como tú, para emprendedores que venden por chat.</p>
       </div>
-      <div class="problem-card">
-        <div class="problem-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-        <h3>Preguntas repetidas</h3>
-        <p>Precio, envío, métodos de pago — las mismas preguntas todo el día, todos los días.</p>
-      </div>
-      <div class="problem-card">
-        <div class="problem-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
-        <h3>Crecimiento estancado</h3>
-        <p>No puedes atender más clientes porque todo tu tiempo se va en responder mensajes.</p>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- CÓMO FUNCIONA -->
-<div class="wrap" id="como-funciona">
-  <section>
-    <div class="section-head fu">
-      <div class="section-label">Proceso</div>
-      <h2 class="section-title">En 3 pasos,<br><em>Aura trabaja</em> por ti</h2>
-      <p class="section-sub">Sin configuraciones complicadas. Sin bots genéricos. Sin que tus clientes sepan que no eres tú.</p>
-    </div>
-    <div class="how-grid">
-      <div class="how-card fu">
-        <div class="how-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2H3v16h5l4 4 4-4h5V2z"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="13" y2="13"/></svg></div>
-        <h3>Conecta tu Telegram</h3>
-        <p>Crea un bot en menos de 2 minutos y conéctalo a Aura. Tus clientes escriben al mismo número de siempre.</p>
-      </div>
-      <div class="how-card fu" style="transition-delay:.12s">
-        <div class="how-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
-        <h3>Enséñale tu estilo</h3>
-        <p>Cuéntale a Aura sobre tu negocio, tus precios y cómo hablas. Ella aprende y suena exactamente como tú.</p>
-      </div>
-      <div class="how-card fu" style="transition-delay:.22s">
-        <div class="how-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
-        <h3>Vende sin parar</h3>
-        <p>Aura responde al instante, 24/7. Tú recibes una alerta solo cuando necesitas intervenir personalmente.</p>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- FEATURES -->
-<section class="features-section">
-  <div class="wrap">
-    <div style="padding-block: 80px;">
-      <div class="fu">
-        <div class="section-label">Características</div>
-        <h2 class="section-title">Todo lo que necesitas<br>para <em>no perder una venta</em></h2>
-      </div>
-      <div class="features-grid">
-        <div class="feature">
-          <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2H3v16h5l4 4 4-4h5V2z"/></svg></div>
-          <h3>Telegram nativo</h3>
-          <p>Integración oficial con la API de Telegram. Sin trucos, sin riesgo de baneo, sin configuraciones raras.</p>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Producto</h4>
+          <a href="#funciones">Funciones</a>
+          <a href="#precios">Precios</a>
+          <a href="https://aura-server-oisv.onrender.com/download">Descargar</a>
         </div>
-        <div class="feature">
-          <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
-          <h3>Personalidad propia</h3>
-          <p>Elige entre modo Negocio, Social o Captación de leads. Aura adapta su tono a cada contexto.</p>
+        <div class="footer-col">
+          <h4>Ayuda</h4>
+          <a href="#preguntas">Preguntas frecuentes</a>
+          <a href="mailto:kurucushy2001@gmail.com">Escríbenos</a>
         </div>
-        <div class="feature">
-          <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
-          <h3>Handoff inteligente</h3>
-          <p>Cuando la conversación lo necesita, Aura te avisa y toma el control sin interrupciones para el cliente.</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg></div>
-          <h3>Respuestas al instante</h3>
-          <p>Tiempo de respuesta promedio: menos de 3 segundos. Tus clientes nunca esperan.</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <h3>Historial de chats</h3>
-          <p>Ve todas las conversaciones activas, busca clientes por nombre y revisa el historial completo.</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <h3>Actualizaciones automáticas</h3>
-          <p>Aura se actualiza sola en segundo plano. Siempre tienes la versión más reciente sin hacer nada.</p>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <button type="button" data-legal="terms">Términos de uso</button>
+          <button type="button" data-legal="privacy">Privacidad</button>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- TESTIMONIOS -->
-<div class="wrap">
-  <section class="testi-section">
-    <div class="section-head fu">
-      <div class="section-label">Testimonios</div>
-      <h2 class="section-title">Emprendedores que ya<br><em>recuperaron su tiempo</em></h2>
+    <div class="footer-bottom">
+      <span>© 2026 Contesa. Hecho en Colombia.</span>
+      <span>Contacto: kurucushy2001@gmail.com</span>
     </div>
-    <div class="testi-grid">
-      <div class="testi-card">
-        <span class="testi-quote-mark">"</span>
-        <p class="testi-text">Antes perdía ventas porque me dormía o estaba ocupada. Con Aura mis clientes reciben respuesta a las 3am si hace falta. Ya recuperé la inversión en la primera semana.</p>
-        <div class="testi-author"><div class="testi-av">K</div><div><div class="testi-name">Karolina M.</div><div class="testi-role">Tienda de ropa · Medellín</div></div></div>
-      </div>
-      <div class="testi-card">
-        <span class="testi-quote-mark">"</span>
-        <p class="testi-text">Lo mejor es que mis clientes no saben que es un bot. El tono es exactamente el mío, hasta los emojis que siempre uso. Es como tener una yo extra que nunca descansa.</p>
-        <div class="testi-author"><div class="testi-av">S</div><div><div class="testi-name">Stefanía O.</div><div class="testi-role">Servicios de belleza · Bogotá</div></div></div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- PRECIOS -->
-<div class="wrap" id="precios">
-  <section>
-    <div class="fu">
-      <div class="section-label">Precios</div>
-      <h2 class="section-title">Empieza gratis.<br><em>Escala cuando crezcas.</em></h2>
-      <p class="section-sub">Sin permanencia. Cancela cuando quieras. Todos los planes incluyen soporte por Telegram.</p>
-    </div>
-    <div class="pricing-grid">
-      <div class="plan-card">
-        <div><div class="plan-name">Gratis</div><div class="plan-price"><span class="plan-amount">$0</span></div><div class="plan-period">Para siempre</div></div>
-        <div class="plan-limit">20 mensajes / día</div>
-        <ul class="plan-features"><li>Telegram integrado</li><li>3 modos de personalidad</li><li>Historial de conversaciones</li><li>Actualizaciones automáticas</li></ul>
-        <a href="https://aura-server-oisv.onrender.com/download" class="plan-cta outline">Descargar gratis</a>
-      </div>
-      <div class="plan-card featured">
-        <span class="plan-badge">Más popular</span>
-        <div><div class="plan-name">Pro</div><div class="plan-price"><span class="plan-amount">$49.900</span><span class="plan-currency">COP</span></div><div class="plan-period">/ mes · ~$12 USD</div></div>
-        <div class="plan-limit">600 mensajes / día</div>
-        <ul class="plan-features"><li>Todo lo del plan Gratis</li><li>Prioridad en respuestas</li><li>Modo automático 24/7</li><li>Estadísticas de conversaciones</li><li>Soporte prioritario</li></ul>
-        <a href="https://aura-server-oisv.onrender.com/download" class="plan-cta filled">Probar 15 días gratis</a>
-      </div>
-      <div class="plan-card">
-        <div><div class="plan-name">Premium</div><div class="plan-price"><span class="plan-amount">$89.900</span><span class="plan-currency">COP</span></div><div class="plan-period">/ mes · ~$22 USD</div></div>
-        <div class="plan-limit">1.500 mensajes / día</div>
-        <ul class="plan-features"><li>Todo lo del plan Pro</li><li>Múltiples personalidades</li><li>Próximo: WhatsApp e Instagram</li><li>Acceso anticipado a features</li><li>Soporte VIP directo</li></ul>
-        <a href="https://aura-server-oisv.onrender.com/download" class="plan-cta outline">Probar 15 días gratis</a>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- FAQ -->
-<div class="wrap" id="faq">
-  <section>
-    <div class="section-head fu">
-      <div class="section-label">Preguntas frecuentes</div>
-      <h2 class="section-title">Lo que todo el mundo<br><em>quiere saber</em></h2>
-    </div>
-    <div class="faq-list">
-      <div class="faq-item">
-        <button class="faq-q">¿Mis clientes van a saber que es un bot?<svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-        <div class="faq-a"><div class="faq-a-inner">No. Aura usa inteligencia artificial para responder con el tono y vocabulario que tú le enseñas. No es una respuesta automática genérica — es tu voz, simplemente más rápida. La mayoría de usuarios dicen que sus clientes no notan diferencia.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">¿Necesito saber de tecnología para configurarlo?<svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-        <div class="faq-a"><div class="faq-a-inner">Para nada. El proceso completo de instalación y conexión con Telegram tarda menos de 10 minutos, y Aura te guía paso a paso con instrucciones en pantalla. Si tienes algún problema, tienes soporte directo por Telegram.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">¿Qué pasa cuando el límite de mensajes se acaba?<svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-        <div class="faq-a"><div class="faq-a-inner">Aura te avisa cuando estás cerca del límite. Los mensajes nuevos siguen llegando — simplemente te toca responderlos tú misma ese día. Al día siguiente el contador se reinicia automáticamente. Nunca se pierden mensajes.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">¿Funciona solo con Telegram? ¿Y WhatsApp?<svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-        <div class="faq-a"><div class="faq-a-inner">Ahora mismo funciona con Telegram, que tiene una API oficial y estable. WhatsApp e Instagram están en el roadmap y llegarán en los próximos meses. Empezamos con Telegram para garantizar que funcione perfecto antes de expandir.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">¿Mis datos y conversaciones están seguros?<svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-        <div class="faq-a"><div class="faq-a-inner">Sí. El historial de conversaciones se guarda localmente en tu computador, no en nuestros servidores. El único dato que viaja a internet es el mensaje que se envía a la IA para generar la respuesta, sin información personal identificable de tus clientes. Cumplimos con la Ley 1581/2012 de protección de datos de Colombia.</div></div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- CTA BAND -->
-<section class="cta-band">
-  <div class="wrap" style="position:relative;z-index:1;">
-    <h2 class="section-title fu">¿Listo para que Aura<br><em>atienda</em> mientras vives?</h2>
-    <p class="section-sub fu" style="margin-inline:auto;margin-bottom:36px;transition-delay:.1s">Descarga Aura hoy. Los primeros 15 días son completamente gratis, sin tarjeta de crédito.</p>
-    <a href="https://aura-server-oisv.onrender.com/download" class="btn-primary fu" style="font-size:16px;padding:16px 36px;transition-delay:.2s">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      Descargar Aura gratis — Windows
-    </a>
-    <p class="fu" style="margin-top:16px;font-size:13px;color:var(--fg-2);transition-delay:.3s">Windows 10 / 11 · Versión 1.0.11</p>
-  </div>
-</section>
-
-<!-- Legal modal -->
-<div id="legalModal" class="legal-modal" onclick="if(event.target===this)closeLegal()">
-  <div class="legal-box">
-    <div class="legal-header">
-      <h2 id="legalTitle" class="legal-title"></h2>
-      <button class="legal-close" onclick="closeLegal()">✕</button>
-    </div>
-    <div id="legalBody" class="legal-body"></div>
-  </div>
-</div>
-
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="footer-logo">Aura<span>.</span></div>
-      <div class="footer-desc">Respuestas automáticas que suenan como tú. Para emprendedores colombianos.</div>
-    </div>
-    <div class="footer-cols">
-      <div class="footer-col">
-        <div class="footer-col-h">Producto</div>
-        <a href="#como-funciona" class="footer-lnk">Cómo funciona</a>
-        <a href="#precios" class="footer-lnk">Precios</a>
-        <a href="https://aura-server-oisv.onrender.com/download" class="footer-lnk">Descargar</a>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-h">Soporte</div>
-        <a href="#faq" class="footer-lnk">Preguntas frecuentes</a>
-        <a href="mailto:kurucushy2001@gmail.com" class="footer-lnk">Contacto</a>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-h">Legal</div>
-        <a href="#" class="footer-lnk" onclick="openLegal('terms');return false;">Términos de uso</a>
-        <a href="#" class="footer-lnk" onclick="openLegal('privacy');return false;">Privacidad</a>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 Aura App. Colombia · Todos los derechos reservados.</span>
-    <span>Hecho con ✦ para emprendedores colombianos</span>
   </div>
 </footer>
 
+<dialog class="sheet" id="legal" aria-labelledby="legalTitle">
+  <div class="sheet-head">
+    <h2 id="legalTitle"></h2>
+    <button class="sheet-close" type="button" aria-label="Cerrar" data-close><svg class="ic"><use href="#i-x"/></svg></button>
+  </div>
+  <div class="sheet-body" id="legalBody"></div>
+</dialog>
+
 <script>
-// Nav scroll
-window.addEventListener('scroll', () => {
-  document.getElementById('nav').classList.toggle('scrolled', scrollY > 20)
-}, { passive: true })
+(() => {
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches
 
-// Fade in on scroll
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target) } })
-}, { threshold: 0.08 })
-document.querySelectorAll('.fu').forEach(el => obs.observe(el))
+  // Nav con borde al hacer scroll
+  const nav = document.getElementById('nav')
+  const onScroll = () => nav.classList.toggle('is-scrolled', scrollY > 8)
+  addEventListener('scroll', onScroll, { passive: true }); onScroll()
 
-// FAQ
-document.querySelectorAll('.faq-q').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.closest('.faq-item')
-    const answer = item.querySelector('.faq-a')
-    const isOpen = item.classList.contains('open')
-    document.querySelectorAll('.faq-item.open').forEach(o => { o.classList.remove('open'); o.querySelector('.faq-a').style.maxHeight = '0'; })
-    if (!isOpen) { item.classList.add('open'); answer.style.maxHeight = answer.scrollHeight + 'px'; }
-  })
-})
+  // Encabezados que aparecen al llegar
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target) } })
+  }, { threshold: 0.15 })
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el))
 
-// Phone chat animation
-const CONVS = [
-  { n: 'Valentina R.', i: 'V', t: '3:42 p.m.', q: 'Hola! 🌸 Cuánto vale el vestido negro que publicaste ayer?', a: '¡Hola Valentina! El vestido queda en $85.000 💜 Tenemos S, M y L. ¿Cuál sería tu talla?' },
-  { n: 'Carolina B.', i: 'C', t: '7:18 p.m.', q: 'Hacen envíos a Medellín?', a: '¡Claro! 🚀 Enviamos a toda Colombia. A Medellín llega en 2-3 días hábiles. ¿Te explico cómo pedir?' },
-  { n: 'Daniela F.', i: 'D', t: '11:05 a.m.', q: 'Tienen algo para regalo de cumpleaños? 🎁', a: '¡Sí! 🎉 Tenemos unos sets preciosos para regalo. ¿Cuánto quieres invertir? Te muestro opciones.' },
-  { n: 'Mariana S.', i: 'M', t: '9:33 p.m.', q: 'A qué hora cierran?', a: 'Atendemos las 24 horas por aquí 😊 ¿En qué te puedo ayudar?' }
-]
-const msgs = document.getElementById('chatMsgs')
-const avEl = document.getElementById('phoneAv')
-const nmEl = document.getElementById('phoneName')
-let ci = 0
-const W = ms => new Promise(r => setTimeout(r, ms))
+  // ---------- Demo de la bandeja ----------
+  const CH = { whatsapp: 'WhatsApp', telegram: 'Telegram', discord: 'Discord' }
+  const COLORS = ['#e8875f', '#7c8cf0', '#4fb38a', '#c27ad6']
+  const CONVOS = [
+    { id: 'val', name: 'Valentina Ríos', ch: 'whatsapp', time: '3:42 p. m.', color: COLORS[0], preview: '¿Cuánto vale el vestido negro de lino?' },
+    { id: 'and', name: 'Andrés Mejía', ch: 'telegram', time: '3:40 p. m.', color: COLORS[1], preview: '¿Hacen envíos a Medellín?' },
+    { id: 'tie', name: 'Tienda Mora', ch: 'discord', time: '3:21 p. m.', color: COLORS[2], preview: '¿Venden al por mayor?' },
+    { id: 'mar', name: 'Mariana Silva', ch: 'whatsapp', time: '11:48 p. m.', color: COLORS[3], preview: '¿A qué hora abren mañana?' }
+  ]
+  const SCENES = [
+    { convo: 'val', mode: ['auto', 'Automático'], steps: [
+      ['in', 'Hola, ¿cuánto vale el vestido negro de lino? ¿Lo tienen en talla M?'],
+      ['typing'],
+      ['out', '¡Hola Valentina! El vestido negro de lino está en $85.000 y sí hay talla M. El envío a Cali llega en 2 o 3 días. ¿Te lo separo?', 'Respondido por Contesa en 2 segundos'],
+      ['in', 'Sí, sepáramelo porfa'],
+      ['typing'],
+      ['out', 'Listo, quedó separado a tu nombre. Te paso los datos para el pago por Nequi.', 'Respondido por Contesa en 2 segundos'],
+      ['order', 'Nuevo pedido de Valentina Ríos por $85.000']
+    ]},
+    { convo: 'and', mode: ['auto', 'Automático'], steps: [
+      ['in', '¿Hacen envíos a Medellín? ¿Cuánto cuesta?'],
+      ['typing'],
+      ['out', 'Sí, enviamos a toda Colombia. A Medellín el envío cuesta $12.000 y llega en 2 días hábiles. ¿Qué producto te interesa?', 'Respondido por Contesa en 3 segundos']
+    ]},
+    { convo: 'tie', mode: ['assist', 'Asistente'], steps: [
+      ['in', 'Buenas, tengo una tienda en Pereira. ¿Venden al por mayor?'],
+      ['typing'],
+      ['draft', '¡Hola! Sí, desde 10 unidades manejamos un 15% de descuento. ¿Qué productos te interesan para tu tienda?'],
+      ['approve', 'Enviado por ti, escrito por Contesa']
+    ]},
+    { convo: 'mar', mode: ['away', 'Fuera de horario'], steps: [
+      ['in', 'Hola, ¿a qué hora abren mañana?'],
+      ['typing'],
+      ['out', '¡Hola Mariana! Ya cerramos por hoy. Mañana abrimos a las 9:00 a. m. y te escribo apenas lleguemos.', 'Mensaje de ausencia'],
+      ['note', 'Quedó en tu lista para mañana a las 9:00 a. m.']
+    ]}
+  ]
 
-function addMsg(cls, txt, time) {
-  const d = document.createElement('div')
-  d.className = `chat-msg ${cls} msg-pop`
-  d.innerHTML = `${txt}<div class="chat-t">${time}</div>`
-  msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight
-}
-function showTyping() {
-  const d = document.createElement('div'); d.className = 'typing-ind msg-pop'; d.id = 'typing'
-  d.innerHTML = '<div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>'
-  msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight
-}
-function hideTyping() { const t = document.getElementById('typing'); if (t) t.remove() }
+  const $ = id => document.getElementById(id)
+  const list = $('convos'), body = $('chatBody'), ordersCount = $('ordersCount')
+  const initials = n => n.split(' ').map(w => w[0]).slice(0, 2).join('')
+  const glyph = ch => `<span class="ch ch--${ch}"><svg><use href="#g-${ch}"/></svg></span>`
+  const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]))
 
-async function runChat() {
-  const c = CONVS[ci++ % CONVS.length]
-  msgs.innerHTML = ''; avEl.textContent = c.i; nmEl.textContent = c.n
-  await W(600); addMsg('chat-in', c.q, c.t)
-  await W(1000); showTyping()
-  await W(1800); hideTyping(); addMsg('chat-out', c.a, c.t)
-  await W(3500); runChat()
-}
-runChat()
+  list.innerHTML = CONVOS.map(c => `
+    <li class="convo" data-id="${c.id}">
+      <span class="av" style="background:${c.color}">${initials(c.name)}${glyph(c.ch)}</span>
+      <span class="convo-main"><span class="convo-name">${esc(c.name)}</span><span class="convo-prev" data-prev>${esc(c.preview)}</span></span>
+      <span class="convo-time">${c.time}</span>
+    </li>`).join('')
 
-// Legal modal
-const LEGAL_CONTENT = {
-  terms: {
-    title: 'Términos de uso',
-    body: `
-      <h3>1. Aceptación</h3>
-      <p>Al descargar o usar Aura, aceptas estos términos. Si no estás de acuerdo, no uses el servicio.</p>
-      <h3>2. Descripción del servicio</h3>
-      <p>Aura es una aplicación de escritorio que automatiza respuestas en Telegram usando inteligencia artificial. Requiere un bot de Telegram propio configurado por el usuario.</p>
-      <h3>3. Uso permitido</h3>
-      <p>Puedes usar Aura para responder mensajes de clientes en tu negocio personal. Queda prohibido usarlo para spam, fraude, o cualquier actividad que viole los Términos de Servicio de Telegram.</p>
-      <h3>4. Cuenta y licencia</h3>
-      <p>Cada licencia es personal e intransferible. La licencia está vinculada al dispositivo donde se activa (HWID). El plan Trial dura 15 días sin costo.</p>
-      <h3>5. Pagos y cancelaciones</h3>
-      <p>Los pagos mensuales se procesan a través de Wompi (Colombia) o Stripe (internacional). No hay contratos de permanencia. Puedes cancelar en cualquier momento contactándonos.</p>
-      <h3>6. Limitación de responsabilidad</h3>
-      <p>Aura no garantiza que todas las respuestas automáticas sean perfectas. El usuario es responsable de supervisar las conversaciones importantes.</p>
-      <h3>7. Contacto</h3>
-      <p>Para dudas sobre estos términos: <a href="mailto:kurucushy2001@gmail.com" style="color:var(--accent)">kurucushy2001@gmail.com</a></p>
-    `
-  },
-  privacy: {
-    title: 'Política de privacidad',
-    body: `
-      <h3>1. Datos que recopilamos</h3>
-      <p>Aura almacena localmente en tu dispositivo: el token de tu bot de Telegram, los mensajes procesados (para mostrar en la app), y tu licencia de activación.</p>
-      <h3>2. Datos que NO recopilamos</h3>
-      <p>No guardamos tus conversaciones en servidores externos. Los mensajes de Telegram se procesan en tiempo real y no se almacenan fuera de tu dispositivo.</p>
-      <h3>3. Telegram</h3>
-      <p>Los mensajes se reciben a través de la API oficial de Telegram Bots. Telegram tiene su propia política de privacidad aplicable a sus servicios.</p>
-      <h3>4. Inteligencia artificial</h3>
-      <p>Las respuestas se generan con Claude (Anthropic) a través de nuestro servidor proxy. Los mensajes se envían de forma encriptada y no se usan para entrenar modelos.</p>
-      <h3>5. Pagos</h3>
-      <p>Los pagos son procesados por Wompi o Stripe. Aura no almacena datos de tarjetas de crédito.</p>
-      <h3>6. Contacto</h3>
-      <p>Para ejercer tus derechos de datos o cualquier consulta: <a href="mailto:kurucushy2001@gmail.com" style="color:var(--accent)">kurucushy2001@gmail.com</a></p>
-    `
+  function openConvo(scene) {
+    const c = CONVOS.find(x => x.id === scene.convo)
+    list.querySelectorAll('.convo').forEach(li => li.classList.toggle('is-active', li.dataset.id === c.id))
+    $('chatAv').style.background = c.color
+    $('chatAv').textContent = initials(c.name)
+    $('chatName').textContent = c.name
+    $('chatChannel').innerHTML = `${glyph(c.ch)}${CH[c.ch]}`
+    $('chatMode').dataset.mode = scene.mode[0]
+    $('chatMode').textContent = scene.mode[1]
+    body.innerHTML = ''
+    return c
   }
-}
+  function setPreview(id, text) {
+    const el = list.querySelector(`[data-id="${id}"] [data-prev]`)
+    if (el) el.textContent = text
+  }
+  function add(html, cls) {
+    const d = document.createElement('div')
+    d.className = cls + (reduceMotion ? '' : ' pop')
+    d.innerHTML = html
+    body.appendChild(d)
+    while (body.scrollHeight > body.clientHeight + 4 && body.children.length > 2) body.firstElementChild.remove()
+    return d
+  }
+  const meta = text => add(`<svg class="ic"><use href="#i-sparkles"/></svg>${esc(text)}`, 'msg-meta')
 
-function openLegal(type) {
-  const content = LEGAL_CONTENT[type]
-  document.getElementById('legalTitle').textContent = content.title
-  document.getElementById('legalBody').innerHTML = content.body
-  document.getElementById('legalModal').classList.add('open')
-  document.body.style.overflow = 'hidden'
-}
-function closeLegal() {
-  document.getElementById('legalModal').classList.remove('open')
-  document.body.style.overflow = ''
-}
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLegal() })
+  let running = false, visible = true, token = 0
+  const wait = ms => new Promise(r => setTimeout(r, ms))
+  async function until() { while (!visible) await wait(300) }
+
+  async function play(scene, t) {
+    const c = openConvo(scene)
+    for (const [type, text, extra] of scene.steps) {
+      await wait(type === 'in' ? 700 : 500); await until(); if (t !== token) return
+      if (type === 'in') { add(esc(text), 'msg msg--in'); setPreview(c.id, text) }
+      else if (type === 'typing') {
+        const ty = add('Contesa está escribiendo<span class="dots"><i></i><i></i><i></i></span>', 'typing')
+        await wait(1500); ty.remove()
+      }
+      else if (type === 'out') { add(esc(text), 'msg msg--out'); meta(extra); setPreview(c.id, text) }
+      else if (type === 'draft') {
+        add(`<div class="draft-label"><svg class="ic"><use href="#i-sparkles"/></svg>Borrador de Contesa para revisar</div><p>${esc(text)}</p><div class="draft-actions"><span class="chip-btn">Editar</span><span class="chip-btn chip-btn--primary" data-send>Enviar</span></div>`, 'draft')
+        setPreview(c.id, 'Borrador listo para revisar')
+      }
+      else if (type === 'approve') {
+        await wait(1400)
+        const btn = body.querySelector('[data-send]'); if (btn) btn.classList.add('is-press')
+        await wait(350)
+        const draft = body.querySelector('.draft'); const txt = draft.querySelector('p').textContent; draft.remove()
+        add(esc(txt), 'msg msg--out'); meta(text); setPreview(c.id, txt)
+      }
+      else if (type === 'order') {
+        add(`<svg class="ic"><use href="#i-package"/></svg>${esc(text)}`, 'event')
+        ordersCount.textContent = Number(ordersCount.textContent) + 1
+        ordersCount.classList.remove('is-bump'); void ordersCount.offsetWidth; ordersCount.classList.add('is-bump')
+      }
+      else if (type === 'note') add(`<svg class="ic"><use href="#i-clock"/></svg>${esc(text)}`, 'event event--muted')
+    }
+    await wait(3200)
+  }
+
+  function renderStatic() {
+    const scene = SCENES[0]; const c = openConvo(scene)
+    scene.steps.forEach(([type, text, extra]) => {
+      if (type === 'in') add(esc(text), 'msg msg--in')
+      if (type === 'out') { add(esc(text), 'msg msg--out'); meta(extra) }
+      if (type === 'order') add(`<svg class="ic"><use href="#i-package"/></svg>${esc(text)}`, 'event')
+    })
+    setPreview(c.id, 'Listo, quedó separado a tu nombre.')
+  }
+
+  async function loop() {
+    if (running) return; running = true
+    const t = ++token; let i = 0
+    while (t === token) {
+      if (i % SCENES.length === 0) ordersCount.textContent = '2'
+      await play(SCENES[i++ % SCENES.length], t)
+    }
+  }
+
+  if (reduceMotion) renderStatic()
+  else {
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting }, { threshold: 0.2 }).observe($('demo'))
+    document.addEventListener('visibilitychange', () => { visible = !document.hidden })
+    loop()
+  }
+
+  // ---------- Modos ----------
+  const MODES = {
+    auto: ['Responde sola, al instante', 'Contesa contesta en segundos con tu tono y tus precios. Tú ves cada conversación en la bandeja y puedes entrar cuando quieras.'],
+    assist: ['Escribe el borrador y espera tu visto bueno', 'Cada respuesta llega lista para revisar. La envías, la editas o la descartas con un clic. Ideal para tus primeros días o para clientes importantes.'],
+    alert: ['Te avisa y tú respondes', 'Contesa no contesta: te manda un aviso al escritorio con lo que el cliente necesita. Al hacer clic se abre el chat justo donde va.']
+  }
+  const tabs = [...document.querySelectorAll('.seg [role="tab"]')]
+  function selectTab(tab, focus) {
+    tabs.forEach(t => {
+      const on = t === tab
+      t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on
+    })
+    const [title, text] = MODES[tab.id.replace('tab-', '')]
+    $('modeCopy').innerHTML = `<h3>${title}</h3><p>${text}</p>`
+    if (focus) tab.focus()
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => selectTab(t))
+    t.addEventListener('keydown', e => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return
+      e.preventDefault()
+      selectTab(tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length], true)
+    })
+  })
+
+  // ---------- Legal ----------
+  const LEGAL = {
+    terms: ['Términos de uso', `
+      <h3>1. Aceptación</h3><p>Al descargar o usar Contesa aceptas estos términos. Si no estás de acuerdo, no uses el servicio.</p>
+      <h3>2. El servicio</h3><p>Contesa es una aplicación de escritorio para Windows que redacta y envía respuestas a los mensajes de tus clientes en WhatsApp, Telegram y Discord usando inteligencia artificial, según el modo que elijas.</p>
+      <h3>3. Uso permitido</h3><p>Puedes usar Contesa para atender a los clientes de tu negocio. Está prohibido usarla para spam, mensajes masivos no solicitados, fraude o cualquier actividad que viole los términos de WhatsApp, Telegram o Discord. Eres responsable de las cuentas que conectes.</p>
+      <h3>4. Licencia</h3><p>Cada licencia es personal y se vincula al equipo donde se activa. La prueba gratuita dura 15 días; después, la cuenta pasa al plan Gratis si no eliges un plan de pago.</p>
+      <h3>5. Pagos y cancelación</h3><p>Los pagos se procesan con Wompi (Colombia) o Stripe (internacional). No hay permanencia y puedes cancelar cuando quieras escribiéndonos.</p>
+      <h3>6. Responsabilidad</h3><p>Las respuestas generadas por IA pueden contener errores. Revisa las conversaciones importantes o usa el modo Asistente para aprobar cada respuesta.</p>
+      <h3>7. Contacto</h3><p>kurucushy2001@gmail.com</p>`],
+    privacy: ['Política de privacidad', `
+      <h3>1. Qué se guarda en tu equipo</h3><p>Las conversaciones, el catálogo, las preguntas frecuentes, los pedidos, las credenciales de tus canales (como el token de tu bot o la sesión vinculada de WhatsApp) y tu licencia se guardan localmente en tu computador.</p>
+      <h3>2. Qué viaja a internet</h3><p>Para redactar una respuesta se envían a nuestro servidor el mensaje del cliente, un historial corto de la conversación y la información de tu negocio que configuraste. Se procesa con Claude, de Anthropic, a través de una conexión cifrada, y no se usa para entrenar modelos.</p>
+      <h3>3. Canales</h3><p>Los mensajes llegan a través de WhatsApp, Telegram y Discord, que tienen sus propias políticas de privacidad. Al desconectar un canal, Contesa borra sus credenciales de tu equipo.</p>
+      <h3>4. Pagos</h3><p>Los pagos los procesan Wompi o Stripe. Contesa nunca ve ni guarda los datos de tu tarjeta.</p>
+      <h3>5. Tus derechos</h3><p>Tratamos tus datos según la Ley 1581 de 2012 de Colombia. Para consultas o para ejercer tus derechos escríbenos a kurucushy2001@gmail.com.</p>`]
+  }
+  const dlg = $('legal')
+  document.querySelectorAll('[data-legal]').forEach(b => b.addEventListener('click', () => {
+    const [title, html] = LEGAL[b.dataset.legal]
+    $('legalTitle').textContent = title
+    $('legalBody').innerHTML = html
+    dlg.showModal()
+  }))
+  dlg.addEventListener('click', e => { if (e.target === dlg || e.target.closest('[data-close]')) dlg.close() })
+})()
 </script>
-
 </body>
 </html>
