@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Contesa — responde a tus clientes como tú</title>
-<meta name="description" content="Contesa atiende tus chats de WhatsApp, Telegram y Discord con tu tono, tu catálogo y tus precios. App para Windows con 15 días de prueba gratis.">
+<meta name="description" content="Contesa atiende tus chats de WhatsApp, Telegram y Discord con tu tono, tu catálogo y tus precios. App para Windows con 7 días de prueba gratis.">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#161514" media="(prefers-color-scheme: dark)">
 <meta property="og:title" content="Contesa — responde a tus clientes como tú">
@@ -301,7 +301,9 @@ button { font: inherit; color: inherit; }
 @media (max-width: 820px) { .modes, .privacy { grid-template-columns: 1fr; } }
 
 /* Precios */
-.plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 56px; align-items: stretch; }
+.plans { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 56px; align-items: stretch; }
+.plans .plan { padding: 24px; }
+@media (max-width: 1180px) { .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .plan { position: relative; display: flex; flex-direction: column; gap: 18px; padding: 28px; border-radius: 18px; background: var(--bg); box-shadow: 0 0 0 1px var(--line); }
 .plan--pro { box-shadow: 0 0 0 1.5px var(--accent), 0 24px 50px -24px rgba(238, 93, 59, .45); }
 .plan-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
@@ -424,14 +426,14 @@ button { font: inherit; color: inherit; }
   <section class="hero">
     <div class="wrap">
       <div class="hero-in">
-        <div><a class="hero-pill" href="novedades.html#v1-2"><b>Nuevo en 1.2</b>Cobros con Bre-B y comprobantes</a></div>
+        <div><a class="hero-pill" href="novedades.html#v1-3"><b>Nuevo en 1.3</b>Respuestas al instante, gratis</a></div>
         <h1>Tus clientes escriben. Contesa contesta como tú.</h1>
         <p class="hero-sub">La app para Windows que atiende tus chats de WhatsApp, Telegram y Discord con tu tono, tu catálogo y tus precios. Tú solo cierras la venta.</p>
         <div class="hero-actions">
           <a href="https://aura-server-oisv.onrender.com/download" class="btn btn--primary"><svg class="ic"><use href="#i-download"/></svg>Descargar para Windows</a>
           <a href="#precios" class="btn btn--secondary">Ver planes y precios</a>
         </div>
-        <p class="hero-note">15 días de prueba con todo incluido. Sin tarjeta de crédito.</p>
+        <p class="hero-note">7 días de prueba con todo incluido. Sin tarjeta de crédito.</p>
       </div>
 
       <div class="stage" aria-label="Vista de la bandeja de Contesa respondiendo mensajes">
@@ -600,6 +602,9 @@ button { font: inherit; color: inherit; }
       </div>
 
       <ul class="feat-list">
+        <li><svg class="ic"><use href="#i-zap"/></svg><h3>Respuestas al instante, gratis</h3><p>Precios, envíos, pagos y horario se responden en un segundo sin gastar respuestas de IA. La IA te propone nuevas con lo que más te preguntan.</p></li>
+        <li><svg class="ic"><use href="#i-check-circle"/></svg><h3>Contraentrega confirmada</h3><p>Antes de despachar, el cliente confirma productos, total y dirección. Menos devoluciones y fletes perdidos.</p></li>
+        <li><svg class="ic"><use href="#i-send"/></svg><h3>Entiende notas de voz</h3><p>Transcribe los audios de tus clientes y les responde como si te hubieran escrito.</p></li>
         <li><svg class="ic"><use href="#i-inbox"/></svg><h3>Una sola bandeja</h3><p>WhatsApp, Telegram y Discord juntos. Responde a todos sin cambiar de aplicación.</p></li>
         <li><svg class="ic"><use href="#i-slash"/></svg><h3>Respuestas rápidas</h3><p>Escribe / y elige un atajo: datos de pago, direcciones o políticas de cambio.</p></li>
         <li><svg class="ic"><use href="#i-repeat"/></svg><h3>Seguimiento automático</h3><p>Si un cliente interesado deja de responder, Contesa le escribe de nuevo en el momento justo.</p></li>
@@ -636,47 +641,59 @@ button { font: inherit; color: inherit; }
     <div class="wrap">
       <div class="reveal head-center">
         <h2 class="h2">Empieza gratis. Paga cuando te haga vender más.</h2>
-        <p class="lede">Todos los planes usan la misma IA, tu personalidad y tu catálogo. Cambia la cantidad de respuestas al día y de canales.</p>
+        <p class="lede">En todos los planes las preguntas repetidas se responden al instante y gratis, sin límite. El plan define cuántas respuestas escribe la IA y cuántos canales atiendes.</p>
       </div>
       <div class="plans">
         <div class="plan">
           <div class="plan-top"><span class="plan-name">Gratis</span></div>
           <div class="plan-price"><b>$0</b><span>para siempre</span></div>
-          <p class="plan-tag">Para probar con un canal.</p>
+          <p class="plan-tag">Para empezar con un canal.</p>
           <ul>
-            <li><svg class="ic"><use href="#i-check"/></svg>20 respuestas al día</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Respuestas al instante sin límite</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>100 respuestas de IA al mes</li>
             <li><svg class="ic"><use href="#i-check"/></svg>1 canal conectado</li>
-            <li><svg class="ic"><use href="#i-check"/></svg>Personalidad, catálogo y horario</li>
-            <li><svg class="ic"><use href="#i-check"/></svg>Bandeja unificada</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Bandeja, pedidos y cobros</li>
           </ul>
           <a href="https://aura-server-oisv.onrender.com/download" class="btn btn--secondary">Descargar gratis</a>
+        </div>
+        <div class="plan">
+          <div class="plan-top"><span class="plan-name">Emprende</span></div>
+          <div class="plan-price"><b>$24.900</b><span>COP al mes</span></div>
+          <p class="plan-tag">Para quien vende por un solo canal.</p>
+          <ul>
+            <li><svg class="ic"><use href="#i-check"/></svg>Respuestas al instante sin límite</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>600 respuestas de IA al mes</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>1 canal conectado</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Comprobantes, contraentrega y notas de voz</li>
+          </ul>
+          <a href="https://aura-server-oisv.onrender.com/download" class="btn btn--secondary">Probar 7 días gratis</a>
         </div>
         <div class="plan plan--pro">
           <div class="plan-top"><span class="plan-name">Pro</span><span class="plan-flag">Más elegido</span></div>
           <div class="plan-price"><b>$49.900</b><span>COP al mes</span></div>
           <p class="plan-tag">Para negocios que venden todos los días.</p>
           <ul>
-            <li><svg class="ic"><use href="#i-check"/></svg>600 respuestas al día</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Respuestas al instante sin límite</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>2.500 respuestas de IA al mes</li>
             <li><svg class="ic"><use href="#i-check"/></svg>WhatsApp, Telegram y Discord a la vez</li>
-            <li><svg class="ic"><use href="#i-check"/></svg>Todo lo del plan Gratis</li>
-            <li><svg class="ic"><use href="#i-check"/></svg>Soporte por correo</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Todo lo de Emprende</li>
           </ul>
-          <a href="https://aura-server-oisv.onrender.com/download" class="btn btn--primary">Probar 15 días gratis</a>
+          <a href="https://aura-server-oisv.onrender.com/download" class="btn btn--primary">Probar 7 días gratis</a>
         </div>
         <div class="plan">
           <div class="plan-top"><span class="plan-name">Premium</span></div>
-          <div class="plan-price"><b>$89.900</b><span>COP al mes</span></div>
-          <p class="plan-tag">Para negocios con mucho volumen.</p>
+          <div class="plan-price"><b>$99.900</b><span>COP al mes</span></div>
+          <p class="plan-tag">Para mucho volumen de clientes.</p>
           <ul>
-            <li><svg class="ic"><use href="#i-check"/></svg>1.500 respuestas al día</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>Respuestas al instante sin límite</li>
+            <li><svg class="ic"><use href="#i-check"/></svg>6.000 respuestas de IA al mes</li>
             <li><svg class="ic"><use href="#i-check"/></svg>Todos los canales, incluidos los nuevos</li>
-            <li><svg class="ic"><use href="#i-check"/></svg>Todo lo del plan Pro</li>
             <li><svg class="ic"><use href="#i-check"/></svg>Soporte prioritario</li>
           </ul>
-          <a href="https://aura-server-oisv.onrender.com/download" class="btn btn--secondary">Probar 15 días gratis</a>
+          <a href="https://aura-server-oisv.onrender.com/download" class="btn btn--secondary">Probar 7 días gratis</a>
         </div>
       </div>
-      <p class="plans-note">Paga con Nequi, PSE o tarjeta a través de Wompi. Cada pago cubre 30 días, sin cobros automáticos. <a href="terminos.html#retracto" style="color:var(--accent-ink)">5 días para arrepentirte</a>.</p>
+      <p class="plans-note">Paga con Nequi, PSE o tarjeta a través de Wompi, sin cobros automáticos. Plan anual con 2 meses gratis y recargas de 1.000 respuestas por $19.900. <a href="terminos.html#retracto" style="color:var(--accent-ink)">5 días para arrepentirte</a>.</p>
     </div>
   </section>
 
@@ -700,8 +717,12 @@ button { font: inherit; color: inherit; }
           <div class="faq-a"><p>Sí. Contesa responde mientras la app está abierta, aunque sea minimizada en la bandeja de Windows. Si apagas el equipo, los mensajes te esperan y puedes responderlos al volver.</p></div>
         </details>
         <details>
-          <summary>¿Qué pasa si se acaban las respuestas del día?<svg class="ic"><use href="#i-plus"/></svg></summary>
-          <div class="faq-a"><p>Los mensajes siguen llegando a tu bandeja y los respondes tú. El contador se reinicia cada día y Contesa te avisa antes de llegar al límite. Nunca se pierde un mensaje.</p></div>
+          <summary>¿Qué son las respuestas al instante?<svg class="ic"><use href="#i-plus"/></svg></summary>
+          <div class="faq-a"><p>Son respuestas a lo que te preguntan siempre: precios del catálogo, envíos, cómo pagar, horario, saludos. Contesa las arma con tu información y las envía en un segundo, sin usar la IA. Son gratis y no tienen límite en ningún plan.</p><p>Cuando la pregunta es distinta o necesita contexto, responde la IA con tu estilo. Con el botón «Crear con IA», Contesa revisa lo que más te preguntan y propone nuevas respuestas al instante.</p></div>
+        </details>
+        <details>
+          <summary>¿Qué pasa si se acaban las respuestas de IA del mes?<svg class="ic"><use href="#i-plus"/></svg></summary>
+          <div class="faq-a"><p>Las respuestas al instante siguen funcionando. Los demás chats quedan marcados en tu bandeja para que los respondas tú, y Contesa te avisa. Puedes recargar 1.000 respuestas por $19.900 o esperar a que se renueve tu plan. Nunca se pierde un mensaje.</p></div>
         </details>
         <details>
           <summary>Windows muestra un aviso al instalar. ¿Es normal?<svg class="ic"><use href="#i-plus"/></svg></summary>
@@ -727,7 +748,7 @@ button { font: inherit; color: inherit; }
       <div class="hero-actions">
         <a href="https://aura-server-oisv.onrender.com/download" class="btn btn--primary"><svg class="ic"><use href="#i-download"/></svg>Descargar Contesa gratis</a>
       </div>
-      <p class="hero-note">Versión 1.2.0 para Windows 10 y 11. 15 días de prueba sin tarjeta.</p>
+      <p class="hero-note">Versión 1.3.0 para Windows 10 y 11. 7 días de prueba sin tarjeta.</p>
     </div>
   </section>
 </main>
