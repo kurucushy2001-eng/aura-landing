@@ -347,16 +347,6 @@ button { font: inherit; color: inherit; }
 .footer-col a:hover, .footer-col button:hover { color: var(--text); }
 .footer-bottom { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-size: 12.5px; color: var(--text-3); }
 
-/* Hoja legal */
-.sheet { border: 0; padding: 0; width: min(620px, calc(100% - 32px)); max-height: min(80vh, 720px); border-radius: 16px; background: var(--bg); color: var(--text); box-shadow: var(--pop-shadow); }
-.sheet::backdrop { background: rgba(20, 12, 8, .45); backdrop-filter: blur(4px); }
-.sheet-head { position: sticky; top: 0; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 22px; background: var(--bg); border-bottom: 1px solid var(--line); }
-.sheet-head h2 { font-family: var(--serif); font-weight: 400; font-size: 26px; }
-.sheet-close { width: 30px; height: 30px; border-radius: 8px; border: 0; background: var(--bg-sunk); display: grid; place-items: center; cursor: pointer; color: var(--text-2); }
-.sheet-close:hover { color: var(--text); }
-.sheet-body { padding: 8px 22px 24px; font-size: 14.5px; line-height: 1.75; color: var(--text-2); }
-.sheet-body h3 { font-size: 15px; font-weight: 600; color: var(--text); margin: 20px 0 4px; }
-.sheet-body a { color: var(--accent-ink); }
 
 /* Entrada al hacer scroll — solo encabezados */
 .reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
@@ -622,7 +612,7 @@ button { font: inherit; color: inherit; }
     <div class="wrap privacy">
       <div class="reveal">
         <h2 class="h2">Tus chats se quedan en tu computador.</h2>
-        <p class="lede">Contesa guarda tus conversaciones, tu catálogo y tus pedidos en tu equipo, no en una nube ajena.</p>
+        <p class="lede">Contesa guarda tus conversaciones, tu catálogo y tus pedidos en tu equipo, no en una nube ajena. Lee la <a href="privacidad.html" style="color:var(--accent-ink)">política de tratamiento de datos</a>.</p>
       </div>
       <ul class="privacy-points">
         <li><svg class="ic"><use href="#i-laptop"/></svg><span><b>Historial local.</b> Las conversaciones y los pedidos viven en tu Windows y solo tú los ves.</span></li>
@@ -677,7 +667,7 @@ button { font: inherit; color: inherit; }
           <a href="https://aura-server-oisv.onrender.com/download" class="btn btn--secondary">Probar 15 días gratis</a>
         </div>
       </div>
-      <p class="plans-note">Paga con Nequi, PSE o tarjeta a través de Wompi, o con tarjeta internacional (US$14,99 y US$24,99). Sin permanencia.</p>
+      <p class="plans-note">Paga con Nequi, PSE o tarjeta a través de Wompi. Cada pago cubre 30 días, sin cobros automáticos. <a href="terminos.html#retracto" style="color:var(--accent-ink)">5 días para arrepentirte</a>.</p>
     </div>
   </section>
 
@@ -710,7 +700,7 @@ button { font: inherit; color: inherit; }
         </details>
         <details>
           <summary>¿Puedo cancelar cuando quiera?<svg class="ic"><use href="#i-plus"/></svg></summary>
-          <div class="faq-a"><p>Sí, no hay permanencia. Si cancelas, tu cuenta pasa al plan Gratis y conservas tus conversaciones, tu catálogo y tus pedidos.</p></div>
+          <div class="faq-a"><p>Sí. No hay cobros automáticos: cada pago cubre 30 días y tú decides si renuevas. Si no renuevas, pasas al plan Gratis y conservas tus conversaciones, tu catálogo y tus pedidos.</p></div>
         </details>
         <details>
           <summary>¿Funciona en Mac?<svg class="ic"><use href="#i-plus"/></svg></summary>
@@ -754,8 +744,8 @@ button { font: inherit; color: inherit; }
         </div>
         <div class="footer-col">
           <h4>Legal</h4>
-          <button type="button" data-legal="terms">Términos de uso</button>
-          <button type="button" data-legal="privacy">Privacidad</button>
+          <a href="terminos.html">Términos de uso</a>
+          <a href="privacidad.html">Tratamiento de datos</a>
         </div>
       </div>
     </div>
@@ -766,13 +756,6 @@ button { font: inherit; color: inherit; }
   </div>
 </footer>
 
-<dialog class="sheet" id="legal" aria-labelledby="legalTitle">
-  <div class="sheet-head">
-    <h2 id="legalTitle"></h2>
-    <button class="sheet-close" type="button" aria-label="Cerrar" data-close><svg class="ic"><use href="#i-x"/></svg></button>
-  </div>
-  <div class="sheet-body" id="legalBody"></div>
-</dialog>
 
 <script>
 (() => {
@@ -953,31 +936,6 @@ button { font: inherit; color: inherit; }
     })
   })
 
-  // ---------- Legal ----------
-  const LEGAL = {
-    terms: ['Términos de uso', `
-      <h3>1. Aceptación</h3><p>Al descargar o usar Contesa aceptas estos términos. Si no estás de acuerdo, no uses el servicio.</p>
-      <h3>2. El servicio</h3><p>Contesa es una aplicación de escritorio para Windows que redacta y envía respuestas a los mensajes de tus clientes en WhatsApp, Telegram y Discord usando inteligencia artificial, según el modo que elijas.</p>
-      <h3>3. Uso permitido</h3><p>Puedes usar Contesa para atender a los clientes de tu negocio. Está prohibido usarla para spam, mensajes masivos no solicitados, fraude o cualquier actividad que viole los términos de WhatsApp, Telegram o Discord. Eres responsable de las cuentas que conectes.</p>
-      <h3>4. Licencia</h3><p>Cada licencia es personal y se vincula al equipo donde se activa. La prueba gratuita dura 15 días; después, la cuenta pasa al plan Gratis si no eliges un plan de pago.</p>
-      <h3>5. Pagos y cancelación</h3><p>Los pagos se procesan con Wompi (Colombia) o Stripe (internacional). No hay permanencia y puedes cancelar cuando quieras escribiéndonos.</p>
-      <h3>6. Responsabilidad</h3><p>Las respuestas generadas por IA pueden contener errores. Revisa las conversaciones importantes o usa el modo Asistente para aprobar cada respuesta.</p>
-      <h3>7. Contacto</h3><p>kurucushy2001@gmail.com</p>`],
-    privacy: ['Política de privacidad', `
-      <h3>1. Qué se guarda en tu equipo</h3><p>Las conversaciones, el catálogo, las preguntas frecuentes, los pedidos, las credenciales de tus canales (como el token de tu bot o la sesión vinculada de WhatsApp) y tu licencia se guardan localmente en tu computador.</p>
-      <h3>2. Qué viaja a internet</h3><p>Para redactar una respuesta se envían a nuestro servidor el mensaje del cliente, un historial corto de la conversación y la información de tu negocio que configuraste. Se procesa con Claude, de Anthropic, a través de una conexión cifrada, y no se usa para entrenar modelos.</p>
-      <h3>3. Canales</h3><p>Los mensajes llegan a través de WhatsApp, Telegram y Discord, que tienen sus propias políticas de privacidad. Al desconectar un canal, Contesa borra sus credenciales de tu equipo.</p>
-      <h3>4. Pagos</h3><p>Los pagos los procesan Wompi o Stripe. Contesa nunca ve ni guarda los datos de tu tarjeta.</p>
-      <h3>5. Tus derechos</h3><p>Tratamos tus datos según la Ley 1581 de 2012 de Colombia. Para consultas o para ejercer tus derechos escríbenos a kurucushy2001@gmail.com.</p>`]
-  }
-  const dlg = $('legal')
-  document.querySelectorAll('[data-legal]').forEach(b => b.addEventListener('click', () => {
-    const [title, html] = LEGAL[b.dataset.legal]
-    $('legalTitle').textContent = title
-    $('legalBody').innerHTML = html
-    dlg.showModal()
-  }))
-  dlg.addEventListener('click', e => { if (e.target === dlg || e.target.closest('[data-close]')) dlg.close() })
 })()
 </script>
 </body>
