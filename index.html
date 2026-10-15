@@ -112,6 +112,7 @@ button { font: inherit; color: inherit; }
 /* ---------- Hero ---------- */
 .hero { padding-block: clamp(44px, 6vw, 72px) 0; text-align: center; }
 .hero-pill { display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px 5px 6px; border-radius: 999px; background: var(--bg-soft); box-shadow: inset 0 0 0 1px var(--line); font-size: 13px; color: var(--text-2); margin-bottom: 28px; }
+.hero-pill:hover { box-shadow: inset 0 0 0 1px var(--line-strong); color: var(--text); }
 .hero-pill b { background: var(--accent-soft); color: var(--accent-ink); font-weight: 600; font-size: 12px; padding: 2px 8px; border-radius: 999px; }
 .hero h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(2.9rem, 7.4vw, 5.6rem); line-height: 1.02; letter-spacing: -0.025em; text-wrap: balance; max-width: 15ch; margin-inline: auto; }
 .hero-sub { font-size: clamp(1.05rem, 1.8vw, 1.2rem); color: var(--text-2); max-width: 36em; margin: 24px auto 0; line-height: 1.65; text-wrap: pretty; }
@@ -385,6 +386,10 @@ button { font: inherit; color: inherit; }
   <symbol id="i-tag" viewBox="0 0 24 24"><path d="M12.59 2.59A2 2 0 0 0 11.17 2H4a2 2 0 0 0-2 2v7.17a2 2 0 0 0 .59 1.42l8.7 8.7a2.43 2.43 0 0 0 3.42 0l6.58-6.58a2.43 2.43 0 0 0 0-3.42z"/><path d="M7.5 7.5h.01"/></symbol>
   <symbol id="i-moon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 18a6 6 0 0 0 0-12z"/></symbol>
   <symbol id="i-sunrise" viewBox="0 0 24 24"><path d="M12 2v8"/><path d="m4.93 10.93 1.41 1.41"/><path d="M2 18h2"/><path d="M20 18h2"/><path d="m19.07 10.93-1.41 1.41"/><path d="M22 22H2"/><path d="m8 6 4-4 4 4"/><path d="M16 18a4 4 0 0 0-8 0"/></symbol>
+  <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></symbol>
+  <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M14 8H8M16 12H8M13 16H8"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62L18.3 8.38A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol>
+  <symbol id="i-smartphone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/></symbol>
   <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
   <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
@@ -406,6 +411,7 @@ button { font: inherit; color: inherit; }
     </a>
     <ul class="nav-links">
       <li><a href="#funciones">Funciones</a></li>
+      <li><a href="novedades.html">Novedades</a></li>
       <li><a href="#precios">Precios</a></li>
       <li><a href="#preguntas">Preguntas</a></li>
       <li><a href="https://aura-server-oisv.onrender.com/download" class="btn btn--primary btn--sm">Descargar gratis</a></li>
@@ -418,7 +424,7 @@ button { font: inherit; color: inherit; }
   <section class="hero">
     <div class="wrap">
       <div class="hero-in">
-        <div><span class="hero-pill"><b>Nuevo en 1.1</b>WhatsApp, Discord y pedidos</span></div>
+        <div><a class="hero-pill" href="novedades.html#v1-2"><b>Nuevo en 1.2</b>Cobros con Bre-B y comprobantes</a></div>
         <h1>Tus clientes escriben. Contesa contesta como tú.</h1>
         <p class="hero-sub">La app para Windows que atiende tus chats de WhatsApp, Telegram y Discord con tu tono, tu catálogo y tus precios. Tú solo cierras la venta.</p>
         <div class="hero-actions">
@@ -601,8 +607,11 @@ button { font: inherit; color: inherit; }
         <li><svg class="ic"><use href="#i-tag"/></svg><h3>Etiquetas y notas</h3><p>Marca a cada cliente como interesado, mayorista o VIP y guarda lo que necesitas recordar.</p></li>
         <li><svg class="ic"><use href="#i-book"/></svg><h3>Catálogo y preguntas frecuentes</h3><p>Contesa responde con tus precios reales y nunca inventa productos que no tienes.</p></li>
         <li><svg class="ic"><use href="#i-bell"/></svg><h3>Avisos en el escritorio</h3><p>Te avisa cuando un cliente quiere comprar o pide hablar con una persona.</p></li>
-        <li><svg class="ic"><use href="#i-moon"/></svg><h3>Modo claro y oscuro</h3><p>Se adapta a tu Windows o elige el tema y el color de acento que prefieras.</p></li>
-        <li><svg class="ic"><use href="#i-refresh"/></svg><h3>Siempre actualizada</h3><p>Las mejoras llegan solas en segundo plano. No tienes que volver a descargar nada.</p></li>
+        <li><svg class="ic"><use href="#i-wallet"/></svg><h3>Cobros con Bre-B y Nequi</h3><p>Guarda tu llave, Nequi o cuenta una vez. Contesa la comparte cuando el cliente quiere pagar, sin inventar números.</p></li>
+        <li><svg class="ic"><use href="#i-receipt"/></svg><h3>Comprobantes bajo la lupa</h3><p>Lee el monto y la referencia del pantallazo, lo compara con el pedido y te avisa si esa referencia ya la mandó otro cliente.</p></li>
+        <li><svg class="ic"><use href="#i-truck"/></svg><h3>Guía de envío en un clic</h3><p>Escribe la transportadora y el número de guía; el cliente recibe el mensaje y el pedido pasa a Enviado.</p></li>
+        <li><svg class="ic"><use href="#i-smartphone"/></svg><h3>Si respondes tú, se aparta</h3><p>Contesta desde tu celular y Contesa deja ese chat en tus manos por el tiempo que elijas.</p></li>
+        <li><svg class="ic"><use href="#i-sparkles"/></svg><h3>Aprende de ti</h3><p>Cada borrador que corriges y cada mensaje que escribes le enseñan cómo hablas de verdad.</p></li>
       </ul>
     </div>
   </section>
@@ -718,7 +727,7 @@ button { font: inherit; color: inherit; }
       <div class="hero-actions">
         <a href="https://aura-server-oisv.onrender.com/download" class="btn btn--primary"><svg class="ic"><use href="#i-download"/></svg>Descargar Contesa gratis</a>
       </div>
-      <p class="hero-note">Versión 1.1.0 para Windows 10 y 11. 15 días de prueba sin tarjeta.</p>
+      <p class="hero-note">Versión 1.2.0 para Windows 10 y 11. 15 días de prueba sin tarjeta.</p>
     </div>
   </section>
 </main>
@@ -735,6 +744,7 @@ button { font: inherit; color: inherit; }
           <h4>Producto</h4>
           <a href="#funciones">Funciones</a>
           <a href="#precios">Precios</a>
+          <a href="novedades.html">Novedades</a>
           <a href="https://aura-server-oisv.onrender.com/download">Descargar</a>
         </div>
         <div class="footer-col">
