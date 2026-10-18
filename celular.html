@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Contesa en tu celular</title>
+<meta name="description" content="Instala Contesa en tu celular: mira tus chats y pedidos, toma un chat o pausa Contesa. En Android, además, responde tus WhatsApp si el computador se apaga.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7.5' fill='%23ee5d3b'/%3E%3Cpath d='M21.6 11.1A6.6 6.6 0 1 0 21.6 20.9' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round'/%3E%3Ccircle cx='16.2' cy='16' r='2' fill='white'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="legal.css">
+<style>
+.phones { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; padding-block: 40px 24px; }
+.phone { padding: 26px 26px 28px; border-radius: 18px; background: var(--bg-soft); box-shadow: inset 0 0 0 1px var(--line); display: flex; flex-direction: column; gap: 14px; }
+.phone h2 { font-family: var(--serif); font-weight: 400; font-size: 34px; line-height: 1.05; }
+.phone-lede { color: var(--text-2); font-size: 15px; line-height: 1.6; }
+.phone ol { margin: 4px 0 0; padding: 0; list-style: none; counter-reset: step; display: flex; flex-direction: column; gap: 12px; }
+.phone li { counter-increment: step; display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 12px; font-size: 15px; line-height: 1.55; color: var(--text-2); }
+.phone li::before { content: counter(step); width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--bg-sunk); color: var(--text); font-size: 13px; font-weight: 600; }
+.phone li b { color: var(--text); font-weight: 600; }
+.get { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 20px; border-radius: 12px; background: var(--accent); color: #fff; font-weight: 600; text-decoration: none; }
+.get:hover { filter: brightness(0.96); }
+.get small { font-weight: 500; opacity: 0.85; }
+.can { display: flex; flex-wrap: wrap; gap: 6px; }
+.can span { font-size: 12.5px; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: var(--bg); box-shadow: inset 0 0 0 1px var(--line); color: var(--text-2); }
+.can span.is-on { background: var(--accent-soft); box-shadow: none; color: var(--accent-ink); }
+.notes { max-width: 70ch; padding-block: 8px 96px; display: flex; flex-direction: column; gap: 18px; color: var(--text-2); }
+.notes h2 { font-size: 18px; font-weight: 600; color: var(--text); letter-spacing: -0.01em; }
+.notes p { line-height: 1.65; }
+@media (max-width: 760px) { .phones { grid-template-columns: minmax(0, 1fr); } }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="./" class="brand"><span class="mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.4 7.4A7.2 7.2 0 1 0 17.4 16.6" fill="none" stroke="#fff" stroke-width="2.7" stroke-linecap="round"/><circle cx="12.4" cy="12" r="2.2" fill="#fff"/></svg></span>Contesa</a>
+    <nav class="nav-links" aria-label="Sitio">
+      <a href="./#funciones">Funciones</a>
+      <a href="novedades.html">Novedades</a>
+      <a href="./#precios">Precios</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap doc-head">
+    <h1>Contesa en tu celular</h1>
+    <p class="doc-lede">Contesa trabaja en tu computador. Desde el celular ves los chats que te necesitan, tomas uno, le escribes al cliente o pausas a Contesa. En Android, además, responde tus WhatsApp si el computador se apaga.</p>
+  </div>
+
+  <div class="wrap">
+    <div class="phones">
+      <section class="phone" aria-labelledby="android">
+        <h2 id="android">Android</h2>
+        <div class="can"><span class="is-on">Ver y tomar chats</span><span class="is-on">Pausar a Contesa</span><span class="is-on">Responde si el PC se apaga</span></div>
+        <p class="phone-lede">La app de Contesa para Android, 3,6 MB. Por ahora se instala desde aquí, no desde Play Store.</p>
+        <a class="get" href="descargas/contesa-android.apk" download>Descargar para Android <small>versión 1.0.0</small></a>
+        <ol>
+          <li><span>Abre el archivo descargado. Si Android pregunta, <b>permite instalar apps de esta fuente</b> (Chrome o Archivos).</span></li>
+          <li><span>Abre Contesa y escribe el <b>código de 6 números</b> que te muestra tu computador en Ajustes, Celular.</span></li>
+          <li><span>En Ajustes del celular, da el <b>acceso a notificaciones</b> y quita el ahorro de batería. Si Android dice «Ajuste restringido», ve a la información de la app, toca los tres puntos y elige Permitir ajustes restringidos.</span></li>
+        </ol>
+      </section>
+
+      <section class="phone" aria-labelledby="iphone">
+        <h2 id="iphone">iPhone</h2>
+        <div class="can"><span class="is-on">Ver y tomar chats</span><span class="is-on">Pausar a Contesa</span><span>No responde solo</span></div>
+        <p class="phone-lede">En iPhone, Contesa es una app web: no ocupa espacio y se abre desde tu pantalla de inicio.</p>
+        <a class="get" href="app/">Abrir Contesa para iPhone</a>
+        <ol>
+          <li><span>Abre este enlace <b>en Safari</b>.</span></li>
+          <li><span>Toca <b>Compartir</b> y luego <b>Agregar a inicio</b>. Abre Contesa desde el icono nuevo.</span></li>
+          <li><span>Escribe el <b>código de 6 números</b> que te muestra tu computador en Ajustes, Celular.</span></li>
+        </ol>
+      </section>
+    </div>
+
+    <div class="notes">
+      <h2>¿Por qué el iPhone no responde solo?</h2>
+      <p>Apple no deja que ninguna app lea ni responda mensajes de WhatsApp. En iPhone, Contesa te muestra los chats y te deja tomarlos, escribirles y pausarla mientras tu computador está prendido.</p>
+      <h2>¿Qué pasa con los datos?</h2>
+      <p>Mientras tengas un celular vinculado, lo que le enseñaste a Contesa y un resumen de los chats de los últimos 7 días quedan en nuestro servidor para que el celular los vea. Si quitas el último celular, se borran. Más detalles en el <a href="privacidad.html">tratamiento de datos</a>.</p>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <span>© 2026 Contesa. Hecho en Colombia.</span>
+    <span><a href="./">Inicio</a> · <a href="terminos.html">Términos</a> · <a href="privacidad.html">Tratamiento de datos</a></span>
+  </div>
+</footer>
+</body>
+</html>
