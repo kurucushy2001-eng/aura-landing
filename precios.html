@@ -31,6 +31,8 @@
 .price span { font-size: 13.5px; color: var(--text-2); }
 .yearly { font-size: 13px; color: var(--text-2); min-height: 20px; margin-top: -10px; font-variant-numeric: tabular-nums; }
 .yearly s { color: var(--text-3); }
+.launch { font-size: 13px; line-height: 1.45; color: var(--accent-ink); margin-top: -8px; }
+.launch s { color: var(--text-3); margin-right: 4px; }
 .tag { font-size: 14px; color: var(--text-2); line-height: 1.5; }
 .plan ul { list-style: none; margin: 0; padding: 16px 0 0; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 9px; flex: 1; font-size: 14.5px; line-height: 1.5; }
 .plan li { display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 10px; }
@@ -147,10 +149,11 @@
       <a href="https://aura-server-oisv.onrender.com/download" class="btn btn--secondary">Probar 7 días gratis</a>
     </article>
 
-    <article class="plan plan--pro" data-month="69900" data-year="699000">
+    <article class="plan plan--pro" data-month="69900" data-year="699000" data-launch-month="49900" data-launch-year="499000">
       <div class="plan-top"><span class="plan-name">Pro</span><span class="flag">Recomendado</span></div>
-      <div class="price"><b data-price>$69.900</b><span>COP al mes</span></div>
+      <div class="price"><b data-price>$49.900</b><span>COP al mes</span></div>
       <div class="yearly"></div>
+      <p class="launch" data-launch><s>$69.900</s> Precio de lanzamiento para las primeras 50 personas. Lo conservas 12 meses.</p>
       <p class="tag">Para negocios que venden todos los días.</p>
       <ul>
         <li><span>Respuestas al instante <b>sin límite</b></span></li>
@@ -191,7 +194,7 @@
         <label>Plan
           <select id="plan">
             <option value="29900">Emprende, $29.900 al mes</option>
-            <option value="69900" selected>Pro, $69.900 al mes</option>
+            <option value="49900" id="proOpt" selected>Pro, $49.900 al mes</option>
             <option value="149900">Negocio, $149.900 al mes</option>
           </select>
         </label>
@@ -211,7 +214,7 @@
       <div class="topup"><b>1.000 respuestas</b><span>$24.900</span></div>
       <div class="topup"><b>5.000 respuestas</b><span>$89.900</span></div>
     </div>
-    <p class="topup-note">Si te pasa todos los meses, subir de plan rinde más: Pro trae 5.000 respuestas por $40.000 más que Emprende.</p>
+    <p class="topup-note">Si te pasa todos los meses, subir de plan rinde más: Pro trae 5.000 respuestas al mes y cuesta menos que dos recargas grandes.</p>
   </section>
 
   <section class="block" aria-labelledby="cmp-t">
@@ -221,7 +224,7 @@
       <table class="cmp">
         <thead><tr><th></th><th>Contesa Pro</th><th>Asistente de IA de Meta en WhatsApp Business</th><th>Plataformas como Wati o Leadsales</th><th>Una agencia que te monta un bot</th></tr></thead>
         <tbody>
-          <tr><td>Precio al mes</td><td>$69.900</td><td>Gratis para empezar; Meta anuncia planes pagos</td><td>Desde unos $220.000; la IA suele ir aparte</td><td>De $300.000 a $1.500.000, más instalación</td></tr>
+          <tr><td>Precio al mes</td><td>$49.900 de lanzamiento; luego $69.900</td><td>Gratis para empezar; Meta anuncia planes pagos</td><td>Desde unos $220.000; la IA suele ir aparte</td><td>De $300.000 a $1.500.000, más instalación</td></tr>
           <tr><td>Cobro</td><td>En pesos, con Nequi, PSE o tarjeta</td><td>Desde la app de WhatsApp</td><td>En dólares, con tarjeta</td><td>Contrato con la agencia</td></tr>
           <tr><td>Lee comprobantes de Nequi y Bre-B</td><td>Sí, y te deja la última palabra</td><td class="no">No lo anuncia</td><td class="no">No lo anuncian</td><td>Depende de la agencia</td></tr>
           <tr><td>Confirma contraentregas y toma pedidos</td><td>Sí</td><td class="no">No lo anuncia</td><td>Con configuración</td><td>Depende de la agencia</td></tr>
@@ -263,12 +266,17 @@
 (function () {
   var cop = function (n) { return '$' + Math.round(n).toLocaleString('es-CO') }
   var buttons = document.querySelectorAll('.cycle button')
+  var launch = true, cycle = 'month'
   function setCycle(c) {
+    cycle = c
     buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.cycle === c)) })
     document.querySelectorAll('.plan[data-month]').forEach(function (p) {
-      var m = +p.dataset.month, y = +p.dataset.year
+      var promo = launch && p.dataset.launchMonth
+      var list = +p.dataset.month, m = promo ? +p.dataset.launchMonth : list, y = promo ? +p.dataset.launchYear : +p.dataset.year
       p.querySelector('[data-price]').textContent = cop(c === 'year' ? Math.round(y / 1200) * 100 : m)
-      p.querySelector('.yearly').innerHTML = c === 'year' ? cop(y) + ' al año <s>' + cop(m * 12) + '</s>' : ''
+      p.querySelector('.yearly').innerHTML = c === 'year' ? cop(y) + ' al año <s>' + cop(list * 12) + '</s>' : ''
+      var note = p.querySelector('[data-launch]')
+      if (note) note.hidden = !promo
     })
   }
   buttons.forEach(function (b) { b.addEventListener('click', function () { setCycle(b.dataset.cycle) }) })
@@ -285,6 +293,20 @@
   }
   [ticket, margin, plan].forEach(function (el) { el.addEventListener('input', calc) })
   calc()
+
+  // Cupos de lanzamiento: los cuenta el servidor. Si ya no quedan, se muestra el precio de lista.
+  fetch('https://aura-server-oisv.onrender.com/payments/plans').then(function (r) { return r.json() }).then(function (d) {
+    if (!d.launch) return
+    var note = document.querySelector('[data-launch]')
+    if (d.launch.left > 0) {
+      note.innerHTML = '<s>$69.900</s> Precio de lanzamiento: quedan ' + d.launch.left + ' de ' + d.launch.seats + ' cupos. Lo conservas 12 meses.'
+      return
+    }
+    launch = false
+    var opt = document.getElementById('proOpt')
+    opt.value = '69900'; opt.textContent = 'Pro, $69.900 al mes'
+    setCycle(cycle); calc()
+  }).catch(function () {})
 })()
 </script>
 </body>
