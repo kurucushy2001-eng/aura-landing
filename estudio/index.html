@@ -466,6 +466,10 @@ footer .l { display: flex; gap: 22px; flex-wrap: wrap; } footer .l a { padding: 
 @media (prefers-reduced-motion: reduce) {
   .tel { animation: none !important; } .ver { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; }
 }
+.btn.pronto { opacity: .55; cursor: not-allowed; box-shadow: none; }
+.btn.pronto:hover { transform: none; }
+.avisame { margin-top: 12px; font-size: 13.5px; color: var(--text-2); }
+.avisame a { color: var(--accent-2); text-decoration: underline; text-underline-offset: 3px; }
 </style>
 </head>
 <body>
@@ -885,7 +889,8 @@ footer .l { display: flex; gap: 22px; flex-wrap: wrap; } footer .l a { padding: 
     <div class="tarj">
       <h3>Contesa Estudio para Windows</h3>
       <p>Beta · 343 MB</p>
-      <a class="btn pri" href="https://aura-server-oisv.onrender.com/download/estudio">Descargar gratis</a>
+      <span class="btn pri pronto" role="button" aria-disabled="true">Descarga muy pronto</span>
+      <p class="avisame">La beta abre en los próximos días. <a href="mailto:contesa.soporte@gmail.com?subject=Av%C3%ADsenme%20cuando%20salga%20Contesa%20Estudio">Avísame cuando esté lista</a></p>
       <div class="req" style="margin-top:26px">
         <div><span>Sistema</span><span style="color:var(--text)">Windows 10 u 11 de 64 bits</span></div>
         <div><span>Memoria</span><span style="color:var(--text)">16 GB (mejor 32 GB)</span></div>
