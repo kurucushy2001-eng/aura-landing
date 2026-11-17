@@ -1,0 +1,1088 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contesa Estudio · Grabas. Estudio hace el resto.</title>
+<meta name="description" content="Estudio recorta tus grabaciones a lo mejor, saca los shorts, pone subtítulos y voz, y deja listo lo que vas a subir. En tu PC, con tu marca. Prueba 7 días gratis.">
+<meta name="theme-color" content="#0c0a09">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contesa Estudio · Grabas. Estudio hace el resto.">
+<meta property="og:description" content="De horas de grabación a videos y shorts listos para tus redes. Prueba 7 días gratis en Windows.">
+<meta property="og:image" content="https://contesa.com.co/estudio/medios/p-largo-lomejor.jpg">
+<meta property="og:url" content="https://contesa.com.co/estudio/">
+<link rel="canonical" href="https://contesa.com.co/estudio/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7.5' fill='%23ee5d3b'/%3E%3Cpath d='M21.6 11.1A6.6 6.6 0 1 0 21.6 20.9' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round'/%3E%3Ccircle cx='16.2' cy='16' r='2' fill='white'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=Anton&display=swap">
+<style>
+:root {
+  --bg: #0c0a09; --bg-2: #14110f; --bg-3: #1c1714; --bg-4: #241e1a;
+  --line: rgba(255,240,230,.08); --line-2: rgba(255,240,230,.15);
+  --text: #f6f0ec; --text-2: #b5a99f; --text-3: #9a8d83;
+  --accent: #ee5d3b; --accent-btn: #cf4527; --accent-2: #ff8a5f; --accent-soft: rgba(238,93,59,.14); --glow: rgba(238,93,59,.35);
+  --ok: #4cc38a; --amb: #f0b35b;
+  --serif: 'Instrument Serif', Georgia, serif; --ui: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --r: 22px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 var(--ui); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; border: 0; background: none; cursor: pointer; }
+video { display: block; }
+:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 3px; border-radius: 10px; }
+.saltar { position: absolute; left: 16px; top: -60px; z-index: 50; background: var(--accent-btn); color: #fff; padding: 10px 16px; border-radius: 99px; font-weight: 600; font-size: 14px; }
+.saltar:focus { top: 10px; }
+.w { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+
+/* Barra */
+nav { position: sticky; top: 0; z-index: 30; background: rgba(12,10,9,.72); backdrop-filter: saturate(160%) blur(18px); -webkit-backdrop-filter: saturate(160%) blur(18px); border-bottom: 1px solid var(--line); }
+nav .w { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.marca { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -.01em; }
+.iso { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(160deg, var(--accent-2), #c63d1f); display: grid; place-items: center; box-shadow: 0 4px 16px var(--glow); }
+.iso i { border-left: 9px solid #fff; border-top: 6px solid transparent; border-bottom: 6px solid transparent; margin-left: 2px; }
+.beta { font-size: 10.5px; font-weight: 700; letter-spacing: .06em; color: var(--accent-2); border: 1px solid rgba(238,93,59,.4); border-radius: 99px; padding: 1px 7px; }
+.links { display: flex; gap: 26px; font-size: 14px; color: var(--text-2); align-items: center; }
+.links a:hover { color: var(--text); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 46px; padding: 0 24px; border-radius: 99px; font-weight: 600; font-size: 15px; transition: transform .2s, box-shadow .2s, background .2s; white-space: nowrap; }
+.btn.pri { background: var(--accent-btn); color: #fff; box-shadow: 0 8px 30px -6px var(--glow); }
+.btn.pri:hover { transform: translateY(-1px); box-shadow: 0 14px 40px -6px var(--glow); }
+.btn.sec { background: rgba(255,255,255,.06); border: 1px solid var(--line-2); }
+.btn.sec:hover { background: rgba(255,255,255,.1); }
+.btn.peq { height: 36px; padding: 0 16px; font-size: 13.5px; }
+
+/* Portada */
+.hero { position: relative; min-height: min(920px, 100vh); display: flex; align-items: center; overflow: hidden; isolation: isolate; }
+.hero .fondo { position: absolute; inset: 0; z-index: -2; }
+.hero .fondo video { width: 100%; height: 100%; object-fit: cover; filter: saturate(1.15) brightness(.5) blur(6px); transform: scale(1.08); }
+.hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background:
+  linear-gradient(90deg, rgba(12,10,9,.94) 0%, rgba(12,10,9,.78) 42%, rgba(12,10,9,.35) 100%),
+  linear-gradient(180deg, rgba(12,10,9,.4) 0%, rgba(12,10,9,0) 35%, var(--bg) 100%); }
+.hero .w { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; padding-top: 80px; padding-bottom: 100px; }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--text-2); background: rgba(255,255,255,.06); border: 1px solid var(--line-2); padding: 6px 12px 6px 8px; border-radius: 99px; backdrop-filter: blur(8px); margin-bottom: 26px; }
+.eyebrow .p { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px rgba(76,195,138,.18); }
+.hero h1 { font: 400 clamp(52px, 7.6vw, 104px)/.95 var(--serif); letter-spacing: -.02em; margin: 0 0 24px; }
+.hero h1 em { font-style: italic; background: linear-gradient(100deg, var(--accent-2), #ffc2a3); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero p.l { font-size: clamp(17px, 1.6vw, 20px); color: var(--text-2); max-width: 520px; margin: 0 0 32px; }
+.hero .acc { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero .chico { color: var(--text-3); font-size: 13px; margin-top: 16px; }
+.telefonos { position: relative; height: 560px; }
+.tel { position: absolute; width: 228px; aspect-ratio: 9/19.5; border-radius: 38px; padding: 9px; background: linear-gradient(160deg, #3a322d, #0f0c0b); box-shadow: 0 40px 80px -20px rgba(0,0,0,.8), inset 0 0 0 1.5px rgba(255,255,255,.08); }
+.tel .pan { width: 100%; height: 100%; border-radius: 30px; overflow: hidden; position: relative; background: #000; }
+.tel video { width: 100%; height: 100%; object-fit: cover; }
+.tel .isla { position: absolute; top: 9px; left: 50%; transform: translateX(-50%); width: 70px; height: 20px; border-radius: 99px; background: #000; z-index: 2; }
+.tel .red { position: absolute; left: 10px; bottom: 12px; z-index: 2; font-size: 11px; font-weight: 600; background: rgba(0,0,0,.45); backdrop-filter: blur(6px); padding: 4px 9px; border-radius: 99px; }
+.tel.t1 { left: 4%; top: 40px; transform: rotate(-7deg); animation: flota 7s ease-in-out infinite; }
+.tel.t2 { left: 34%; top: 0; z-index: 2; width: 250px; animation: flota 7s ease-in-out -2.3s infinite; }
+.tel.t3 { left: 66%; top: 60px; transform: rotate(7deg); animation: flota 7s ease-in-out -4.6s infinite; }
+@keyframes flota { 50% { translate: 0 -12px; } }
+.sonido { position: absolute; right: 10px; top: 36px; z-index: 3; width: 40px; height: 40px; border-radius: 50%; background: rgba(0,0,0,.5); backdrop-filter: blur(6px); display: grid; place-items: center; }
+.sonido svg { width: 17px; height: 17px; }
+
+/* Cifras */
+.cifras { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg-2); }
+.cifras .w { display: grid; grid-template-columns: repeat(4, 1fr); }
+.cifra { padding: 30px 22px; border-left: 1px solid var(--line); }
+.cifra:first-child { border-left: 0; }
+.cifra b { display: block; font: 400 44px/1 var(--serif); margin-bottom: 8px; }
+.cifra b small { font-size: 22px; color: var(--accent-2); }
+.cifra span { color: var(--text-2); font-size: 14px; }
+.nota-c { color: var(--text-3); font-size: 12px; text-align: center; padding: 10px 16px 0; }
+
+/* Secciones */
+section { padding: 130px 0 0; }
+.cap { font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-2); margin-bottom: 14px; }
+.tit { font: 400 clamp(40px, 5.4vw, 72px)/1 var(--serif); letter-spacing: -.015em; margin: 0 0 18px; }
+.tit em { font-style: italic; color: var(--accent-2); }
+.lead { color: var(--text-2); font-size: clamp(17px, 1.5vw, 19px); max-width: 620px; margin: 0 0 48px; }
+.centro { text-align: center; } .centro .lead { margin-left: auto; margin-right: auto; }
+.tarj { background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--r); }
+.ver { opacity: 0; transform: translateY(28px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+.ver.si { opacity: 1; transform: none; }
+
+/* Videos largos */
+.largo { display: grid; grid-template-columns: 1.25fr .75fr; gap: 16px; }
+.mesa { padding: 28px; }
+.mesa h3 { margin: 0 0 4px; font-size: 18px; }
+.mesa .s { color: var(--text-3); font-size: 13.5px; margin-bottom: 22px; }
+.curva { position: relative; height: 170px; border-radius: 14px; background: var(--bg); border: 1px solid var(--line); overflow: hidden; }
+.curva svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.curva .tramo { position: absolute; top: 0; bottom: 0; background: rgba(238,93,59,.16); border-left: 1px solid rgba(238,93,59,.55); border-right: 1px solid rgba(238,93,59,.55); transition: left .5s, width .5s; }
+.momento { position: absolute; top: 10px; transform: translateX(-50%); font-size: 11px; font-weight: 600; background: var(--bg-4); border: 1px solid var(--line-2); padding: 3px 8px; border-radius: 99px; white-space: nowrap; transition: opacity .4s; }
+.momento i { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 5px; vertical-align: 1px; }
+.onda { display: flex; align-items: center; gap: 2px; height: 34px; margin-top: 10px; }
+.onda i { flex: 1; background: var(--bg-4); border-radius: 2px; transition: background .5s; }
+.onda i.on { background: rgba(238,93,59,.75); }
+.control { display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; margin-top: 24px; color: var(--text-2); font-size: 13.5px; }
+input[type=range] { -webkit-appearance: none; appearance: none; height: 4px; border-radius: 99px; background: linear-gradient(90deg, var(--accent) var(--v, 50%), var(--bg-4) var(--v, 50%)); outline: none; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,.5); cursor: grab; }
+input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 0; }
+.resultado { display: flex; align-items: baseline; gap: 14px; margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--line); }
+.resultado b { font: 400 54px/1 var(--serif); }
+.resultado span { color: var(--text-2); }
+.carpeta { padding: 22px; display: flex; flex-direction: column; gap: 14px; }
+.carpeta video { width: 100%; border-radius: 12px; aspect-ratio: 16/9; object-fit: cover; }
+.arch { display: grid; gap: 2px; font-size: 13.5px; }
+.arch div { display: flex; gap: 10px; align-items: center; padding: 8px 10px; border-radius: 9px; color: var(--text-2); }
+.arch div:hover { background: var(--bg-3); color: var(--text); }
+.arch svg { width: 16px; height: 16px; color: var(--accent-2); flex: none; }
+.arch small { margin-left: auto; color: var(--text-3); }
+.minis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
+.mini { padding: 22px; }
+.mini b { display: block; margin-bottom: 4px; }
+.mini span { color: var(--text-2); font-size: 14.5px; }
+
+/* Subtítulos */
+.subs { display: grid; grid-template-columns: .8fr 1.2fr; gap: 56px; align-items: center; }
+.escen { position: relative; width: 300px; margin: 0 auto; }
+.escen .tel { position: relative; width: 300px; }
+.capa-sub { position: absolute; left: 18px; right: 18px; z-index: 3; text-align: center; transition: top .45s cubic-bezier(.2,.7,.2,1); pointer-events: none; }
+.capa-sub .pal { display: inline-block; margin: 0 .12em; }
+.e-golpe .pal { font: 400 34px/1.05 'Anton', var(--ui); text-transform: uppercase; color: #fff; -webkit-text-stroke: 1px rgba(0,0,0,.7); text-shadow: 0 3px 0 rgba(0,0,0,.6); }
+.e-golpe .pal.on { color: var(--c, #ffd23f); transform: scale(1.18); transition: transform .12s; }
+.e-caja .pal { font: 800 22px/1.25 var(--ui); color: #111; background: #fff; padding: 2px 8px; border-radius: 6px; margin: 2px; }
+.e-caja .pal.on { background: var(--c, #ffd23f); }
+.e-pop .pal { font: 800 26px/1.1 var(--ui); color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,.7); opacity: .0; transform: translateY(8px) scale(.8); transition: all .18s; }
+.e-pop .pal.vis { opacity: 1; transform: none; }
+.e-pop .pal.on { color: var(--c, #ffd23f); }
+.e-karaoke .pal { font: 700 24px/1.2 var(--ui); color: rgba(255,255,255,.5); text-shadow: 0 2px 10px rgba(0,0,0,.7); }
+.e-karaoke .pal.vis { color: #fff; }
+.e-karaoke .pal.on { color: var(--c, #ffd23f); }
+.e-limpio .pal { font: 600 20px/1.3 var(--ui); color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.9); }
+.opciones { display: grid; gap: 22px; }
+.grupo label { display: block; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); margin-bottom: 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { height: 38px; padding: 0 16px; border-radius: 99px; border: 1px solid var(--line-2); background: rgba(255,255,255,.03); font-size: 14px; font-weight: 500; color: var(--text-2); transition: all .2s; }
+.chip:hover { color: var(--text); border-color: rgba(255,255,255,.3); }
+.chip.on { background: var(--text); color: #111; border-color: var(--text); font-weight: 600; }
+.color { width: 38px; height: 38px; border-radius: 50%; border: 2px solid transparent; outline: 1px solid var(--line-2); }
+.color.on { border-color: var(--bg); outline: 2px solid var(--text); }
+
+/* Voces */
+.voces { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.voz { padding: 30px; display: flex; flex-direction: column; gap: 22px; }
+.voz-cab { display: flex; align-items: center; gap: 16px; }
+.play { width: 56px; height: 56px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; flex: none; box-shadow: 0 10px 30px -8px var(--glow); transition: transform .2s; }
+.play:hover { transform: scale(1.05); }
+.play svg { width: 20px; height: 20px; fill: #fff; }
+.voz-cab b { display: block; font-size: 16px; }
+.voz-cab span { color: var(--text-3); font-size: 13px; }
+.barras { display: flex; align-items: center; gap: 3px; height: 34px; margin-left: auto; }
+.barras i { width: 3px; border-radius: 2px; background: var(--bg-4); height: 30%; transition: height .12s; }
+.voz.suena .barras i { background: var(--accent-2); }
+.frase { font: 400 clamp(24px, 2.4vw, 30px)/1.25 var(--serif); color: var(--text-3); }
+.frase .pal { transition: color .15s; }
+.frase .pal.dicha { color: var(--text); }
+.acentos { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.acentos span { font-size: 13.5px; color: var(--text-2); background: var(--bg-2); border: 1px solid var(--line); padding: 7px 14px; border-radius: 99px; }
+.acentos span b { color: var(--text); font-weight: 600; }
+.doblaje { margin-top: 16px; padding: 30px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.doblaje b { display: block; margin-bottom: 6px; font-size: 17px; }
+.doblaje span { color: var(--text-2); font-size: 14.5px; }
+.doblaje svg { width: 26px; height: 26px; color: var(--accent-2); margin-bottom: 14px; }
+
+/* Sin cámara */
+.sincam { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.sincam .tarj { overflow: hidden; }
+.sincam video { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+.sincam .txt { padding: 24px 26px 28px; }
+.sincam b { font-size: 19px; display: block; margin-bottom: 6px; }
+.sincam span { color: var(--text-2); }
+
+/* La app */
+.app-tabs { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 26px; }
+.ventana { border-radius: 16px; overflow: hidden; border: 1px solid var(--line-2); box-shadow: 0 60px 120px -30px rgba(0,0,0,.9), 0 0 0 1px rgba(0,0,0,.6); background: #0f0c0b; position: relative; }
+.ventana .barra-v { height: 34px; display: flex; align-items: center; gap: 7px; padding: 0 14px; background: #1a1513; border-bottom: 1px solid var(--line); }
+.ventana .barra-v i { width: 11px; height: 11px; border-radius: 50%; background: #3a322d; }
+.ventana img { width: 100%; height: auto; display: block; transition: opacity .5s; }
+.halo { position: absolute; inset: auto 10% -40px; height: 120px; background: var(--glow); filter: blur(80px); z-index: -1; }
+.pie-app { text-align: center; color: var(--text-3); font-size: 13.5px; margin-top: 18px; }
+
+/* Publicar */
+.publicar { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.semana { padding: 26px; }
+.dias { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-top: 18px; }
+.dia { border-radius: 12px; background: var(--bg); border: 1px solid var(--line); min-height: 150px; padding: 8px; display: flex; flex-direction: column; gap: 6px; }
+.dia small { color: var(--text-3); font-size: 11px; font-weight: 600; }
+.post { border-radius: 8px; padding: 6px; font-size: 11.5px; font-weight: 600; line-height: 1.25; }
+.post.ig { background: rgba(225,48,108,.16); color: #ff86ad; }
+.post.fb { background: rgba(24,119,242,.16); color: #7db3ff; }
+.post.tt { background: rgba(255,255,255,.08); color: #e9e9e9; }
+.post.yt { background: rgba(255,0,0,.14); color: #ff8a8a; }
+.redes { padding: 26px; display: grid; gap: 4px; align-content: start; }
+.red-f { display: grid; grid-template-columns: 38px 1fr; gap: 14px; align-items: start; padding: 14px 0; border-top: 1px solid var(--line); }
+.red-f:first-of-type { border-top: 0; }
+.red-i { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; font-weight: 800; font-size: 13px; }
+.red-f b { display: flex; align-items: center; gap: 8px; }
+.red-f span { color: var(--text-2); font-size: 14px; }
+.est { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 99px; }
+.est.v { background: rgba(76,195,138,.14); color: var(--ok); }
+.est.a { background: rgba(240,179,91,.14); color: var(--amb); }
+
+/* Tu marca */
+.tumarca { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; }
+.marcas-op { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 26px; }
+.m-op { display: flex; align-items: center; gap: 10px; height: 46px; padding: 0 16px 0 8px; border-radius: 99px; border: 1px solid var(--line-2); font-weight: 600; font-size: 14px; color: var(--text-2); transition: all .2s; }
+.m-op i { width: 30px; height: 30px; border-radius: 50%; }
+.m-op.on { color: var(--text); border-color: var(--text); background: rgba(255,255,255,.05); }
+.vista-m { position: relative; width: 290px; margin: 0 auto; }
+.vista-m .tel { position: relative; width: 290px; }
+.logo-m { position: absolute; z-index: 3; top: 40px; left: 22px; display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 13px; background: rgba(0,0,0,.4); backdrop-filter: blur(8px); padding: 5px 12px 5px 5px; border-radius: 99px; transition: all .4s; }
+.logo-m i { width: 24px; height: 24px; border-radius: 50%; transition: background .4s; }
+.cta-m { position: absolute; z-index: 3; left: 22px; right: 22px; bottom: 60px; text-align: center; padding: 12px; border-radius: 14px; font-weight: 800; font-size: 15px; transition: background .4s, color .4s; }
+.sub-m { position: absolute; z-index: 3; left: 18px; right: 18px; top: 52%; text-align: center; font: 400 30px/1.05 'Anton', var(--ui); text-transform: uppercase; color: #fff; text-shadow: 0 3px 0 rgba(0,0,0,.5); }
+.sub-m em { font-style: normal; transition: color .4s; }
+
+/* Tienda */
+.tienda { padding: 56px; display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; background: radial-gradient(80% 140% at 100% 0%, rgba(238,93,59,.18), transparent 60%), var(--bg-2); }
+.tienda .tel { position: relative; width: 210px; }
+.tienda .tit { font-size: clamp(34px, 4vw, 52px); }
+
+/* Beta */
+.beta-c { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.beta-c .tarj { padding: 30px; }
+.beta-c h3 { margin: 0 0 18px; font-size: 18px; display: flex; gap: 10px; align-items: center; }
+.beta-c ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.beta-c li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; color: var(--text-2); font-size: 15px; }
+.beta-c li svg { width: 18px; height: 18px; margin-top: 2px; }
+.ya svg { color: var(--ok); } .viene svg { color: var(--amb); }
+.beta-c li b { color: var(--text); font-weight: 600; }
+
+/* Precios */
+.periodo { display: inline-flex; padding: 4px; border-radius: 99px; background: var(--bg-2); border: 1px solid var(--line); margin-bottom: 34px; }
+.periodo button { height: 38px; padding: 0 20px; border-radius: 99px; font-size: 14px; font-weight: 600; color: var(--text-2); }
+.periodo button.on { background: var(--text); color: #111; }
+.periodo small { color: var(--ok); font-weight: 700; margin-left: 4px; }
+.precios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: left; }
+.plan { padding: 30px; display: flex; flex-direction: column; }
+.plan.hi { border: 1.5px solid var(--accent); background: linear-gradient(180deg, rgba(238,93,59,.09), var(--bg-2) 45%); position: relative; }
+.plan.hi::after { content: "Recomendado"; position: absolute; top: -12px; left: 30px; font-size: 12px; font-weight: 700; background: var(--accent-btn); color: #fff; padding: 3px 12px; border-radius: 99px; }
+.plan h3 { margin: 0 0 4px; font-size: 20px; }
+.plan .para { color: var(--text-3); font-size: 14px; }
+.precio { font-size: 44px; font-weight: 700; letter-spacing: -.03em; margin: 20px 0 2px; }
+.precio span { font-size: 15px; color: var(--text-3); font-weight: 500; letter-spacing: 0; }
+.equiv { color: var(--text-3); font-size: 13px; min-height: 20px; margin-bottom: 22px; }
+.plan ul { list-style: none; padding: 0; margin: 0 0 26px; display: grid; gap: 11px; font-size: 14.5px; color: var(--text-2); flex: 1; }
+.plan li { display: grid; grid-template-columns: 18px 1fr; gap: 9px; }
+.plan li svg { width: 16px; height: 16px; color: var(--accent-2); margin-top: 3px; }
+.plan .btn { width: 100%; }
+.prueba { margin-top: 20px; color: var(--text-2); font-size: 15px; }
+.combo { margin-top: 16px; display: flex; gap: 16px; align-items: center; justify-content: space-between; padding: 20px 24px; text-align: left; }
+.combo span { color: var(--text-2); }
+.combo b { color: var(--text); }
+
+/* Descarga */
+.desc { display: grid; grid-template-columns: 1.1fr .9fr; gap: 16px; }
+.desc .tarj { padding: 34px; }
+.desc h3 { margin: 0 0 6px; font-size: 24px; }
+.desc p { color: var(--text-2); margin: 0 0 24px; }
+.req div { display: flex; justify-content: space-between; gap: 18px; padding: 12px 0; border-top: 1px solid var(--line); font-size: 14.5px; }
+.req span:first-child { color: var(--text-3); white-space: nowrap; }
+.req div > :last-child { text-align: right; }
+.pasos { counter-reset: p; list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+.pasos li { counter-increment: p; display: grid; grid-template-columns: 32px 1fr; gap: 12px; color: var(--text-2); font-size: 15px; }
+.pasos li::before { content: counter(p); width: 28px; height: 28px; border-radius: 50%; background: var(--bg-4); display: grid; place-items: center; font-size: 13px; font-weight: 700; color: var(--text); }
+.pasos b { color: var(--text); }
+
+/* Preguntas */
+.faq { max-width: 800px; margin: 0 auto; }
+details { border-bottom: 1px solid var(--line); }
+summary { list-style: none; cursor: pointer; padding: 22px 0; font-size: 18px; font-weight: 600; display: flex; justify-content: space-between; gap: 16px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-weight: 400; color: var(--text-3); font-size: 24px; line-height: 1; transition: transform .3s; }
+details[open] summary::after { transform: rotate(45deg); }
+details p { margin: 0 0 22px; color: var(--text-2); max-width: 680px; }
+
+
+/* Cómo funciona */
+.pasos3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; position: relative; }
+.paso { padding: 30px; position: relative; overflow: hidden; }
+.paso .num { font: 400 88px/1 var(--serif); color: transparent; -webkit-text-stroke: 1px rgba(255,138,95,.55); position: absolute; right: 18px; top: 8px; }
+.paso b { display: block; font-size: 21px; margin: 46px 0 8px; }
+.paso span { color: var(--text-2); }
+.paso .ico { width: 46px; height: 46px; border-radius: 14px; background: var(--accent-soft); color: var(--accent-2); display: grid; place-items: center; }
+.paso .ico svg { width: 22px; height: 22px; }
+.paso small { display: inline-block; margin-top: 16px; font-size: 12.5px; font-weight: 600; color: var(--text-3); }
+
+/* Galería */
+.gal { display: grid; grid-template-columns: 1.25fr 1fr; gap: 16px; align-items: start; }
+.gal .tarj { overflow: hidden; position: relative; }
+.gal video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.gal .grande video, .gal .h169 video { aspect-ratio: 16/9; height: auto; }
+.gal .txt { padding: 18px 22px 22px; }
+.gal .txt b { display: block; font-size: 17px; margin-bottom: 4px; }
+.gal .txt span { color: var(--text-2); font-size: 14.5px; }
+.gal .h169 video { aspect-ratio: 16/9; }
+.ab { grid-column: 1 / -1; padding: 30px 34px; display: grid; grid-template-columns: 1fr 170px 170px; gap: 22px; align-items: center; }
+.ab .lado { text-align: center; }
+.ab .lado .mini-tel { aspect-ratio: 9/16; border-radius: 18px; overflow: hidden; border: 1px solid var(--line-2); background: #000; margin-bottom: 10px; position: relative; }
+.ab .lado .mini-tel video { width: 100%; height: 100%; object-fit: cover; }
+.ab .lado em { position: absolute; top: 8px; left: 8px; font-style: normal; font-size: 11px; font-weight: 800; background: var(--accent-btn); color: #fff; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; }
+.ab .lado span { color: var(--text-2); font-size: 13.5px; }
+.ab-tit b { display: block; font: 400 clamp(30px, 3.2vw, 42px)/1.05 var(--serif); margin-bottom: 12px; }
+.ab-tit span { color: var(--text-2); font-size: 16px; max-width: 440px; display: block; }
+
+/* Calculadora */
+.calc { display: grid; grid-template-columns: 1fr 1fr; gap: 0; overflow: hidden; }
+.calc .izq { padding: 40px; border-right: 1px solid var(--line); }
+.calc .der { padding: 40px; background: radial-gradient(90% 120% at 100% 0%, rgba(238,93,59,.16), transparent 60%); display: flex; flex-direction: column; justify-content: center; }
+.campo-c { margin-bottom: 30px; }
+.campo-c label { display: flex; justify-content: space-between; font-size: 15px; color: var(--text-2); margin-bottom: 12px; }
+.campo-c label b { color: var(--text); font-size: 17px; }
+.campo-c input { width: 100%; }
+.gran { font: 400 clamp(64px, 8vw, 104px)/.9 var(--serif); letter-spacing: -.02em; }
+.gran small { font-size: .35em; color: var(--accent-2); letter-spacing: 0; }
+.der p { color: var(--text-2); margin: 12px 0 26px; font-size: 17px; }
+.barras-c { display: grid; gap: 12px; }
+.barra-c { display: grid; grid-template-columns: 96px 1fr 70px; gap: 12px; align-items: center; font-size: 13.5px; color: var(--text-2); }
+.barra-c .t { height: 10px; border-radius: 99px; background: var(--bg-4); overflow: hidden; }
+.barra-c .t i { display: block; height: 100%; border-radius: 99px; transition: width .5s cubic-bezier(.2,.7,.2,1); }
+.barra-c b { color: var(--text); text-align: right; font-weight: 600; }
+.supuestos { color: var(--text-3); font-size: 12.5px; margin-top: 22px; }
+
+/* Barra fija en celular */
+.fija { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 40; display: none; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 10px 10px 18px; border-radius: 99px; background: rgba(28,23,20,.82); backdrop-filter: blur(18px) saturate(160%); -webkit-backdrop-filter: blur(18px) saturate(160%); border: 1px solid var(--line-2); box-shadow: 0 20px 50px -10px rgba(0,0,0,.8); transform: translateY(140%); transition: transform .4s cubic-bezier(.2,.7,.2,1); }
+.fija.si { transform: none; }
+.fija span { font-size: 13.5px; color: var(--text-2); line-height: 1.25; }
+.fija span b { color: var(--text); display: block; font-size: 14px; }
+
+/* Antes (soluciones) */
+.antes { margin-top: 22px; display: grid; gap: 8px; }
+.crudo { display: grid; grid-template-columns: 20px 1fr auto auto; gap: 10px; align-items: center; padding: 11px 14px; border-radius: 12px; background: var(--bg); border: 1px solid var(--line); font-size: 14px; color: var(--text-2); }
+.crudo svg { width: 18px; height: 18px; color: var(--text-3); }
+.crudo > i { width: 14px; height: 14px; border-radius: 4px; }
+.crudo small { color: var(--text-3); font-variant-numeric: tabular-nums; }
+.crudo em { font-style: normal; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 99px; background: rgba(240,179,91,.12); color: var(--amb); }
+.sem-vacia { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.d-vacio { height: 92px; border-radius: 10px; border: 1px dashed var(--line-2); padding: 6px; }
+.d-vacio small { font-size: 10.5px; font-weight: 700; color: var(--text-3); }
+.antes-pie { margin-top: 6px; font: 400 24px/1.1 var(--serif); color: var(--text); }
+.cortes { display: flex; gap: 8px; }
+.corte-txt b { display: block; font-size: 15px; }
+.corte-txt span { color: var(--text-2); font-size: 13.5px; }
+.lienzo-m { position: absolute; inset: -10%; background: radial-gradient(55% 40% at 30% 28%, var(--mc, #ff8a5f), transparent 70%), radial-gradient(60% 45% at 75% 78%, var(--mc, #ff8a5f), transparent 72%), #120e0c; opacity: .55; animation: respira 9s ease-in-out infinite alternate; }
+@keyframes respira { to { transform: scale(1.12) rotate(4deg); } }
+
+/* Soluciones */
+.sol-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+.sol { display: none; grid-template-columns: 1fr 1fr; gap: 16px; }
+.sol.on { display: grid; animation: entra .5s cubic-bezier(.2,.7,.2,1); }
+@keyframes entra { from { opacity: 0; transform: translateY(10px); } }
+.sol .tarj { padding: 30px; }
+.sol .dolor { color: var(--text-3); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px; }
+.sol h3 { font: 400 32px/1.1 var(--serif); margin: 0 0 14px; }
+.sol p { color: var(--text-2); margin: 0; }
+.sol ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.sol li { display: grid; grid-template-columns: 30px 1fr; gap: 12px; color: var(--text-2); font-size: 15px; }
+.sol li i { width: 30px; height: 30px; border-radius: 9px; background: var(--accent-soft); color: var(--accent-2); display: grid; place-items: center; font-style: normal; font-weight: 800; font-size: 13px; }
+.sol li b { color: var(--text); display: block; }
+.sol video { width: 100%; border-radius: 14px; margin-top: 22px; aspect-ratio: 16/9; object-fit: cover; }
+
+/* Herramientas */
+.caja-h { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.h { padding: 22px; transition: border-color .25s, transform .25s, background .25s; }
+.h:hover { border-color: rgba(238,93,59,.45); transform: translateY(-3px); background: var(--bg-3); }
+.h svg { width: 26px; height: 26px; color: var(--accent-2); margin-bottom: 16px; }
+.h b { display: block; font-size: 16px; margin-bottom: 4px; }
+.h span { color: var(--text-2); font-size: 14px; }
+.h em { font-style: normal; display: block; margin-top: 14px; font: 400 30px/1 var(--serif); color: var(--text); }
+
+/* Conexiones */
+.con { display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; align-items: center; }
+.mapa { position: relative; aspect-ratio: 1; max-width: 520px; width: 100%; margin: 0 auto; }
+.mapa svg.lineas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.mapa .lin { stroke: rgba(255,240,230,.14); stroke-width: 1.2; fill: none; }
+.mapa .flujo { stroke: var(--accent-2); stroke-width: 2; fill: none; stroke-dasharray: 4 14; animation: corre 1.6s linear infinite; opacity: .8; }
+@keyframes corre { to { stroke-dashoffset: -36; } }
+.nodo { position: absolute; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 600; color: var(--text-2); text-align: center; width: 110px; cursor: default; }
+.nodo .n { width: 58px; height: 58px; border-radius: 18px; background: var(--bg-3); border: 1px solid var(--line-2); display: grid; place-items: center; font-weight: 800; font-size: 15px; color: var(--text); transition: transform .25s, border-color .25s; }
+.nodo:hover .n, .nodo.on .n { transform: scale(1.08); border-color: var(--accent); }
+.nodo.centro-n .n { width: 96px; height: 96px; border-radius: 28px; background: linear-gradient(160deg, var(--accent-2), #c63d1f); border: 0; box-shadow: 0 20px 60px -10px var(--glow); }
+.nodo.centro-n .n i { border-left: 26px solid #fff; border-top: 17px solid transparent; border-bottom: 17px solid transparent; margin-left: 6px; }
+.con-lista { display: grid; gap: 4px; }
+.con-f { display: grid; grid-template-columns: 1fr auto; gap: 4px 14px; padding: 16px 18px; border-radius: 14px; border: 1px solid transparent; transition: all .25s; cursor: default; }
+.con-f:hover, .con-f.on { background: var(--bg-2); border-color: var(--line); }
+.con-f b { font-size: 16px; }
+.con-f span { grid-column: 1 / -1; color: var(--text-2); font-size: 14.5px; }
+.con-f small { font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 99px; background: var(--bg-4); color: var(--text-2); align-self: center; white-space: nowrap; }
+.con-f small.v { background: rgba(76,195,138,.14); color: var(--ok); }
+
+/* Por qué */
+.tabla { border-radius: var(--r); border: 1px solid var(--line); overflow: hidden; background: var(--bg-2); }
+.tabla .tw { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.tabla table { width: 100%; border-collapse: collapse; min-width: 640px; }
+.tabla th, .tabla td { padding: 16px 20px; text-align: left; border-bottom: 1px solid var(--line); font-size: 14.5px; vertical-align: top; }
+.tabla tr:last-child td { border-bottom: 0; }
+.tabla th { font-size: 12.5px; font-weight: 700; color: var(--text-3); letter-spacing: .04em; }
+.tabla th.yo, .tabla td.yo { background: rgba(238,93,59,.07); }
+.tabla th.yo { color: var(--accent-2); }
+.tabla td:first-child { color: var(--text); font-weight: 600; width: 30%; }
+.tabla td { color: var(--text-2); }
+.tabla td.yo { color: var(--text); }
+.tabla td.yo::before { content: ""; display: inline-block; width: 14px; height: 14px; margin: 0 8px -2px 0; background: no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234cc38a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E"); }
+.razones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px; }
+.razon { padding: 28px; }
+.razon b { display: block; font: 400 28px/1.1 var(--serif); margin-bottom: 10px; }
+.razon span { color: var(--text-2); font-size: 15px; }
+.nota-t { color: var(--text-3); font-size: 12.5px; margin-top: 12px; }
+
+.final { text-align: center; padding: 140px 0 40px; }
+.final .tit { font-size: clamp(46px, 6.4vw, 88px); }
+footer { margin-top: 90px; border-top: 1px solid var(--line); }
+footer .w { padding-top: 30px; padding-bottom: 48px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: var(--text-3); font-size: 13px; }
+footer .l { display: flex; gap: 22px; flex-wrap: wrap; } footer .l a { padding: 10px 0; }
+.nota-maq { margin-top: 18px; padding: 14px 18px; border-radius: 14px; border: 1px dashed rgba(240,179,91,.4); color: var(--amb); font-size: 13px; background: rgba(240,179,91,.05); }
+
+@media (max-width: 960px) {
+  .hero .w { grid-template-columns: 1fr; padding-top: 56px; }
+  .telefonos { height: 440px; max-width: 520px; width: 100%; margin: 0 auto; }
+  .tel { width: 170px; } .tel.t2 { width: 190px; } .escen .tel, .escen { width: 270px; } .vista-m, .vista-m .tel { width: 260px; }
+  .cifras .w { grid-template-columns: 1fr 1fr; } .cifra:nth-child(3) { border-left: 0; } .cifra { border-top: 1px solid var(--line); }
+  .largo, .subs, .voces, .sincam, .publicar, .tumarca, .beta-c, .precios, .desc { grid-template-columns: minmax(0, 1fr); }
+  .barras { display: none; } .voz { padding: 22px; }
+  .minis, .doblaje, .sol, .sol.on, .con, .razones { grid-template-columns: 1fr; }
+  .caja-h { grid-template-columns: 1fr 1fr; }
+  .pasos3, .gal, .calc { grid-template-columns: 1fr; } .ab { grid-template-columns: 1fr 1fr; padding: 24px; } .ab-tit { grid-column: 1 / -1; } .calc .izq { border-right: 0; border-bottom: 1px solid var(--line); padding: 28px; } .calc .der { padding: 28px; }
+  .fija { display: flex; } footer { padding-bottom: 70px; }
+  .tienda { grid-template-columns: 1fr; padding: 32px; } .tienda .tel { margin: 0 auto; }
+  .links a:not(.btn) { display: none; }
+  .combo { flex-direction: column; align-items: flex-start; }
+  section { padding-top: 96px; }
+  .dias { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 520px) {
+  .tel { width: 140px; border-radius: 28px; padding: 7px; } .tel .pan { border-radius: 22px; } .tel.t2 { width: 158px; }
+  .telefonos { height: 360px; } .tel.t1 { left: 0; } .tel.t3 { left: auto; right: 0; }
+  .cifra b { font-size: 36px; }
+  .dias { grid-template-columns: repeat(3, 1fr); }
+  .caja-h { grid-template-columns: 1fr 1fr; gap: 10px; } .h { padding: 16px; } .h svg { width: 22px; height: 22px; margin-bottom: 10px; } .h b { font-size: 15px; } .h span { font-size: 13px; } .h em { font-size: 24px; margin-top: 10px; }
+  section { padding-top: 76px; }
+  .crudo { grid-template-columns: 18px 1fr auto; } .crudo em { display: none; } .d-vacio { height: 64px; }
+  .nodo { width: 84px; font-size: 11px; } .nodo .n { width: 46px; height: 46px; border-radius: 14px; font-size: 13px; } .nodo.centro-n .n { width: 74px; height: 74px; }
+  .req div { flex-direction: column; gap: 2px; } .req div > :last-child { text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tel { animation: none !important; } .ver { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<nav><div class="w">
+  <a class="marca" href="#contenido" aria-label="Contesa Estudio, ir al inicio"><span class="iso"><i></i></span>Contesa Estudio <span class="beta">BETA</span></a>
+  <div class="links"><a href="#como">Cómo funciona</a><a href="#soluciones">Para quién</a><a href="#herramientas">Herramientas</a><a href="#conexiones">Conexiones</a><a href="#porque">Por qué Estudio</a><a href="#precios">Precios</a><a class="btn pri peq" href="#descargar">Probar gratis</a></div>
+</div></nav>
+<main id="contenido">
+
+<!-- PORTADA -->
+<header class="hero">
+  <div class="fondo"><video src="medios/portada-3d.mp4" poster="medios/p-portada-3d.jpg" autoplay muted loop playsinline aria-hidden="true"></video></div>
+  <div class="w">
+    <div>
+      <div class="eyebrow"><span class="p"></span>Beta abierta para Windows</div>
+      <h1>Grabas.<br>Estudio hace <em>el resto.</em></h1>
+      <p class="l">Recorta las horas de grabación a lo mejor, saca los shorts, pone subtítulos y voz, y deja listo lo que vas a subir. En tu PC, con tu marca.</p>
+      <div class="acc"><a class="btn pri" href="#descargar">Probar 7 días gratis</a><a class="btn sec" href="#largos">Ver cómo funciona</a></div>
+      <div class="chico">Sin tarjeta · Todos los videos de esta página los hizo Estudio</div>
+    </div>
+    <div class="telefonos" aria-label="Shorts hechos con Estudio">
+      <div class="tel t1"><div class="pan"><span class="isla"></span><video src="medios/short-noche.mp4" poster="medios/p-short-noche.jpg" autoplay muted loop playsinline aria-hidden="true"></video><span class="red">Para tu negocio</span></div></div>
+      <div class="tel t2"><div class="pan"><span class="isla"></span><video src="medios/short-todovolo.mp4" poster="medios/p-short-todovolo.jpg" autoplay muted loop playsinline aria-hidden="true"></video><span class="red">Short de una partida</span></div></div>
+      <div class="tel t3"><div class="pan"><span class="isla"></span><video src="medios/short-cuento.mp4" poster="medios/p-short-cuento.jpg" autoplay muted loop playsinline aria-hidden="true"></video><span class="red">Historias animadas</span></div></div>
+    </div>
+  </div>
+</header>
+
+<!-- CIFRAS -->
+<div class="cifras"><div class="w">
+  <div class="cifra"><b>2 <small>min</small></b><span>tardó en dejar una partida de 20 minutos en sus 12 mejores minutos</span></div>
+  <div class="cifra"><b>3 <small>shorts</small></b><span>verticales por video, con título, gancho y subtítulos</span></div>
+  <div class="cifra"><b>5 <small>voces</small></b><span>en español de México, Colombia y España, más la tuya</span></div>
+  <div class="cifra"><b>4 <small>redes</small></b><span>Instagram, Facebook, YouTube y TikTok desde una pestaña</span></div>
+</div></div>
+<p class="nota-c">Medido en un PC con tarjeta RTX 5060 Ti. En equipos sin tarjeta NVIDIA funciona, pero tarda más.</p>
+
+<!-- CÓMO FUNCIONA -->
+<section id="como"><div class="w">
+  <div class="ver centro"><div class="cap">Cómo funciona</div>
+  <h2 class="tit">Tres pasos. <em>Ninguno es editar.</em></h2>
+  <p class="lead">De la grabación a tus redes, sin tocar una línea de tiempo si no quieres.</p></div>
+  <div class="pasos3 ver">
+    <div class="tarj paso"><span class="num">1</span><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg></div><b>Suelta tu video</b><span>Una partida de horas, una grabación con el celular o solo una idea escrita.</span><small>O deja que Estudio vigile tu carpeta</small></div>
+    <div class="tarj paso"><span class="num">2</span><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l1.8 4.6L18.5 9l-4.7 1.4L12 15l-1.8-4.6L5.5 9l4.7-1.4z"/></svg></div><b>Estudio lo arma</b><span>Lo mejor, los shorts, subtítulos, voz, música, portada y los textos para cada red.</span><small>Mientras tanto, sigue con lo tuyo</small></div>
+    <div class="tarj paso"><span class="num">3</span><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12l5 5 9-10"/></svg></div><b>Revisa y publica</b><span>Cambia lo que quieras, elige el día y la hora, y listo.</span><small>Instagram y Facebook salen solos</small></div>
+  </div>
+</div></section>
+
+<!-- SOLUCIONES -->
+<section id="soluciones"><div class="w">
+  <div class="ver"><div class="cap">Para quién</div>
+  <h2 class="tit">El problema no es grabar.<br>Es <em>todo lo que viene después.</em></h2>
+  <p class="lead">Editar, cortar, subtitular, escribir el texto y subirlo a cada red se come las horas. Estudio hace esa parte por ti, sea cual sea tu caso.</p></div>
+  <div class="sol-tabs ver" data-grupo="sol">
+    <button class="chip on" data-v="s-stream">Streamers y gamers</button><button class="chip" data-v="s-negocio">Negocios y tiendas</button><button class="chip" data-v="s-agencia">Agencias y creadores de contenido</button>
+  </div>
+  <div class="sol on ver" id="s-stream">
+    <div class="tarj"><div class="dolor">Antes</div><h3>Tres horas de transmisión que nadie va a ver enteras.</h3><p>Y editarlas a mano toma más tiempo que haberlas jugado.</p><div class="antes"><div class="crudo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg><span>Partida 07-nov.mp4</span><small>3:12:40</small><em>Sin editar</em></div><div class="crudo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg><span>Partida 09-nov.mp4</span><small>2:47:05</small><em>Sin editar</em></div><div class="crudo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg><span>Partida 12-nov.mp4</span><small>4:01:18</small><em>Sin editar</em></div><div class="crudo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg><span>Partida 15-nov.mp4</span><small>3:30:52</small><em>Sin editar</em></div><div class="antes-pie">13 horas grabadas · 0 publicadas</div></div></div>
+    <div class="tarj"><div class="dolor">Con Estudio</div><ul>
+      <li><i>1</i><span><b>Suelta la grabación</b>O deja que el modo Automático vigile tu carpeta de grabaciones.</span></li>
+      <li><i>2</i><span><b>Marca momentos mientras juegas</b>Con una tecla, sin salir del juego.</span></li>
+      <li><i>3</i><span><b>Recibe la carpeta lista</b>Video editado, partes, shorts con tu cámara y los textos para subir.</span></li>
+      <li><i>4</i><span><b>Mira qué funciona</b>Cruza la retención de YouTube Studio con tu video: ves dónde se va la gente y qué había ahí.</span></li>
+    </ul></div>
+  </div>
+  <div class="sol" id="s-negocio">
+    <div class="tarj"><div class="dolor">Antes</div><h3>Sabes que necesitas videos, pero no tienes tiempo ni editor.</h3><p>Y los que haces a la carrera no se parecen a tu marca.</p><div class="antes"><div class="sem-vacia"><div class="d-vacio"><small>LUN</small></div><div class="d-vacio"><small>MAR</small></div><div class="d-vacio"><small>MIÉ</small></div><div class="d-vacio"><small>JUE</small></div><div class="d-vacio"><small>VIE</small></div><div class="d-vacio"><small>SÁB</small></div><div class="d-vacio"><small>DOM</small></div></div><div class="antes-pie">0 publicaciones esta semana</div></div></div>
+    <div class="tarj"><div class="dolor">Con Estudio</div><ul>
+      <li><i>1</i><span><b>Escribe la idea en una frase</b>Estudio arma el guion, las escenas y la voz.</span></li>
+      <li><i>2</i><span><b>Con tu marca de una vez</b>Logo, colores y llamado a la acción en todos tus videos.</span></li>
+      <li><i>3</i><span><b>Tu catálogo adentro</b>Si vendes con Contesa, tus productos y precios entran solos.</span></li>
+      <li><i>4</i><span><b>La semana programada</b>Instagram y Facebook salen solos a la hora, con el PC apagado.</span></li>
+    </ul></div>
+  </div>
+  <div class="sol" id="s-agencia">
+    <div class="tarj"><div class="dolor">Antes</div><h3>Diez clientes, diez marcas y el mismo trabajo repetido.</h3><p>Cada video pide los mismos pasos a mano, una y otra vez.</p><div class="antes"><div class="crudo"><i style="background:#ff8a5f"></i><span>Café Luna</span><small>12 pendientes</small><em>Atrasado</em></div><div class="crudo"><i style="background:#5ce1a5"></i><span>Verde Vivo</span><small>8 pendientes</small><em>Atrasado</em></div><div class="crudo"><i style="background:#7cc7ff"></i><span>Moda Norte</span><small>15 pendientes</small><em>Atrasado</em></div><div class="crudo"><i style="background:#f0b35b"></i><span>Taller 23</span><small>6 pendientes</small><em>Atrasado</em></div><div class="antes-pie">41 videos por hacer este mes</div></div></div>
+    <div class="tarj"><div class="dolor">Con Estudio</div><ul>
+      <li><i>1</i><span><b>Una marca por cliente</b>Cambias de cliente y cambian logo, colores y letras.</span></li>
+      <li><i>2</i><span><b>Plantillas que se repiten</b>Guarda una receta y úsala con material nuevo.</span></li>
+      <li><i>3</i><span><b>Pídeselo a Claude</b>Conecta Estudio con Claude y pídele cambios desde el chat, incluso desde el celular.</span></li>
+      <li><i>4</i><span><b>Varios equipos</b>Hasta 5 PC con el plan Agencia.</span></li>
+    </ul></div>
+  </div>
+</div></section>
+
+<!-- VIDEOS LARGOS -->
+<section id="largos"><div class="w">
+  <div class="ver"><div class="cap">Videos largos</div>
+  <h2 class="tit">Horas de grabación.<br><em>Minutos</em> que valen la pena.</h2>
+  <p class="lead">Estudio escucha tu video: voces, risas, explosiones, gritos, cambios de escena. Con eso encuentra lo mejor. Y de la misma grabación saca el corte que pidas: lo más intenso o solo lo gracioso.</p></div>
+  <div class="largo ver">
+    <div class="tarj mesa">
+      <h3>Tu partida</h3>
+      <div class="s">Ejemplo con una partida de 3 horas: arrastra para elegir qué tan intenso queda</div>
+      <div class="curva" id="curva">
+        <svg viewBox="0 0 1000 170" preserveAspectRatio="none"><defs><linearGradient id="gc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ee5d3b" stop-opacity=".45"/><stop offset="1" stop-color="#ee5d3b" stop-opacity="0"/></linearGradient></defs><path id="area" fill="url(#gc)"/><path id="linea" fill="none" stroke="#ff8a5f" stroke-width="2.2"/><line id="umbral" x1="0" x2="1000" stroke="rgba(255,255,255,.35)" stroke-dasharray="5 6" stroke-width="1"/></svg>
+      </div>
+      <div class="onda" id="onda"></div>
+      <div class="control"><span>Más completo</span><input type="range" id="intensidad" min="0" max="100" value="55" aria-label="Intensidad"><span>Más intenso</span></div>
+      <div class="resultado"><b id="dur">27:00</b><span id="dur-t">de video editado · se quitan silencios y esperas</span></div>
+    </div>
+    <div class="tarj carpeta">
+      <div class="cortes" data-grupo="corte"><button class="chip on" data-v="medios/largo-lomejor.mp4">Lo mejor</button><button class="chip" data-v="medios/largo-fallos.mp4">Fallos y risas</button></div>
+      <video src="medios/largo-lomejor.mp4" poster="medios/p-largo-lomejor.jpg" id="v-corte" muted loop playsinline preload="none" aria-hidden="true"></video>
+      <div class="corte-txt" id="corte-txt"><b>Far Cry 6 · Lo mejor</b><span>Los momentos de más acción de la grabación.</span></div>
+      <div class="arch">
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg>Far Cry 6 · Lo mejor<small>1:10</small></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg>Far Cry 6 · Fallos y risas<small>1:18</small></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Textos para subir<small>por red</small></div>
+      </div>
+    </div>
+  </div>
+  <div class="minis ver">
+    <div class="tarj mini"><b>Partes e historias</b><span>Corta el video en capítulos que terminan en pausa o fin de frase, con su rótulo.</span></div>
+    <div class="tarj mini"><b>Tu cámara en el short</b><span>La cámara de streamer va arriba o abajo y el juego se ve entero en vertical.</span></div>
+    <div class="tarj mini"><b>Siempre con la última palabra</b><span>Saca o mete momentos, mueve los cortes y ajusta la duración exacta a mano.</span></div>
+  </div>
+</div></section>
+
+<!-- SUBTÍTULOS -->
+<section id="subtitulos"><div class="w">
+  <div class="subs">
+    <div class="escen ver">
+      <div class="tel"><div class="pan"><span class="isla"></span><video src="medios/sub-fondo.mp4" poster="medios/p-sub-fondo.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+        <div class="capa-sub e-golpe" id="capa"></div></div></div>
+    </div>
+    <div class="ver">
+      <div class="cap">Subtítulos</div>
+      <h2 class="tit">Palabra por palabra.<br><em>Al ritmo</em> de la voz.</h2>
+      <p class="lead">Estudio escucha y escribe solo, en el idioma que elijas. Tú eliges el estilo, el lugar y el color, o los arrastras en la vista previa. Pruébalo:</p>
+      <div class="opciones">
+        <div class="grupo"><label>Estilo</label><div class="chips" data-grupo="estilo">
+          <button class="chip on" data-v="golpe">Golpe</button><button class="chip" data-v="caja">Caja</button><button class="chip" data-v="pop">Pop</button><button class="chip" data-v="karaoke">Karaoke</button><button class="chip" data-v="limpio">Limpio</button></div></div>
+        <div class="grupo"><label>Lugar</label><div class="chips" data-grupo="lugar">
+          <button class="chip" data-v="16">Arriba</button><button class="chip" data-v="44">Centro</button><button class="chip on" data-v="66">Abajo</button></div></div>
+        <div class="grupo"><label>Color</label><div class="chips" data-grupo="color">
+          <button class="color on" data-v="#ffd23f" style="background:#ffd23f" aria-label="Amarillo"></button><button class="color" data-v="#ff8a5f" style="background:#ff8a5f" aria-label="Coral"></button><button class="color" data-v="#5ce1a5" style="background:#5ce1a5" aria-label="Verde"></button><button class="color" data-v="#7cc7ff" style="background:#7cc7ff" aria-label="Azul"></button></div></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- VOCES -->
+<section id="voces"><div class="w">
+  <div class="ver"><div class="cap">Voces</div>
+  <h2 class="tit">Escribe la frase.<br>Estudio la <em>dice.</em></h2>
+  <p class="lead">Narra con voces naturales en español, con el tono que pidas: suave, natural, enérgico o agresivo. Estas dos frases las dijo Estudio, tal cual:</p></div>
+  <div class="voces ver">
+    <div class="tarj voz" data-voz="medios/voz-clientes.m4a" data-t="Tus clientes escriben a las dos de la mañana. Y si nadie responde, le compran a otro." data-p="[[0.07,0.28],[0.28,0.94],[0.94,1.55],[1.55,1.63],[1.63,1.88],[1.88,2.13],[2.13,2.29],[2.29,2.44],[2.44,3.37],[3.37,3.45],[3.41,3.56],[3.56,3.93],[3.93,4.69],[4.69,4.87],[4.87,5.32],[5.32,5.4],[5.39,5.86]]">
+      <div class="voz-cab"><button class="play" aria-label="Escuchar"><svg viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z"/></svg></button><div><b>Para un anuncio</b><span>Tono natural · 6 s</span></div><div class="barras"></div></div>
+      <div class="frase"></div>
+    </div>
+    <div class="tarj voz" data-voz="medios/voz-pago.m4a" data-t="Me llegó un pago de ciento ochenta y nueve mil pesos. Casi despacho la chaqueta, pero Contesa vio que no aparecía en mi cuenta." data-p="[[0.13,0.21],[0.21,0.45],[0.45,0.56],[0.56,0.8],[0.8,0.92],[0.92,1.36],[1.36,1.88],[1.88,1.96],[1.95,2.32],[2.32,2.55],[2.55,2.89],[2.89,3.21],[3.21,3.92],[3.92,4.15],[4.15,4.99],[4.99,5.27],[5.27,5.74],[5.74,5.97],[5.97,6.18],[6.18,6.29],[6.29,6.87],[6.87,7],[7,7.17],[7.17,7.46]]">
+      <div class="voz-cab"><button class="play" aria-label="Escuchar"><svg viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z"/></svg></button><div><b>Para contar una historia</b><span>Tono natural · 8 s</span></div><div class="barras"></div></div>
+      <div class="frase"></div>
+    </div>
+  </div>
+  <div class="acentos ver"><span><b>Valeria</b> · México</span><span><b>Camila</b> · Colombia</span><span><b>Andrés</b> · México</span><span><b>Nico</b> · México</span><span><b>Lucía</b> · España</span><span><b>Tu voz</b> · con 15 segundos de muestra</span></div>
+  <div class="tarj doblaje ver">
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5h9M8.5 5c0 5-2.5 8-5 9.5M6 10c1.5 2 3.5 3.5 6 4.5M14 19l3.5-9 3.5 9M15 16.5h5"/></svg><b>Dobla un video entero</b><span>Lo traduce frase por frase y lo dice con otra voz, sobre el sonido original.</span></div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><b>Graba y cambia tu voz</b><span>Graba la escena con tu ritmo y Estudio la pasa a otra voz, con el mismo ritmo.</span></div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg><b>Revisa lo que dijo</b><span>Si una frase no se entiende bien, la vuelve a decir sola antes de entregártela.</span></div>
+  </div>
+</div></section>
+
+<!-- SIN CÁMARA -->
+<section id="sin-camara"><div class="w">
+  <div class="ver centro"><div class="cap">Sin cámara</div>
+  <h2 class="tit">Historias y animaciones<br>desde un <em>guion.</em></h2>
+  <p class="lead">Escribe lo que quieres contar y Estudio lo arma: personajes, escenas, gráficos, música y voz. Ningún cuadro de estos se grabó con cámara.</p></div>
+  <div class="sincam ver">
+    <div class="tarj"><video src="medios/cuatro-intentos.mp4" poster="medios/p-cuatro-intentos.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><div class="txt"><b>Gráficos en 3D</b><span>Datos y recorridos que se dibujan solos, con cámara y luces.</span></div></div>
+    <div class="tarj"><video src="medios/codigo.mp4" poster="medios/p-codigo.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><div class="txt"><b>Animación con movimiento exacto</b><span>Textos, gráficas y escenas que se mueven al segundo justo.</span></div></div>
+  </div>
+</div></section>
+
+<!-- HECHO CON ESTUDIO -->
+<section id="galeria"><div class="w">
+  <div class="ver"><div class="cap">Ganchos</div>
+  <h2 class="tit">El primer segundo<br><em>decide.</em></h2>
+  <p class="lead">Si el inicio no engancha, nadie ve el resto. Por eso Estudio te propone más de un comienzo para el mismo video.</p></div>
+  <div class="gal ver">
+    <div class="tarj ab">
+      <div class="ab-tit"><b>Mismo anuncio,<br>dos ganchos.</b><span>Publica los dos y quédate con el que más gente vea hasta el final.</span></div>
+      <div class="lado"><div class="mini-tel"><em>A</em><video src="medios/gancho-a.mp4" poster="medios/p-gancho-a.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></div><span>«Se fue la luz…»</span></div>
+      <div class="lado"><div class="mini-tel"><em>B</em><video src="medios/gancho-b.mp4" poster="medios/p-gancho-b.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></div><span>«¿Quién le responde…?»</span></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- LA APP -->
+<section id="app"><div class="w">
+  <div class="ver centro"><div class="cap">La app</div>
+  <h2 class="tit">Automático cuando quieres.<br><em>A mano</em> cuando lo necesitas.</h2>
+  <p class="lead">Un editor completo con línea de tiempo, efectos, color, audio y clips. Lo automático hace casi todo y tú pules el resto.</p></div>
+  <div class="app-tabs ver" data-grupo="app">
+    <button class="chip on" data-v="medios/app-editor.jpg">Editor</button><button class="chip" data-v="medios/app-largos.jpg">Videos largos</button><button class="chip" data-v="medios/app-clips.jpg">Clips</button><button class="chip" data-v="medios/app-publicar.jpg">Publicar</button><button class="chip" data-v="medios/app-inicio.jpg">Inicio</button>
+  </div>
+  <div class="ver" style="position:relative"><div class="halo"></div><div class="ventana"><img id="captura" src="medios/app-editor.jpg" alt="Editor de Contesa Estudio con un clip elegido y la biblioteca de efectos" width="1920" height="1032"></div></div>
+  <p class="pie-app">También le puedes hablar: «hazme tres shorts de este video» y lo hace.</p>
+</div></section>
+
+<!-- HERRAMIENTAS -->
+<section id="herramientas"><div class="w">
+  <div class="ver"><div class="cap">Herramientas</div>
+  <h2 class="tit">Todo lo que necesitas.<br><em>En un solo lugar.</em></h2>
+  <p class="lead">Sin saltar entre cinco programas. Esto viene adentro:</p></div>
+  <div class="caja-h ver">
+    <div class="tarj h"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l1.8 4.6L18.5 9l-4.7 1.4L12 15l-1.8-4.6L5.5 9l4.7-1.4z"/><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg><b>Efectos</b><span>Brillo, ondas, mosaico, grano y más, con su intensidad.</span><em>120</em></div>
+    <div class="tarj h"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="8" height="12" rx="1.5"/><rect x="13" y="6" width="8" height="12" rx="1.5"/><path d="M11 12h2"/></svg><b>Transiciones</b><span>Para pasar de una escena a otra sin cortes bruscos.</span><em>121</em></div>
+    <div class="tarj h"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="10" r="5"/><circle cx="15" cy="10" r="5"/><circle cx="12" cy="15" r="5"/></svg><b>Filtros y color</b><span>Filtros listos y corrección con curvas, forma de onda y antes y después.</span><em>80</em></div>
+    <div class="tarj h"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 3H7a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V9z"/><path d="M14 3v6h6"/><circle cx="10" cy="14" r="1"/><path d="M13 16c-.8.7-2.2.7-3 0"/></svg><b>Stickers y capas</b><span>Stickers, capas animadas y fondos para tus escenas.</span><em>398</em></div>
+    <div class="tarj h"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 12h3l3-7 4 14 3-7h5"/></svg><b>Escucha y transcribe</b><span>Convierte lo hablado en texto editable, con sus tiempos.</span></div>
+    <div class="tarj h"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18"/></svg><b>Recorte y croma</b><span>Máscaras, pantalla verde con gotero y recorte de personas.</span></div>
+    <div class="tarj h"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 16v-4M8 18V8M12 20V4M16 18V8M20 16v-4"/></svg><b>Audio</b><span>Mezcla por pistas, música al pulso, menos ruido y volumen parejo para redes.</span></div>
+    <div class="tarj h"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 13l3-3 2 2 4-4"/></svg><b>Portadas</b><span>Elige el mejor cuadro, con la cara y el texto en su lugar.</span></div>
+    <div class="tarj h"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg><b>Tendencias</b><span>Lo más visto en YouTube de tu tema y qué te sugiere hacer.</span></div>
+    <div class="tarj h"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg><b>Automático</b><span>Vigila tus grabaciones y trabaja desde el ícono junto al reloj.</span></div>
+    <div class="tarj h"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><b>Háblale</b><span>«Haz tres shorts de este video» y lo hace. Con Ctrl + Espacio.</span></div>
+    <div class="tarj h"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 20V9"/></svg><b>Exporta a tu medida</b><span>Vertical, horizontal o cuadrado. De 720p a 4K, con la tarjeta de video.</span></div>
+  </div>
+</div></section>
+
+<!-- CONEXIONES -->
+<section id="conexiones"><div class="w">
+  <div class="con">
+    <div class="mapa ver" id="mapa">
+      <svg class="lineas" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
+      <div class="nodo centro-n" style="left:50%;top:50%"><span class="n"><i></i></span>Contesa Estudio</div>
+      <div class="nodo" data-n="claude" style="left:50%;top:10%"><span class="n" style="color:#d97757">Cl</span>Claude</div>
+      <div class="nodo" data-n="mcp" style="left:84%;top:28%"><span class="n">MCP</span>Otras apps de IA</div>
+      <div class="nodo" data-n="redes" style="left:88%;top:68%"><span class="n">4</span>Tus redes</div>
+      <div class="nodo" data-n="contesa" style="left:50%;top:90%"><span class="n" style="color:var(--accent-2)">C</span>Tu tienda Contesa</div>
+      <div class="nodo" data-n="youtube" style="left:12%;top:68%"><span class="n" style="color:#ff6b6b">YT</span>YouTube Studio</div>
+      <div class="nodo" data-n="local" style="left:16%;top:28%"><span class="n">PC</span>Modelos en tu PC</div>
+    </div>
+    <div class="ver">
+      <div class="cap">Conexiones</div>
+      <h2 class="tit">Se lleva bien con<br><em>tus otras herramientas.</em></h2>
+      <p class="lead" style="margin-bottom:24px">Estudio no te encierra: habla con las apps de IA que ya usas y con las cuentas donde publicas.</p>
+      <div class="con-lista">
+        <div class="con-f" data-n="claude"><b>Claude</b><small class="v">Listo</small><span>Conecta Estudio con Claude y pídele desde el chat que corte, cambie textos o exporte. También desde el celular, con una conexión segura que se apaga sola.</span></div>
+        <div class="con-f" data-n="mcp"><b>Otras apps de IA</b><small class="v">Listo</small><span>Estudio habla MCP, el estándar abierto para conectar apps de IA. La que lo entienda puede usar sus herramientas.</span></div>
+        <div class="con-f" data-n="local"><b>Modelos en tu PC</b><small class="v">Listo</small><span>Escuchar, voces, traducir y escribir textos corren en tu equipo: sin pagar por minuto y sin subir tus videos.</span></div>
+        <div class="con-f" data-n="youtube"><b>YouTube</b><small>Con tu clave</small><span>Tendencias de tu tema y retención de tus videos, con tu propia clave de YouTube.</span></div>
+        <div class="con-f" data-n="redes"><b>Instagram, Facebook, YouTube y TikTok</b><small class="v">Listo</small><span>Conectas cada cuenta una vez y publicas desde la pestaña Publicar.</span></div>
+        <div class="con-f" data-n="contesa"><b>Contesa</b><small class="v">Listo</small><span>Si vendes con Contesa, tu catálogo y tu tienda entran en tus videos.</span></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- POR QUÉ -->
+<section id="porque"><div class="w">
+  <div class="ver centro"><div class="cap">Por qué Estudio</div>
+  <h2 class="tit">Hecho para quien<br><em>no tiene tiempo de editar.</em></h2>
+  <p class="lead">Hay editores muy buenos y herramientas de recorte en la nube. Estudio junta lo mejor de los dos, y suma lo que ninguno hace por ti.</p></div>
+  <div class="razones ver">
+    <div class="tarj razon"><b>Tus videos no salen de tu PC.</b><span>Horas de grabación no se suben a ningún lado para editarse. Más rápido y más privado.</span></div>
+    <div class="tarj razon"><b>Sin créditos por minuto.</b><span>Lo pesado corre en tu equipo. Editas una hora o cien con el mismo plan.</span></div>
+    <div class="tarj razon"><b>En español de verdad.</b><span>Voces latinas, subtítulos que entienden cómo hablamos y precios en pesos.</span></div>
+  </div>
+  <div class="tabla ver"><div class="tw"><table>
+    <tr><th></th><th class="yo">Contesa Estudio</th><th>Editores tradicionales</th><th>Recorte en la nube</th></tr>
+    <tr><td>Videos largos a lo mejor</td><td class="yo">Solo, y tú ajustas</td><td>A mano</td><td>Sí, subiendo el video</td></tr>
+    <tr><td>Dónde se procesa</td><td class="yo">En tu PC</td><td>En tu PC</td><td>En sus servidores</td></tr>
+    <tr><td>Cobro</td><td class="yo">Plan fijo en pesos</td><td>Licencia o plan</td><td>Suele ser por minutos o créditos</td></tr>
+    <tr><td>Editor completo</td><td class="yo">Línea de tiempo, efectos, color, audio</td><td>Sí</td><td>Suele ser básico</td></tr>
+    <tr><td>Voces, doblaje y cambio de voz</td><td class="yo">Incluido, en español</td><td>Pocas veces</td><td>A veces, como extra</td></tr>
+    <tr><td>Programar en tus redes</td><td class="yo">Incluido</td><td>No</td><td>A veces</td></tr>
+    <tr><td>Conexión con Claude y apps de IA</td><td class="yo">Incluida</td><td>Pocas veces</td><td>Pocas veces</td></tr>
+    <tr><td>Tu marca, sin logos ajenos</td><td class="yo">En todos los planes pagos</td><td>Sí</td><td>Según el plan</td></tr>
+  </table></div></div>
+  <p class="nota-t">Comparación general por tipo de herramienta, no contra un producto en particular. Cada una tiene sus fuertes.</p>
+</div></section>
+
+<!-- PUBLICAR -->
+<section id="publicar"><div class="w">
+  <div class="ver"><div class="cap">Publicar</div>
+  <h2 class="tit">Elige el día y la hora.<br><em>Lo demás pasa solo.</em></h2>
+  <p class="lead">Estudio escribe el título, la descripción y los hashtags que pide cada red, y deja la semana programada desde una sola pestaña.</p></div>
+  <div class="publicar ver">
+    <div class="tarj semana">
+      <b>Tu semana</b>
+      <div class="dias">
+        <div class="dia"><small>LUN</small><div class="post ig">Reel · 7:00 p. m.</div><div class="post fb">Video · 7:00 p. m.</div></div>
+        <div class="dia"><small>MAR</small><div class="post tt">TikTok · 12:30 p. m.</div></div>
+        <div class="dia"><small>MIÉ</small><div class="post ig">Reel · 6:00 p. m.</div><div class="post yt">Short · 6:00 p. m.</div></div>
+        <div class="dia"><small>JUE</small></div>
+        <div class="dia"><small>VIE</small><div class="post ig">Reel · 8:00 p. m.</div><div class="post fb">Video · 8:00 p. m.</div><div class="post tt">TikTok · 8:00 p. m.</div></div>
+        <div class="dia"><small>SÁB</small><div class="post yt">Video · 10:00 a. m.</div></div>
+        <div class="dia"><small>DOM</small></div>
+      </div>
+    </div>
+    <div class="tarj redes">
+      <div class="red-f"><div class="red-i" style="background:linear-gradient(135deg,#feda75,#d62976,#4f5bd5)">IG</div><div><b>Instagram <span class="est v">Automático</span></b><span>Se publica a la hora, aunque tu PC esté apagado.</span></div></div>
+      <div class="red-f"><div class="red-i" style="background:#1877f2">f</div><div><b>Facebook <span class="est v">Automático</span></b><span>Igual: a la hora, con el PC apagado.</span></div></div>
+      <div class="red-f"><div class="red-i" style="background:#ff0000">▶</div><div><b>YouTube <span class="est a">Lo deja listo</span></b><span>Título, descripción y capítulos listos para pegar al subir.</span></div></div>
+      <div class="red-f"><div class="red-i" style="background:#111;border:1px solid var(--line-2)">TT</div><div><b>TikTok <span class="est a">A tus borradores</span></b><span>Llega a tu TikTok y lo publicas con un toque.</span></div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- TU MARCA -->
+<section id="marca"><div class="w">
+  <div class="tumarca">
+    <div class="ver">
+      <div class="cap">Tu marca</div>
+      <h2 class="tit">Tus videos llevan tu marca.<br><em>Nunca la nuestra.</em></h2>
+      <p class="lead" style="margin-bottom:0">Logo, colores, letras y llamado a la acción de tu negocio en cada video. Si manejas varios clientes, cada uno con la suya. Toca una:</p>
+      <div class="marcas-op" data-grupo="marca">
+        <button class="m-op on" data-v="#ff8a5f|Café Luna|PIDE EL TUYO HOY|#2a120a"><i style="background:#ff8a5f"></i>Café Luna</button>
+        <button class="m-op" data-v="#5ce1a5|Verde Vivo|ESCRÍBENOS AHORA|#0b2b1d"><i style="background:#5ce1a5"></i>Verde Vivo</button>
+        <button class="m-op" data-v="#7cc7ff|Moda Norte|COMPRA LA COLECCIÓN|#0c1f33"><i style="background:#7cc7ff"></i>Moda Norte</button>
+      </div>
+    </div>
+    <div class="vista-m ver">
+      <div class="tel"><div class="pan"><span class="isla"></span><div class="lienzo-m" id="m-fondo"></div>
+        <div class="logo-m" id="m-logo"><i></i><span>Café Luna</span></div>
+        <div class="sub-m">Pedidos <em id="m-sub">hasta medianoche</em></div>
+        <div class="cta-m" id="m-cta">PIDE EL TUYO HOY</div></div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- TIENDA -->
+<section id="tienda"><div class="w">
+  <div class="tarj tienda ver">
+    <div>
+      <div class="cap">Si vendes con Contesa</div>
+      <h2 class="tit">Tu tienda entra sola<br>en el <em>video.</em></h2>
+      <p class="lead" style="margin-bottom:28px">Estudio toma tu catálogo de Contesa, con productos, precios y fotos, y lo pone en el video. Si no usas Contesa, funciona igual de bien.</p>
+      <a class="btn sec" href="https://contesa.com.co">Conocer Contesa</a>
+    </div>
+    <div class="tel"><div class="pan"><span class="isla"></span><img src="medios/tienda.jpg" alt="Catálogo de una tienda Contesa dentro de un video" style="width:100%;height:100%;object-fit:cover"></div></div>
+  </div>
+</div></section>
+
+<!-- CALCULADORA -->
+<section id="tiempo"><div class="w">
+  <div class="ver centro"><div class="cap">Tu tiempo</div>
+  <h2 class="tit">¿Cuánto tiempo<br><em>te devuelve?</em></h2>
+  <p class="lead">Mueve los números según tu caso.</p></div>
+  <div class="tarj calc ver">
+    <div class="izq">
+      <div class="campo-c"><label for="c-grabas">Horas que grabas a la semana <b id="c-h">6 h</b></label><input type="range" id="c-grabas" min="1" max="30" value="6"></div>
+      <div class="campo-c"><label for="c-editas">Horas que hoy te toma editar cada hora grabada <b id="c-e">3 h</b></label><input type="range" id="c-editas" min="1" max="8" value="3"></div>
+      <div class="barras-c">
+        <div class="barra-c"><span>A mano</span><div class="t"><i id="c-b1" style="background:var(--text-3)"></i></div><b id="c-v1"></b></div>
+        <div class="barra-c"><span>Con Estudio</span><div class="t"><i id="c-b2" style="background:var(--accent)"></i></div><b id="c-v2"></b></div>
+      </div>
+    </div>
+    <div class="der">
+      <div class="gran" id="c-total">69 <small>horas al mes</small></div>
+      <p>que puedes usar para grabar más, vender o descansar.</p>
+      <a class="btn pri" href="#descargar" style="align-self:flex-start">Recuperar mi tiempo</a>
+      <div class="supuestos">Cálculo de referencia: Estudio procesa una hora de grabación en unos 6 minutos en un PC con RTX 5060 Ti (lo medimos) y contamos 20 minutos tuyos para revisar cada hora. En tu equipo puede variar.</div>
+    </div>
+  </div>
+</div></section>
+
+<!-- BETA -->
+<section id="beta"><div class="w">
+  <div class="ver centro"><div class="cap">Beta abierta</div>
+  <h2 class="tit">Te contamos todo,<br><em>también</em> lo que falta.</h2>
+  <p class="lead">Estudio está en beta: funciona y se usa todos los días, y cada semana mejora. Esto es lo que hay hoy y lo que viene.</p></div>
+  <div class="beta-c ver">
+    <div class="tarj ya"><h3>Ya funciona</h3><ul>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg><span><b>Videos largos a lo mejor</b>, con partes, historias y shorts</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg><span><b>Subtítulos</b> en 5 estilos y en otros idiomas</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg><span><b>Voces, doblaje</b> y cambio de voz</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg><span><b>Editor</b> con efectos, color, audio y clips</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg><span><b>Instagram y Facebook</b> programados y automáticos</span></li>
+    </ul></div>
+    <div class="tarj viene"><h3>En camino</h3><ul>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg><span><b>TikTok directo</b>, sin pasar por borradores: esperando la aprobación de TikTok</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg><span><b>YouTube automático</b>: esperando la verificación de Google</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg><span><b>Biblioteca en línea</b> de música, plantillas y stickers</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg><span><b>Lo que nos pidas</b>: en la beta, tus ideas deciden lo que sigue</span></li>
+    </ul></div>
+  </div>
+</div></section>
+
+<!-- PRECIOS -->
+<section id="precios"><div class="w centro">
+  <div class="ver"><div class="cap">Precios</div>
+  <h2 class="tit">Empieza gratis.<br>Paga cuando te <em>enamore.</em></h2>
+  <p class="lead">7 días con todo abierto. Después, el plan que vaya con tu ritmo. Cancela cuando quieras: tus proyectos se quedan contigo.</p>
+  <div class="periodo" data-grupo="periodo"><button class="on" data-v="mes">Mensual</button><button data-v="anio">Anual <small>2 meses gratis</small></button></div></div>
+  <div class="precios ver">
+    <div class="tarj plan"><h3>Creador</h3><div class="para">Para empezar a subir seguido</div>
+      <div class="precio" data-mes="39.900" data-anio="399.000">$39.900<span> /mes</span></div><div class="equiv"></div>
+      <ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg>Guiones, Shorts y editor</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg>Voces y subtítulos</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg>Exporta en 1080p, sin marca de agua</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg>30 publicaciones al mes</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg>1 equipo · 1 marca</li></ul>
+      <a class="btn sec" href="#descargar">Elegir Creador</a></div>
+    <div class="tarj plan hi"><h3>Pro</h3><div class="para">Para creadores y negocios en serio</div>
+      <div class="precio" data-mes="79.900" data-anio="799.000">$79.900<span> /mes</span></div><div class="equiv"></div>
+      <ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg>Todo lo de Creador</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg>Videos largos, partes e historias</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg>Doblaje, traducción y cambio de voz</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg>Textos para subir escritos por Estudio</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg>Exporta hasta 4K</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg>2 equipos · 5 marcas</li></ul>
+      <a class="btn pri" href="#descargar">Elegir Pro</a></div>
+    <div class="tarj plan"><h3>Agencia</h3><div class="para">Para quien hace videos de clientes</div>
+      <div class="precio" data-mes="159.900" data-anio="1.599.000">$159.900<span> /mes</span></div><div class="equiv"></div>
+      <ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg>Todo lo de Pro</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg>Marcas de clientes sin límite</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg>5 equipos</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5 9-10"/></svg>Soporte prioritario</li></ul>
+      <a class="btn sec" href="#descargar">Elegir Agencia</a></div>
+  </div>
+  <p class="prueba">Los videos de la prueba gratis llevan una marca pequeña de Estudio. Al pagar, desaparece.</p>
+  <div class="tarj combo"><span><b>¿Ya vendes con Contesa?</b> Con Contesa Pro o Negocio, Estudio te sale 20 % más barato.</span><a class="btn sec peq" href="https://contesa.com.co">Ver cómo</a></div>
+</div></section>
+
+<!-- DESCARGA -->
+<section id="descargar"><div class="w">
+  <div class="ver centro"><div class="cap">Descargar</div>
+  <h2 class="tit">Descárgalo y <em>pruébalo hoy.</em></h2>
+  <p class="lead">El instalador pesa unos 340 MB. Voces y lo demás se bajan después, solo lo que vayas a usar.</p></div>
+  <div class="desc ver">
+    <div class="tarj">
+      <h3>Contesa Estudio para Windows</h3>
+      <p>Beta · 343 MB</p>
+      <a class="btn pri" href="https://aura-server-oisv.onrender.com/download/estudio">Descargar gratis</a>
+      <div class="req" style="margin-top:26px">
+        <div><span>Sistema</span><span style="color:var(--text)">Windows 10 u 11 de 64 bits</span></div>
+        <div><span>Memoria</span><span style="color:var(--text)">16 GB (mejor 32 GB)</span></div>
+        <div><span>Tarjeta de video</span><span style="color:var(--text)">NVIDIA de 8 GB para ir rápido. Sin ella funciona, más lento.</span></div>
+        <div><span>Espacio</span><span style="color:var(--text)">2 GB para empezar, hasta 25 GB con todo</span></div>
+      </div>
+    </div>
+    <div class="tarj">
+      <h3>Cómo instalar</h3>
+      <p>Cuatro pasos.</p>
+      <ol class="pasos">
+        <li><span>Abre el archivo que bajaste. <b>Si Windows dice «Windows protegió su PC»</b>, toca «Más información» y «Ejecutar de todas formas». Pasa con programas nuevos.</span></li>
+        <li><span>Se instala solo, sin pedir permisos de administrador.</span></li>
+        <li><span>Al abrir, empieza tu prueba de 7 días.</span></li>
+        <li><span>Cuando uses voces o videos largos, Estudio te ofrece bajar lo que haga falta.</span></li>
+      </ol>
+    </div>
+  </div>
+</div></section>
+
+<!-- PREGUNTAS -->
+<section id="preguntas"><div class="w">
+  <div class="ver centro"><h2 class="tit">Preguntas</h2></div>
+  <div class="faq ver">
+    <details><summary>¿Mis videos se suben a algún lado?</summary><p>No. Se editan y se guardan en tu PC. Solo pasa por nuestro servidor lo que tú mandas a publicar, y solo para subirlo a tus redes.</p></details>
+    <details><summary>¿Necesito internet?</summary><p>Para activar Estudio, bajar paquetes y publicar. Para editar no: funciona hasta 7 días sin conexión.</p></details>
+    <details><summary>¿Funciona sin tarjeta NVIDIA?</summary><p>Sí, pero lo pesado (escuchar, voces, exportar) tarda más. La prueba gratis es la mejor forma de saber cómo va en tu equipo.</p></details>
+    <details><summary>¿Qué pasa si dejo de pagar?</summary><p>No se borra nada. Puedes abrir y editar tus proyectos y exportar en 720p con la marca de Estudio. Al renovar vuelve todo.</p></details>
+    <details><summary>¿Puedo usar cualquier música?</summary><p>Usa música libre de derechos, la que trae Estudio o la que tengas con licencia. Estudio no esconde música con derechos de las redes.</p></details>
+    <details><summary>¿Qué incluye la prueba gratis?</summary><p>Todo, durante 7 días y sin tarjeta. Lo único distinto es que los videos que exportes llevan una marca pequeña de Estudio.</p></details>
+    <details><summary>¿Cómo pago y cómo cancelo?</summary><p>Pagas en pesos, mes a mes o el año completo. Si cancelas, no se vuelve a cobrar y sigues con tu plan hasta el final del periodo pagado.</p></details>
+    <details><summary>¿Hay versión para Mac o celular?</summary><p>Por ahora solo Windows.</p></details>
+  </div>
+</div></section>
+
+<div class="final"><div class="w ver">
+  <h2 class="tit">Tu próximo video<br><em>ya está grabado.</em></h2>
+  <p class="lead" style="margin:0 auto 32px">Está en esa carpeta de grabaciones que no has tenido tiempo de editar.</p>
+  <a class="btn pri" href="#descargar">Probar 7 días gratis</a>
+</div></div>
+
+</main>
+
+<footer><div class="w">
+  <span>Contesa Estudio · de los creadores de Contesa</span>
+  <div class="l"><a href="terminos.html">Términos</a><a href="privacidad.html">Privacidad</a><a href="mailto:contesa.soporte@gmail.com">Soporte</a><a href="https://contesa.com.co">Contesa</a></div>
+</div></footer>
+
+<div class="fija" id="fija"><span><b>Contesa Estudio</b>7 días gratis, sin tarjeta</span><a class="btn pri peq" href="#descargar">Probar gratis</a></div>
+
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)]
+  const calmo = matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  // Aparecer al bajar
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('si'); io.unobserve(e.target) } }), { threshold: .12 })
+  $$('.ver').forEach((el) => io.observe(el))
+
+  // Videos: solo corren cuando se ven
+  const iv = new IntersectionObserver((es) => es.forEach((e) => { const v = e.target; if (e.isIntersecting && !calmo) v.play().catch(() => {}); else v.pause() }), { threshold: .05 })
+  $$('video').forEach((v) => { if (calmo) { v.removeAttribute('autoplay'); v.pause() } iv.observe(v) })
+
+  // Sonido del teléfono central
+  $$('[data-sonido]').forEach((b) => b.addEventListener('click', () => {
+    const v = b.parentElement.querySelector('video'); v.muted = !v.muted; if (!v.muted) { v.currentTime = 0; v.play() }
+    b.innerHTML = v.muted ? '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M23 9l-6 6M17 9l6 6"/></svg>' : '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>'
+  }))
+
+  // Curva de interés (ilustrativa)
+  const N = 160, pts = []
+  let s = 7; const rnd = () => (s = (s * 9301 + 49297) % 233280) / 233280
+  for (let i = 0; i < N; i++) { const x = i / (N - 1); pts.push(.18 + .1 * Math.sin(x * 9) + .08 * Math.sin(x * 23 + 1) + .05 * rnd()) }
+  const picos = [[.12, .5, 'Risa', '#ffd23f'], [.27, .62, 'Explosión', '#ff8a5f'], [.41, .38, 'Choque', '#7cc7ff'], [.55, .7, 'Público', '#5ce1a5'], [.68, .45, 'Grito', '#ff86ad'], [.83, .66, 'Explosión', '#ff8a5f'], [.93, .4, 'Risa', '#ffd23f'], [.2, .32, 'Voz', '#b5a99f'], [.75, .3, 'Voz', '#b5a99f']]
+  picos.forEach(([c, h]) => { for (let i = 0; i < N; i++) { const d = (i / (N - 1) - c) / .028; pts[i] += h * Math.exp(-d * d) } })
+  const top = Math.max(...pts), y = (v) => 165 - (v / top) * 135
+  const d = pts.map((v, i) => `${i ? 'L' : 'M'}${(i / (N - 1) * 1000).toFixed(1)},${y(v).toFixed(1)}`).join('')
+  $('#linea').setAttribute('d', d); $('#area').setAttribute('d', d + 'L1000,170L0,170Z')
+  const curva = $('#curva')
+  picos.slice(0, 7).forEach(([c, , n, col]) => { const m = document.createElement('span'); m.className = 'momento'; m.style.left = c * 100 + '%'; m.innerHTML = `<i style="background:${col}"></i>${n}`; m.dataset.c = c; curva.appendChild(m) })
+  const onda = $('#onda'); for (let i = 0; i < 90; i++) { const b = document.createElement('i'); b.style.height = (20 + 80 * pts[Math.floor(i / 90 * N)] / top) + '%'; onda.appendChild(b) }
+  const rango = $('#intensidad')
+  function intensidad() {
+    const v = +rango.value; rango.style.setProperty('--v', v + '%')
+    const u = .4 + v / 100 * .42, umbral = u * top
+    $('#umbral').setAttribute('y1', y(umbral)); $('#umbral').setAttribute('y2', y(umbral))
+    $$('.tramo', curva).forEach((t) => t.remove())
+    let ini = -1, total = 0, n = 0
+    for (let i = 0; i <= N; i++) {
+      const sobre = i < N && pts[i] >= umbral
+      if (sobre && ini < 0) ini = i
+      if (!sobre && ini >= 0) { const t = document.createElement('div'); t.className = 'tramo'; t.style.left = (ini / N * 100) + '%'; t.style.width = ((i - ini) / N * 100) + '%'; curva.insertBefore(t, curva.firstChild); total += i - ini; n++; ini = -1 }
+    }
+    $$('.momento', curva).forEach((m) => { const i = Math.round(m.dataset.c * (N - 1)); m.style.opacity = pts[i] >= umbral ? 1 : .25 })
+    $$('i', onda).forEach((b, k) => b.classList.toggle('on', pts[Math.floor(k / 90 * N)] >= umbral))
+    const sec = Math.round((total / N * 180 - Math.floor(total / N * 180)) * 60)
+    const mins = Math.floor(total / N * 180); $('#dur').textContent = mins >= 60 ? `${Math.floor(mins / 60)} h ${String(mins % 60).padStart(2, '0')} min` : `${mins}:${String(sec).padStart(2, '0')}`
+    $('#dur-t').textContent = `de video editado · ${n} ${n === 1 ? 'tramo' : 'tramos'} · se quitan silencios y esperas`
+  }
+  rango.addEventListener('input', intensidad); intensidad()
+
+  // Subtítulos de prueba
+  const capa = $('#capa'), frase = ['Esto', 'estuvo', 'demasiado', 'bueno', 'no', 'lo', 'puedo', 'creer']
+  let estilo = 'golpe', k = 0
+  function dibujar() {
+    const grupo = estilo === 'limpio' ? frase : frase.slice(Math.floor(k / 3) * 3, Math.floor(k / 3) * 3 + 3)
+    const base = estilo === 'limpio' ? 0 : Math.floor(k / 3) * 3
+    capa.className = 'capa-sub e-' + estilo
+    capa.innerHTML = grupo.map((p, i) => `<span class="pal${base + i <= k ? ' vis' : ''}${base + i === k ? ' on' : ''}">${p}</span>`).join(' ')
+  }
+  dibujar(); if (!calmo) setInterval(() => { k = (k + 1) % frase.length; dibujar() }, 420)
+  function grupo(nombre, fn) { const bs = $$(`[data-grupo="${nombre}"] > *`); bs.forEach((b) => { b.setAttribute('aria-pressed', b.classList.contains('on')); b.addEventListener('click', () => { bs.forEach((x) => { x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', x === b) }); fn(b.dataset.v) }) }) }
+  grupo('estilo', (v) => { estilo = v; dibujar() })
+  grupo('lugar', (v) => { capa.style.top = v + '%' }); capa.style.top = '66%'
+  grupo('color', (v) => capa.style.setProperty('--c', v))
+
+  // Voces con su texto iluminado palabra por palabra
+  $$('.voz').forEach((card) => {
+    const palabras = card.dataset.t.split(' '), tiempos = JSON.parse(card.dataset.p), frase = $('.frase', card), barras = $('.barras', card)
+    frase.innerHTML = palabras.map((p) => `<span class="pal">${p}</span>`).join(' ')
+    for (let i = 0; i < 26; i++) barras.appendChild(document.createElement('i'))
+    const audio = new Audio(card.dataset.voz); let raf = 0
+    const pal = $$('.pal', frase), bs = $$('i', barras)
+    function paso() {
+      const t = audio.currentTime
+      pal.forEach((p, i) => p.classList.toggle('dicha', tiempos[i] ? t >= tiempos[i][0] : t > 0))
+      bs.forEach((b) => { b.style.height = audio.paused ? '30%' : (25 + Math.random() * 75) + '%' })
+      if (!audio.paused) raf = requestAnimationFrame(paso)
+    }
+    $('.play', card).addEventListener('click', () => {
+      $$('.voz').forEach((o) => { if (o !== card && o._a) { o._a.pause(); o.classList.remove('suena') } })
+      if (audio.paused) { if (audio.ended || audio.currentTime > 0.1 && pal.every((p) => p.classList.contains('dicha'))) audio.currentTime = 0; audio.play(); card.classList.add('suena'); paso() }
+      else { audio.pause(); card.classList.remove('suena') }
+    })
+    audio.addEventListener('ended', () => { card.classList.remove('suena'); cancelAnimationFrame(raf); bs.forEach((b) => b.style.height = '30%') })
+    card._a = audio
+  })
+
+  // Capturas de la app
+  const img = $('#captura')
+  const altos = { 'medios/app-editor.jpg': 'Editor de Contesa Estudio con un clip elegido y la biblioteca de efectos', 'medios/app-largos.jpg': 'Videos largos: una partida de 11 minutos recortada a 3:57, con sus shorts y el análisis', 'medios/app-clips.jpg': 'Clips de una partida, cada uno con su puntaje, listos para elegir', 'medios/app-publicar.jpg': 'Semana de publicaciones programadas en Instagram, Facebook, YouTube y TikTok', 'medios/app-inicio.jpg': 'Inicio de Contesa Estudio: caminos, proyectos recientes y plantillas' }
+  grupo('app', (v) => { img.alt = altos[v]; img.style.opacity = 0; setTimeout(() => { img.src = v; img.onload = () => img.style.opacity = 1 }, 250) })
+
+  // Tu marca
+  grupo('marca', (v) => {
+    const [col, nombre, cta, tinta] = v.split('|')
+    $('#m-logo i').style.background = col; $('#m-logo span').textContent = nombre
+    $('#m-cta').style.background = col; $('#m-cta').style.color = tinta; $('#m-cta').textContent = cta
+    $('#m-sub').style.color = col; $('#m-fondo').style.setProperty('--mc', col)
+  })
+  const m0 = $('[data-grupo="marca"] .on'); m0.click()
+
+  // Soluciones por caso
+  grupo('sol', (v) => $$('.sol').forEach((s) => { s.classList.toggle('on', s.id === v); s.classList.add('si') }))
+
+  // Mapa de conexiones: líneas al centro y realce al pasar por encima
+  const mapa = $('#mapa'), lineas = $('svg.lineas', mapa), ns = 'http://www.w3.org/2000/svg'
+  $$('.nodo[data-n]', mapa).forEach((n) => {
+    const x = parseFloat(n.style.left), y2 = parseFloat(n.style.top)
+    const cx = 50 + (x - 50) * .25, cy = 50 + (y2 - 50) * .25
+    ;['lin', 'flujo'].forEach((c) => { const l = document.createElementNS(ns, 'path'); l.setAttribute('d', `M${x},${y2} Q${(x + 50) / 2 + (y2 - 50) * .08},${(y2 + 50) / 2 - (x - 50) * .08} ${cx},${cy}`); l.setAttribute('class', c); l.setAttribute('vector-effect', 'non-scaling-stroke'); l.dataset.n = n.dataset.n; if (c === 'flujo') l.style.opacity = .25; lineas.appendChild(l) })
+  })
+  function realzar(id) {
+    $$('.nodo[data-n], .con-f').forEach((e) => e.classList.toggle('on', e.dataset.n === id))
+    $$('.flujo', lineas).forEach((l) => { l.style.opacity = !id || l.dataset.n === id ? .9 : .12 })
+  }
+  $$('.nodo[data-n], .con-f').forEach((e) => { e.addEventListener('mouseenter', () => realzar(e.dataset.n)); e.addEventListener('mouseleave', () => realzar(null)) })
+  realzar(null)
+
+  // Videos largos: cambiar de corte
+  const textos = { 'medios/largo-lomejor.mp4': ['Far Cry 6 · Lo mejor', 'Los momentos de más acción de la grabación.'], 'medios/largo-fallos.mp4': ['Far Cry 6 · Fallos y risas', 'De la misma grabación, solo los fallos y lo gracioso.'] }
+  grupo('corte', (v) => { const vid = $('#v-corte'); vid.poster = v.replace('medios/', 'medios/p-').replace('.mp4', '.jpg'); vid.src = v; vid.play().catch(() => {}); $('#corte-txt').innerHTML = '<b>' + textos[v][0] + '</b><span>' + textos[v][1] + '</span>' })
+
+  // Calculadora de tiempo
+  const cG = $('#c-grabas'), cE = $('#c-editas')
+  function calcular() {
+    const g = +cG.value, e = +cE.value, mano = g * e, yo = g * (20 / 60), mes = Math.round((mano - yo) * 4.3)
+    ;[cG, cE].forEach((r) => r.style.setProperty('--v', ((r.value - r.min) / (r.max - r.min) * 100) + '%'))
+    $('#c-h').textContent = g + ' h'; $('#c-e').textContent = e + ' h'
+    const fmt = (h) => h >= 1 ? (Math.round(h * 10) / 10).toString().replace('.', ',') + ' h' : Math.round(h * 60) + ' min'
+    $('#c-v1').textContent = fmt(mano); $('#c-v2').textContent = fmt(yo)
+    $('#c-b1').style.width = '100%'; $('#c-b2').style.width = Math.max(3, yo / mano * 100) + '%'
+    $('#c-total').innerHTML = Math.max(0, mes) + ' <small>horas al mes</small>'
+  }
+  ;[cG, cE].forEach((r) => r.addEventListener('input', calcular)); calcular()
+
+  // Barra fija en celular: aparece al pasar la portada y se esconde en la descarga
+  const fija = $('#fija'), desc = $('#descargar')
+  addEventListener('scroll', () => { const y = scrollY, d = desc.getBoundingClientRect().top; fija.classList.toggle('si', y > innerHeight * .8 && d > innerHeight * .6) }, { passive: true })
+
+  // Mensual / anual
+  grupo('periodo', (v) => $$('.precio').forEach((p) => {
+    p.innerHTML = '$' + p.dataset[v] + `<span> /${v === 'mes' ? 'mes' : 'año'}</span>`
+    const eq = p.nextElementSibling
+    eq.textContent = v === 'anio' ? `Equivale a $${(Number(p.dataset.anio.replace(/\./g, '')) / 12).toLocaleString('es-CO', { maximumFractionDigits: 0 })} al mes` : ''
+  }))
+})()
+</script>
+</body>
+</html>
